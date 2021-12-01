@@ -14,3 +14,4 @@ Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre
  * Petita descripció
  * URL de producció (quan la tingueu)
  * Estat: (explicació de en quin punt està)
+ughhgh
