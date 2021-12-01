@@ -9,8 +9,8 @@ Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre
 
 
 # Aquest fitxer ha de contenir com a mínim:
- * Nom dels integrants
- * Nom del projecte
+   Integrants: Pau Muñoz, Víctor Moreno, Sandra Ortiz
+   Nom del projecte
  * Petita descripció
  * URL de producció (quan la tingueu)
  * Estat: (explicació de en quin punt està)
