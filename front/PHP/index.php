@@ -9,7 +9,20 @@
 
 <body>
     
+    <div id="divBusqueda" class="oculto">
+        <div id="divsearch">
 
+            <h4>Buscar peli: <input type="text" id="search">
+                <input type="button" id="btn_search" value="Buscar">
+            </h4>
+
+        </div>
+
+        <div id="resultat"></div>
+    </div>
+
+
+    <script type="text/javascript" src="./JS/index.js"></script>
 
 </body>
 </html>
