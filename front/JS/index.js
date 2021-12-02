@@ -1,8 +1,7 @@
-
 document.getElementById("btn_search").addEventListener("click", function (e) {
     var txt = document.getElementById("search").value;
     console.log(txt);
-    fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${txt}`).then(res =>
+    fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${txt}&type=movie`).then(res =>
         res.json()).then(data => {
             var text_movie = "";
             for (var i = 0; i < 10; i++) {
