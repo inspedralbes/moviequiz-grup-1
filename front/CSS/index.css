@@ -3,6 +3,8 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 95%;
+    margin: auto;
 }
 
 div {
@@ -16,7 +18,6 @@ div {
 
 .row{
     margin:30px;
-
 }
 
 .card-image img{
