@@ -1,61 +1,50 @@
 CREATE DATABASE projecte_pelis; 
 
-CREATE TABLE persona(
-    idPersona int(5) AUTO_INCREMENT UNIQUE NOT NULL, 
+CREATE TABLE usuari(
+    idUsuari int(5) AUTO_INCREMENT UNIQUE NOT NULL, 
     nom varchar(30) NOT NULL,
     cognoms varchar(50),
     email varchar(50) NOT NULL,
+    user varchar(30) NOT NULL,
     passw varchar(20) NOT NULL, 
-    PRIMARY KEY(idPersona)
+    imatge varchar(100) NOT NULL,
+    punts int(10),
+    PRIMARY KEY(idUsuari)
 ); 
 
 CREATE TABLE pelicula(
 	idPelicula int(5) AUTO_INCREMENT UNIQUE NOT NULL, 
-    nom varchar(30) NOT NULL,
+    nomPelicula varchar(30) NOT NULL,
     any year NOT NULL,
     img varchar(100) NOT NULL,
     PRIMARY KEY(idPelicula)
 );
 
+CREATE TABLE partida(
+    idPartida int(5) AUTO_INCREMENT UNIQUE NOT NULL, 
+    nomPartida varchar(30) NOT NULL,
+    pelicules varchar(3000) NOT NULL, 
+    fecha datetime NOT NULL,
+    PRIMARY KEY(idPartida)
+);
+
 CREATE TABLE valoracio_pelicules(
 	pelicula int(5) NOT NULL,
-    persona int(5) NOT NULL,
-    comentari varchar(200),
-    valoracio int(1),
-    PRIMARY KEY(pelicula, persona),
+    usuari int(5) NOT NULL,
+    comentari varchar(200) NOT NULL,
+    favorit boolean NOT NULL,
+    valoracio int(1) NOT NULL,
+    PRIMARY KEY(pelicula, usuari),
     FOREIGN KEY (pelicula) REFERENCES pelicula(idPelicula),
-    FOREIGN KEY (persona) REFERENCES persona(idPersona)
+    FOREIGN KEY (usuari) REFERENCES usuari(idUsuari)
 );
 
-CREATE TABLE guardar_pelicules(
-    pelicula int(5) NOT NULL,
-    persona int(5) NOT NULL,
-    PRIMARY KEY(pelicula, persona),
-    FOREIGN KEY (pelicula) REFERENCES pelicula(idPelicula),
-    FOREIGN KEY (persona) REFERENCES persona(idPersona)
-);
-
-CREATE TABLE joc(
-    idJoc int(5) AUTO_INCREMENT UNIQUE NOT NULL, 
-    nom varchar(30) NOT NULL,
+CREATE TABLE partida_jugada(
+    partida int(5) NOT NULL,
+    usuari int(5) NOT NULL,
     encerts varchar(50) NOT NULL,
-    errades varchar(20) NOT NULL, 
-    fecha datetime NOT NULL,
-    PRIMARY KEY(idJoc)
-);
-
-CREATE TABLE pelicula_joc(
-    pelicula int(5) NOT NULL,
-    joc int(5) NOT NULL,
-    PRIMARY KEY(pelicula, joc),
-    FOREIGN KEY (pelicula) REFERENCES pelicula(idPelicula),
-    FOREIGN KEY (joc) REFERENCES joc(idJoc)
-);
-
-CREATE TABLE usuari_joc(
-    joc int(5) NOT NULL,
-    persona int(5) NOT NULL,
-    PRIMARY KEY(joc, persona),
-    FOREIGN KEY (joc) REFERENCES joc(idJoc),
-    FOREIGN KEY (persona) REFERENCES persona(idPersona)
+    errades varchar(20) NOT NULL,
+    PRIMARY KEY(partida, usuari),
+    FOREIGN KEY (partida) REFERENCES partida(idPartida),
+    FOREIGN KEY (usuari) REFERENCES usuari(idUsuari)
 );
