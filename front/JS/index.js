@@ -18,10 +18,29 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
 })
 
 function imprimirpelis(data_movie) {
-    var txt = `<div id="divpelis" class="divpelis">
-                    <h3 class="titulo">${data_movie.Title}</h3>
-                    <h3 class="year">${data_movie.Year}</h3>
-                    <img class="poster" src="${data_movie.Poster}">
-                </div>`;
+    var txt = `<div class="col s6 m4 l3" id="divpelis" class="divpelis">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="poster" src="${data_movie.Poster}">
+                        <a class="btn-floating halfway-fab modal-trigger waves-effect waves-light red"
+                            data-target="sinopsis1"><i class="material-icons">add</i></a>
+                    </div>
+
+                    
+                    <div class="card-content card-title">
+                        <span>${data_movie.Title}</span><br>
+                        <span>${data_movie.Year}</span>
+                    </div>
+                </div>
+                <div id="sinopsis1" class="modal">
+                    <div class="modal-content">
+                        <h4 class="center-align cyan-text text-darken-3 ">${data_movie.Title}</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn modal-close red "><i class="material-icons red">close</i></a>
+                    </div>
+                </div>
+            </div>`;
     return txt;
 }
+

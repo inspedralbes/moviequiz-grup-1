@@ -1,4 +1,48 @@
 /* CSS INDEX */
 body {
-    
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
+
+div {
+    text-align: center;
+}
+
+.divpelis {
+    display: inline-block;
+    margin-bottom: 100px;
+}
+
+.row{
+    margin:30px;
+
+}
+
+.card-image img{
+    min-height: 20vh;
+    height: auto;
+    max-height: 60vh;
+}
+
+.card-content{
+    font-size: 25px !important;
+
+}
+
+@media only screen and (max-width: 1000px) {
+    .card-content{
+        font-size: 20px !important;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .card-content{
+        font-size: 18px !important;
+    }
+}
+
+
+
+
