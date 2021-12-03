@@ -2,6 +2,8 @@ $(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();
 });
 
+
+
 document.getElementById("btn_search").addEventListener("click", function (e) {
     var input = document.getElementById("search").value;
     let valoracio;
@@ -13,6 +15,7 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
                 let data_movie = data.Search[i];
                 text_movie += imprimirPelisModals(data_movie, id);
             }
+            
             document.getElementById("resultat").innerHTML = text_movie;
 
             /* Inicialitzar modals */
@@ -21,7 +24,6 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
             document.getElementById("formRadio").addEventListener("click", function(e){
                 valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
             })
-
 
             document.getElementById("formValoracio").addEventListener("click", function(e){
                 let favorito = (e.target.parentElement.querySelector("[name='fav']").value == "on") ? true : false ;
@@ -46,6 +48,9 @@ function imprimirPelisModals(data_movie, id) {
                         <span>${data_movie.Year}</span>
                     </div>
                 </div>
+
+                <!-- MODAL -->
+
                 <div id="${id}" class="modal">
                     <div class="modal-content">
                         <h4 class="center-align cyan-text text-darken-3 ">${data_movie.Title}</h4>
