@@ -7,23 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="CSS/registrat.css">
-    <title>Registro</title>
+    <link rel="stylesheet" href="../CSS/registrat.css">
+    <link rel="stylesheet" href="normalize.css">
+    <title>Registre</title>
 </head>
 
 <body>
-    <?php include("./PHP/header.php"); ?>
-    </div>
-
-    <!-- Botó tornar enrrere -->
-    <!-- <input type="button" id="back" class="boton btn_back" value="Back"> -->
-    <button id="back" class="btn waves-effect waves-light" type="button" name="action">Back</button>
+    <?php include("header.php"); ?>
+    
+    <div>
+        <!-- Botó tornar enrrere -->
+        <!-- <input type="button" id="back" class="boton btn_back" value="Back"> -->
+        <button id="back" class="btn waves-effect waves-light" type="button" name="action">Back</button>
     </div>
 
 
     <!--Formulari Confirmació compra-->
     <?php
-    if(!$_POST){
+        if(!$_POST){
     ?>  
         
         <div class="row">
@@ -70,15 +71,17 @@
         <?php
     } else {
         echo "<br>";
-    function test_input($valor)
-    {
-        $valor = trim($valor);
-        $valor = stripslashes($valor);
-        return htmlspecialchars($valor);
-    }}
+
+        function test_input($valor){
+            $valor = trim($valor);
+            $valor = stripslashes($valor);
+            return htmlspecialchars($valor);
+        }
+    }
     ?>
+
     <script type="text/javascript" src="../JS/registrat.js"></script>
-    <?php include("./PHP/footer.php"); ?>
+    <?php include("footer.php"); ?>
     </div>
 </body>
 
