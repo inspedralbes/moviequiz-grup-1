@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="../CSS/registrat.css">
-    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="../CSS/normalize.css">
     <title>Registre</title>
 </head>
 
@@ -26,45 +26,45 @@
     <?php
         if(!$_POST){
     ?>  
-        
+        <h2 class="h2">Dades de l'usuari</h2>
+
         <div class="row">
-            <h2 class="h2">Dades de l'usuari</h2>
             <form class="col s12">
-            <div class="row center">
-                <div class="input-field col s6">
-                    <input id="usuari" type="text" class="validate">
-                    <label for="usuari">Usuari/alias</label>
+                <div class="row center">
+                    <div class="input-field col s6">
+                        <input id="usuari" type="text" class="validate">
+                        <label for="usuari">Usuari/alias</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Contrassenya</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Contrassenya</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Email</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="nom" type="text" class="validate">
-                    <label for="nom">Nom</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="nom" type="text" class="validate">
+                        <label for="nom">Nom</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="cognom" type="text" class="validate">
-                    <label for="cognom">Cognom</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="cognom" type="text" class="validate">
+                        <label for="cognom">Cognom</label>
+                    </div>
                 </div>
-            </div>
-                <div class="submit">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Registrat</button>
-                    <!--<input type="submit" value="Registrat" class="boton btn_registrar" id="registrar">-->
+                    <div class="submit">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Registrat</button>
+                        <!--<input type="submit" value="Registrat" class="boton btn_registrar" id="registrar">-->
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
             
