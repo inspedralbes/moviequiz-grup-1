@@ -38,13 +38,6 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
             }
         });
 
-        /* Inicialitzar modals */
-       
-
-
-
-
-
 
     })
 
