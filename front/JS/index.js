@@ -65,19 +65,19 @@ function imprimirPelisModals(data_movie, id) {
 function generarModal(nom) {
     var modalHtml = `<div class="modal-content">
                         <h4 class="center-align cyan-text text-darken-3 ">${nom.Title}</h4>
+                        </br>
                         <div>
                             <label>
                                 <input type="checkbox" id="fav" name="fav"/>
-                                <span>Afegir a pel·lícules favorites? </span>
+                                <span>Afegir a favorites </span>
                             </label>
                         </div>
 
-                        <div class="input-field">
-                            <textarea id="comentario" class="materialize-textarea" data-length="200"></textarea>
-                            <label for="comentario">Comentari</label>
-                        </div>
-
                         <div id="formRadio">
+                        </br>
+                            <h5 class="red-text darken-1">Valoració</h5>
+                            </br>
+
                             <label>
                                 <input name="valoracio" type="radio" value="1"/>
                                 <span>1</span>
@@ -100,7 +100,12 @@ function generarModal(nom) {
                             </label>
                         </div>
 
-                        <button id="btn-guardar">Guardar</button>
+                        <div class="input-field">
+                            <textarea id="comentario" class="materialize-textarea" data-length="200"></textarea>
+                            <label for="comentario">Comentari</label>
+                        </div>
+
+                        <button id="btn-guardar" class="btn waves-effect waves-light"> Guardar </button>
                     </div>
                     <div class="modal-footer">
                         <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>

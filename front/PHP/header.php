@@ -11,6 +11,7 @@
     <div id="login" class="login modal">
         <div class="modal-content">
             <div class="row center">
+                <h5 class="red-text darken-1">Inicia Sessió</h5>
                 <form class="col s4 offset-m3 l4 offset-l4">
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
@@ -33,7 +34,7 @@
         </div>
 
         <div class="modal-footer">
-            <a href="#!" class="btn-small modal-close red "><i class="material-icons red">close</i></a>
+            <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
         </div>
     </div>
 </nav>
