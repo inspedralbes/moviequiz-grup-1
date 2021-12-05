@@ -10,8 +10,8 @@
 
     <div id="login" class="login modal">
         <div class="modal-content">
-            <div class="row">
-                <form class="col s3">
+            <div class="row center">
+                <form class="col s4 offset-m3 l4 offset-l4">
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
                         <label for="usuari">Usuari</label>
@@ -26,8 +26,9 @@
                 </form>
             </div>
 
-            <div class="row center">
-                <a id="btn_login" class="waves-effect waves-light btn-small"><i class="material-icons right">arrow_forward</i>Entrar</a>
+            <div class="row center center-align">
+                <a id="btn_entrar" class="waves-effect waves-light btn-small"><i class="material-icons right">arrow_forward</i>Entrar</a>
+                <p class="grey-text link">No ets usuari?,<a href="registrat.php"> registrat</a></p>
             </div>
         </div>
 
