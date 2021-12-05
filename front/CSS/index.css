@@ -1,12 +1,4 @@
 /* CSS INDEX */
-body {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 95%;
-    margin: auto;
-}
-
 input[type="radio"]{
     background-color: red;
 }
