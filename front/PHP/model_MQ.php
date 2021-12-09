@@ -54,17 +54,15 @@ class usuari extends BD_MovieQuiz
     }
 
     public function comprovarLogin($login_data = array()){
-        $this->query = "SELECT user, passw FROM usuari";
+        $this->query = "SELECT * FROM usuari WHERE user = '" . $login_data['usuari'] . "'";
         $this->get_results_from_query();
-        //print_r($login_data);
-        for($i = 0; $i < count($this->rows); $i++){
-            if($this->rows[$i]["user"] == $login_data['usuari'] and $this->rows[$i]["passw"] == $login_data['contrasenya']){
-                $res = array('exito'=>true, 'nombre'=>$this->rows[$i]["user"], 'imagen'=>'https://randomuser.me/api/portraits/men/23.jpg'); ;  
-            }else{
-                $res = array('exito'=>false);
-            }
-        }
 
+        if($this->rows != null && $this->rows[0]["passw"] == $login_data['contrasenya']){
+            $res = array('exito'=>true, 'nombre'=>$this->rows[0]["nom"], 'imagen'=>'https://randomuser.me/api/portraits/men/23.jpg'); ;  
+        }
+        else {
+            $res = array('exito'=>false);
+        }
         return $res;
     }
 }

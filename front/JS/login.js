@@ -1,6 +1,6 @@
 /* Inicialitzar modals */
 document.getElementById("btn_login").addEventListener("click", function (e) {
-    var instances = M.Modal.init(document.querySelectorAll(".login"), {});
+    var instances = M.Modal.init(document.querySelector(".login"), {});
 })
 
 
@@ -13,7 +13,7 @@ const datosLogin = new FormData();
 datosLogin.append("usuari", u);
 datosLogin.append("pwd", c);
 
-fetch(`../PHP/header.phh`, {
+/*fetch(`../PHP/header.phh`, {
     method: "POST",
     body: datosLogin
 })
@@ -24,19 +24,19 @@ fetch(`../PHP/header.phh`, {
 
         console.log(data);
 
-        /* Usuari */
+        // Usuari
         if (data.exito == true) {
             document.getElementById("diverror").classList.remove("disabled");
             document.getElementById("diverror").classList.remove("oculto");
             document.getElementById("resultat").classList.remove("oculto");
 
-        }/* NO usuari */
+        }// NO usuari
         else {
             document.getElementById("diverror").classList.add("disabled");
             document.getElementById("diverror").classList.add("oculto");
         }
 
-    });
+    });*/
 
 
 
@@ -55,8 +55,22 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
         console.log(data);
         if (data.exito == true) {
             console.log("hola");
+            document.getElementById("btn_login").classList.add("oculto");
+            document.getElementById("a").innerHTML = codigoHTMLuser(data);
+            var instance = M.Modal.init(document.querySelector(".login"), {});
+            instance.close();
+
         } else {
             console.log("adios");
         }
     });
 })
+
+
+function codigoHTMLuser(datos){
+    let text = `<div>
+                    <p>¡Hola ${datos.nombre}!</p>
+                    <img src="${datos.imagen}">
+                </div>`;
+    return text;
+}

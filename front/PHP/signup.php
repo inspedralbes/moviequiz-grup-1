@@ -79,7 +79,7 @@
     }
     ?>
 
-    <script type="text/javascript" src="../JS/singup.js"></script>
+    <script type="text/javascript" src="../JS/signup.js"></script>
     <?php include("footer.php"); ?>
     </div>
 </body>

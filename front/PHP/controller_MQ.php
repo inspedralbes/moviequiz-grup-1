@@ -58,7 +58,7 @@ class controller
         } else if (isset($_POST['usuari'])) {
             $dadesForm = array(
                 'usuari' => $_POST['usuari'],
-                'constrasenya' => $_POST['pwd']
+                'contrasenya' => $_POST['pwd']
             );
         }
 
