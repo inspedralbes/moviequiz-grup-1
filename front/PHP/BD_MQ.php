@@ -4,17 +4,12 @@ abstract class BD_MovieQuiz {
   private static $db_host = "localhost";
   private static $db_user = "root";
   private static $db_pass = "";
-  private static $db_name = "projecte_pelis";
+  private $db_name = "projecte_pelis";
 
   protected $query;
   protected $rows=array();
   private $conn;
-
-  abstract protected function selectAll();
-  abstract protected function select();
-  abstract protected function insert();
-  abstract protected function update();
-  abstract protected function delete();
+  protected $message;
 
   private function open_connection() {
     $this->conn = new mysqli (self::$db_host, self::$db_user, self::$db_pass, $this->db_name);

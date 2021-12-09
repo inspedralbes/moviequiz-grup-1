@@ -29,7 +29,7 @@
 
             <div class="row center center-align">
                 <a id="btn_entrar" class="waves-effect waves-light btn-small"><i class="material-icons right">arrow_forward</i>Entrar</a>
-                <p class="grey-text link">No ets usuari?,<a href="registrat.php"> registrat</a></p>
+                <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
 
 
 <?php 
-
+/*
     $usuari = $_POST['usuari'];
     $pwd = $_POST['pwd'];
 
@@ -58,6 +58,5 @@
     }
 
     $myJSON = json_encode($arr);
-    echo $myJSON;
-
+    echo $myJSON;*/
 ?>

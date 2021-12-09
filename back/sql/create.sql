@@ -7,7 +7,7 @@ CREATE TABLE usuari(
     email varchar(50) NOT NULL,
     user varchar(30) NOT NULL,
     passw varchar(20) NOT NULL, 
-    imatge varchar(100) NOT NULL,
+    imatge varchar(100),
     punts int(10),
     PRIMARY KEY(idUsuari)
 ); 

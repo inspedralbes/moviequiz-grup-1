@@ -13,7 +13,7 @@
     datosLogin.append("usuari", u);
     datosLogin.append("pwd", c);
     
-    fetch(`../PHP/header.phh`, {
+    fetch(`../PHP/header.php`, {
         method: "POST",
         body: datosLogin
     })
