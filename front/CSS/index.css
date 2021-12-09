@@ -60,4 +60,21 @@ div {
     display: none;
 }
 
+.btn-joc{
+    margin: 20px;
+    font-size: 36px;
+}
+
+.labelranking{
+    font-size: 36px;
+    color: white;
+}
+
+.divranking{
+
+    background-color: lightslategrey;
+    margin: 10px;
+    border-radius: 5px;
+}
+
 

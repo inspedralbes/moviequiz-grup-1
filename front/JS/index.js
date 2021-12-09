@@ -3,6 +3,8 @@ $(document).ready(function() {
 });
 
 document.getElementById("btn_search").addEventListener("click", function(e) {
+    document.getElementById("resultat").classList.remove("oculto");
+    document.getElementById("ocultardivsearch").classList.remove("oculto");
     var input = document.getElementById("search").value;
     let valoracio;
     fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${input}&type=movie`).
@@ -38,9 +40,11 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
             }
         });
 
-
     })
-
+        document.getElementById("ocultardivsearch").addEventListener("click", function(e){
+            document.getElementById("resultat").classList.add("oculto");
+            document.getElementById("ocultardivsearch").classList.add("oculto");
+        })
 })
 
 /* Cards */

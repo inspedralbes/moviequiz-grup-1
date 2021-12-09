@@ -24,8 +24,14 @@
             <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
         </div>
 
-        <a href="#!" class="btn red "><i class="material-icons red">close</i></a>
+        <a id="ocultardivsearch" href="#!" class="btn red oculto"><i class="material-icons red">close</i></a>
         <div id="resultat" class="row center-align"></div>
+
+        <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"> Joc </button></div>
+
+        <div class="divranking"><label class="labelranking">Ranking Users</label></div>
+
+        <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"><i class="material-icons">trophy</i> Puntuació Joc </button></div>
     </div>
 
     <?php include("footer.php"); ?>
