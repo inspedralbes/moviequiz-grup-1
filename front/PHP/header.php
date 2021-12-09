@@ -40,8 +40,8 @@
 </nav>
 
 
-<?php 
-
+<?php
+/*
     $usuari = $_POST['usuari'];
     $pwd = $_POST['pwd'];
 
@@ -59,5 +59,5 @@
 
     $myJSON = json_encode($arr);
     echo $myJSON;
-
+*/
 ?>

@@ -8,7 +8,7 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
     fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${input}&type=movie`).
     then(res => res.json()).
     then(data => {
-        var text_movie = "";
+        var text_movie = "  ";
         for (var i = 0; i < data.Search.length; i++) {
             var idMovie = "movie" + i;
             let data_movie = data.Search[i];
@@ -45,7 +45,8 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
 
 /* Cards */
 function imprimirPelisModals(data_movie, id) {
-    var txt = `<div class="col s6 m4 l3" id="divpelis" class="divpelis">
+    var txt = `
+            <div class="col s6 m4 l3" id="divpelis" class="divpelis">
                 <div class="card">
                     <div class="card-image">
                         <img class="poster" src="${data_movie.Poster}">
@@ -63,7 +64,7 @@ function imprimirPelisModals(data_movie, id) {
 }
 
 function generarModal(nom) {
-    var modalHtml = `<div class="modal-content">
+    var modalHtml = `<div class="modal-content center-align">
                         <h4 class="center-align cyan-text text-darken-3 ">${nom.Title}</h4>
                         </br>
                         <div>
@@ -105,7 +106,8 @@ function generarModal(nom) {
                             <label for="comentario">Comentari</label>
                         </div>
 
-                        <button id="btn-guardar" class="btn waves-effect waves-light"> Guardar </button>
+                        <button id="btn-guardar" class="btn waves-effect waves-light disabled"> Guardar </button>
+                        <div id="diverror" class="diverror oculto"><label class="error"><span style="font-size: 20px"> ! </span>Has d'iniciar sessió per poder fer una valoració</label></div>
                     </div>
                     <div class="modal-footer">
                         <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
@@ -118,3 +120,6 @@ function eliminarModals(data) {
         document.getElementById("movie"+i).innerHTML = "";
     }
 }
+/*
+document.getElementById("btn-guardar").style
+*/

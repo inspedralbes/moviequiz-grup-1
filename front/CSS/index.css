@@ -40,6 +40,24 @@ div {
     }
 }
 
+.disabled{
+    disabled : "disabled";
+}
 
+.error{
+    padding: 10px;
+    width: max-content;
+    background-color: #f44336;
+    color: white;
+    font-weight: bold;
+}
+
+.diverror{
+    margin-top: 20px;
+}
+
+.oculto {
+    display: none;
+}
 
 

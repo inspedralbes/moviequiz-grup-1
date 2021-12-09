@@ -24,12 +24,16 @@
         
         console.log(data);
 
+        /* Usuari */
         if (data.exito == true) {
+            document.getElementById("diverror").classList.remove("disabled");
+            document.getElementById("diverror").classList.remove("oculto");
+            document.getElementById("resultat").classList.remove("oculto");
 
-
-        }else {
-
-
+        }/* NO usuari */
+        else {
+            document.getElementById("diverror").classList.add("disabled");
+            document.getElementById("diverror").classList.add("oculto");
         }
 
     });
