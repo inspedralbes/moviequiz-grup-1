@@ -29,7 +29,7 @@
 
             <div class="row center center-align">
                 <a id="btn_entrar" class="waves-effect waves-light btn-small"><i class="material-icons right">arrow_forward</i>Entrar</a>
-                <p class="grey-text link">No ets usuari?,<a href="registrat.php"> registrat</a></p>
+                <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
             </div>
         </div>
 
@@ -37,27 +37,5 @@
             <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
         </div>
     </div>
+
 </nav>
-
-
-<?php
-/*
-    $usuari = $_POST['usuari'];
-    $pwd = $_POST['pwd'];
-
-    if(($usuari == "user") && ($pwd == "1234")){
-
-        session_start();
-
-        $arr = array ('exito' => true, 'usuario' => "user");
-
-    }else{
-
-        $arr = array ('exito' => false);
-
-    }
-
-    $myJSON = json_encode($arr);
-    echo $myJSON;
-*/
-?>
