@@ -38,3 +38,26 @@
         </div>
     </div>
 </nav>
+
+
+<?php 
+
+    $usuari = $_POST['usuari'];
+    $pwd = $_POST['pwd'];
+
+    if(($usuari == "user") && ($pwd == "1234")){
+
+        session_start();
+
+        $arr = array ('exito' => true, 'usuario' => "user");
+
+    }else{
+
+        $arr = array ('exito' => false);
+
+    }
+
+    $myJSON = json_encode($arr);
+    echo $myJSON;
+
+?>
