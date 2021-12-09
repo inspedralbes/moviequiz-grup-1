@@ -37,10 +37,11 @@
             <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
         </div>
     </div>
+
 </nav>
 
 
-<?php 
+<?php
 /*
     $usuari = $_POST['usuari'];
     $pwd = $_POST['pwd'];

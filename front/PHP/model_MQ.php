@@ -29,18 +29,17 @@ class usuari extends BD_MovieQuiz
     {
     }
 
-    public function comprovarExisteixUsuari($user = "")
+    public function dadesUsuari($user = "")
     {
         $this->query = "SELECT * FROM usuari WHERE user = '$user'";
         $this->get_results_from_query();
         return $this->rows;
     }
 
-
     public function introduirUsuari($user_data = array())
     {
         if (array_key_exists("usuari", $user_data)) {
-            $this->comprovarExisteixUsuari($user_data["usuari"]);
+            $this->dadesUsuari($user_data["usuari"]);
             if (!isset($this->rows[0]['user'])) {
                 foreach ($user_data as $campo => $dato) {
                     $$campo = $dato;
@@ -54,12 +53,19 @@ class usuari extends BD_MovieQuiz
         return $this->message;
     }
 
-    public function update($userData = array())
-    {
-    }
+    public function comprovarLogin($login_data = array()){
+        $this->query = "SELECT user, passw FROM usuari";
+        $this->get_results_from_query();
+        //print_r($login_data);
+        for($i = 0; $i < count($this->rows); $i++){
+            if($this->rows[$i]["user"] == $login_data['usuari'] and $this->rows[$i]["passw"] == $login_data['contrasenya']){
+                $res = array('exito'=>true, 'nombre'=>$this->rows[$i]["user"], 'imagen'=>'https://randomuser.me/api/portraits/men/23.jpg'); ;  
+            }else{
+                $res = array('exito'=>false);
+            }
+        }
 
-    public function delete($nom = "")
-    {
+        return $res;
     }
 }
 
