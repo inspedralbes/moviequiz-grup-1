@@ -2,6 +2,15 @@ $(document).ready(function () {
     $('input#input_text, textarea#textarea1').characterCounter();
 });
 
+/* Carrusel */
+document.addEventListener("DOMContentLoaded", function () {
+    var imgs = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(imgs, {
+        numVisible: 10,
+        padding: 2,
+    });
+});
+
 document.getElementById("btn_search").addEventListener("click", function (e) {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");

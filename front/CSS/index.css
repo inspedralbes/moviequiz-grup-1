@@ -1,5 +1,6 @@
 /* CSS INDEX */
-input[type="radio"]{
+
+input[type="radio"] {
     background-color: red;
 }
 
@@ -20,39 +21,37 @@ div {
     margin-bottom: 100px;
 }
 
-.row{
+.row {
     margin: 10px 0 0 0;
 }
 
-.card-image img{
+.card-image img {
     min-height: 20vh;
     height: auto;
     max-height: 60vh;
 }
 
-.card-content{
+.card-content {
     font-size: 25px !important;
-
 }
 
 @media only screen and (max-width: 1000px) {
-    .card-content{
+    .card-content {
         font-size: 20px !important;
     }
 }
 
-
 @media only screen and (max-width: 600px) {
-    .card-content{
+    .card-content {
         font-size: 18px !important;
     }
 }
 
-.disabled{
-    disabled : "disabled";
+.disabled {
+    disabled: "disabled";
 }
 
-.error{
+.error {
     padding: 10px;
     width: max-content;
     background-color: #f44336;
@@ -60,7 +59,7 @@ div {
     font-weight: bold;
 }
 
-.diverror{
+.diverror {
     margin-top: 20px;
 }
 
@@ -68,34 +67,44 @@ div {
     display: none;
 }
 
-
 .btn-joc{
     margin: 20px;
     font-size: 36px;
 }
 
-.labelranking{
-    font-size: 36px;
-    color: white;
-}
-
-.btn i {
-    font-size: 1.3rem;
-    line-height: inherit;
-}
-
-
-
-
-
-
-
-
-.divranking{
-
+.divranking {
     background-color: lightslategrey;
     margin: 10px;
     border-radius: 5px;
 }
 
+#ranking,
+#juego {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 25vh;
+}
 
+#apartadoJuego {
+    height: auto;
+    border: solid black 2px;
+}
+
+#apartadoCarrousel {
+    border: 1px solid black;
+    height: 400px;
+}
+
+.carousel {
+    margin-top: -50px;
+    margin-bottom: 40px;
+}
+
+#carrousel-titol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
