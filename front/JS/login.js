@@ -57,8 +57,10 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             console.log("hola");
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("a").innerHTML = codigoHTMLuser(data);
+            
             var instance = M.Modal.init(document.querySelector(".login"), {});
             instance.close();
+            document.body.style.removeProperty("overflow");
 
         } else {
             console.log("adios");
