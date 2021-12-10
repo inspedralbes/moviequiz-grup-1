@@ -2,6 +2,15 @@ $(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();
 });
 
+/* Carrusel */
+document.addEventListener("DOMContentLoaded", function() {
+    var imgs = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(imgs, {
+        numVisible: 10,
+        padding: 2,
+    });
+});
+
 document.getElementById("btn_search").addEventListener("click", function(e) {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
@@ -26,13 +35,13 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
                 document.getElementById(id).innerHTML = generarModal(data.Search[num]);
                 var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
 
-                document.getElementById("formRadio").addEventListener("click", function(e){
+                document.getElementById("formRadio").addEventListener("click", function(e) {
                     valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
                     console.log()
                 })
-                
-                document.getElementById("btn-guardar").addEventListener("click", function(e){
-                    let favorito = (e.target.parentElement.querySelector("[name='fav']").value == "on") ? true : false ;
+
+                document.getElementById("btn-guardar").addEventListener("click", function(e) {
+                    let favorito = (e.target.parentElement.querySelector("[name='fav']").value == "on") ? true : false;
                     let comentario = e.target.parentElement.querySelector("#comentario").value;
                     console.log(valoracio + " " + favorito + " " + comentario);
                 });
@@ -40,10 +49,10 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
         });
 
     })
-        document.getElementById("ocultardivsearch").addEventListener("click", function(e){
-            document.getElementById("resultat").classList.add("oculto");
-            document.getElementById("ocultardivsearch").classList.add("oculto");
-        })
+    document.getElementById("ocultardivsearch").addEventListener("click", function(e) {
+        document.getElementById("resultat").classList.add("oculto");
+        document.getElementById("ocultardivsearch").classList.add("oculto");
+    })
 })
 
 /* Cards */
@@ -119,8 +128,8 @@ function generarModal(nom) {
 }
 
 function eliminarModals(data) {
-    for(let i = 0; i<data.length; i++){
-        document.getElementById("movie"+i).innerHTML = "";
+    for (let i = 0; i < data.length; i++) {
+        document.getElementById("movie" + i).innerHTML = "";
     }
 }
 /*

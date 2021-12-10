@@ -1,7 +1,7 @@
 <?php
-    require_once("controller_MQ.php");
-    $controller = new controller();
-    $controller->handler();
+require_once("controller_MQ.php");
+$controller = new controller();
+$controller->handler();
 ?>
 
 
@@ -24,25 +24,72 @@
     <?php include("header.php"); ?>
 
     <div id="a"></div>
-    <div id="divBusqueda"><!--class="oculto"-->
-        <div id="divsearch">
-            <h4>Buscar peli: </h4>
-            <input type="text" id="search">
-            <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+
+    <div id="apartadoBusqueda" class="row">
+        <div id="divBusqueda" class="">
+            <div id="divsearch">
+                <h4>Buscar peli: </h4>
+                <input type="text" id="search">
+                <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+            </div>
+
+            <a id="ocultardivsearch" href="#!" class="btn red oculto"><i class="material-icons red">close</i></a>
+            <div id="resultat" class="row center-align"></div>
         </div>
-
-        <a id="ocultardivsearch" href="#!" class="btn red oculto"><i class="material-icons red">close</i></a>
-        <div id="resultat" class="row center-align"></div>
-
-        <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"> Joc </button></div>
-
-        <div class="divranking"><label class="labelranking">Ranking Users</label></div>
-
-        <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"><i class="material-icons">trophy</i> Puntuació Joc </button></div>
     </div>
 
+    <div id="apartadoCarrousel" class="row">
+        <div id="carrousel-titol" class="col s12 m12 l5">
+            <div><h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1></div>
+        </div>
+        <div class="carousel col s12 m12 l7">
+            <a class="carousel-item" href="#"><img src="https://cdn.lorem.space/images/movie/.cache/150x220/jaws-1975.jpg"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=150&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=151&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=152&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=153&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=154&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=155&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=156&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=157&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=158&h=220"></a>
+        </div>
+    </div>
+
+    <div id="apartadoJuego" class="row">
+        <div id="juego" class="col s12 m12 l4">
+            <button id="btn-joc" class="btn waves-effect waves-light btn-joc"> Joc </button>
+        </div>
+        <div id="ranking" class="col s12 m12 l8">
+            <div>
+                <div id="ranking-titol ">
+                    <h5>Ranking puntuació</h5>
+                </div>
+                <div id="ranking-usuaris">
+                    <ul>
+                        <li>Persona 1 - 50pt</li>
+                        <li>Persona 2 - 60pt</li>
+                        <li>Persona 3 - 40pt</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="apartadoMisPeliculas" class="row">
+
+    </div>
+
+
+
+    <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"><i class="material-icons">trophy</i> Puntuació Joc </button></div>
+
+
     <?php include("footer.php"); ?>
+
     <script type="text/javascript" src="../JS/login.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../JS/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
