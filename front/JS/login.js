@@ -26,13 +26,13 @@ datosLogin.append("pwd", c);
 
         // Usuari
         if (data.exito == true) {
-            document.getElementById("diverror").classList.remove("disabled");
+            document.getdocument.getElementById("btn-guardar").classList.remove("disabled");
             document.getElementById("diverror").classList.remove("oculto");
             document.getElementById("resultat").classList.remove("oculto");
 
         }// NO usuari
         else {
-            document.getElementById("diverror").classList.add("disabled");
+            document.getElementById("btn-guardar").classList.add("disabled");
             document.getElementById("diverror").classList.add("oculto");
         }
 
@@ -59,12 +59,13 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("a").innerHTML = codigoHTMLuser(data);
         } else {
             console.log("adios");
+
         }
     });
 })
 
 
-function codigoHTMLuser(datos){
+function codigoHTMLuser(datos) {
     let text = `<div>
                     <p>¡Hola ${datos.nombre}!</p>
                     <img src="${datos.imagen}">
