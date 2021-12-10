@@ -8,7 +8,6 @@
 
     <!-- LOGIN MODAL -->
 
-
         <div id="login" class=" login modal">
         <div class="modal-content">
             <div class="row center">
