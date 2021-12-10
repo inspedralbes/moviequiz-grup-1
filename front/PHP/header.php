@@ -8,7 +8,7 @@
 
     <!-- LOGIN MODAL -->
 
-    <div id="login" class="login modal">
+        <div id="login" class=" login modal">
         <div class="modal-content">
             <div class="row center">
                 <h5 class="red-text darken-1">Inicia Sessió</h5>
@@ -28,14 +28,15 @@
             </div>
 
             <div class="row center center-align">
-                <a id="btn_entrar" class="waves-effect waves-light btn-small"><i class="material-icons right">arrow_forward</i>Entrar</a>
+                <a id="btn_entrar" class="waves-effect waves-light btn-small">Entrar</a>
                 <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
             </div>
         </div>
 
         <div class="modal-footer">
-            <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
+            <a href="#!" class="btn modal-close red ">Tancar</a>
         </div>
-    </div>
+        </div>
+
 
 </nav>

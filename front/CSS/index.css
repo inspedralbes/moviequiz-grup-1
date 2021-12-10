@@ -4,6 +4,14 @@ input[type="radio"] {
     background-color: red;
 }
 
+body {
+    margin:auto;
+    /*justify-content: center;
+    align-items: center;
+    text-align: center;*/
+    width: 95%;
+}
+
 div {
     text-align: center;
 }
@@ -59,7 +67,7 @@ div {
     display: none;
 }
 
-.btn-joc {
+.btn-joc{
     margin: 20px;
     font-size: 36px;
 }
