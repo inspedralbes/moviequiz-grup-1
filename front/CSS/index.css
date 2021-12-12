@@ -21,6 +21,11 @@ div {
     margin-bottom: 100px;
 }
 
+.apartadoBusqueda {
+    padding-top: 30px;
+    padding-left: 50px;
+}
+
 .row {
     margin: 10px 0 0 0;
 }

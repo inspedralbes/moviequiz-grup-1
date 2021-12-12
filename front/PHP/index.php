@@ -25,17 +25,19 @@ $controller->handler();
 
     <div id="a"></div>
 
-    <div id="apartadoBusqueda" class="row">
-        <div id="divBusqueda" class="">
-            <div id="divsearch">
-                <h4>Buscar peli: </h4>
-                <input type="text" id="search">
-                <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
-            </div>
+    <div id="apartadoBusqueda" class="row apartadoBusqueda">
 
-            <a id="ocultardivsearch" href="#!" class="btn red oculto"><i class="material-icons red">close</i></a>
-            <div id="resultat" class="row center-align"></div>
+        <div id="divsearch" class="col s9 m9 l10">
+            <input type="text" id="search" placeholder="Cercar pel·lícula">
         </div>
+
+        <div id="butons_search" class="col s3 m3 l2">
+            <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+            <a id="ocultardivsearch" href="#!" class="btn-small red oculto"><i class="material-icons red">arrow_drop_up</i></a>
+        </div>
+
+       <div id="resultat" class="row center-align"></div>
+
     </div>
 
     <div id="apartadoCarrousel" class="row">
@@ -43,7 +45,7 @@ $controller->handler();
             <div><h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1></div>
         </div>
         <div class="carousel col s12 m12 l7">
-            <a class="carousel-item" href="#"><img src="https://cdn.lorem.space/images/movie/.cache/150x220/jaws-1975.jpg"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=159&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=150&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=151&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=152&h=220"></a>
