@@ -43,13 +43,26 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
 
                     document.getElementById("formRadio").addEventListener("click", function (e) {
                         valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
-                        console.log()
                     })
 
                     document.getElementById("btn-guardar").addEventListener("click", function (e) {
-                        let favorito = (e.target.parentElement.querySelector("[name='fav']").value == "on") ? true : false;
+                        let favorito = e.target.parentElement.querySelector("[name='fav']").checked;
                         let comentario = e.target.parentElement.querySelector("#comentario").value;
                         console.log(valoracio + " " + favorito + " " + comentario);
+                        
+                        const datosLogin = new FormData();
+                        datosLogin.append("valoracio", valoracio);
+                        datosLogin.append("favorit", favorito);
+                        datosLogin.append("comentari", comentario);
+
+                        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
+                            method: "POST",
+                            body: datosLogin
+                        }).then(response => response.json()).then(data => {
+                            console.log(data);
+                            
+                        });
+
                     });
                 }
             });

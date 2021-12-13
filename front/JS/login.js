@@ -48,7 +48,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
     datosLogin.append("usuari", usu);
     datosLogin.append("pwd", pwd);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/login.php', {
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=login', {
         method: "POST",
         body: datosLogin
     }).then(response => response.json()).then(data => {
@@ -59,7 +59,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
-            document.getElementById("apartadoCarrousel").insertAdjacentHTML("aftersbegin", loginHTML)
+            document.getElementById("apartadoCarrousel").insertAdjacentHTML("afterbegin", loginHTML)
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
         } else {
             console.log("adios");
@@ -70,9 +70,25 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
 
 
 function codigoHTMLuser(datos) {
-    let text = `<div>
-                    <p>¡Hola ${datos.nombre}!</p>
-                    <img src="${datos.imagen}">
+    let text = `<div class="row">
+                    <h3>¡Hola ${datos.nombre}!</h3>
+                    <br>
+                    <div class="col s3 m3 l3">
+                        <img src="${datos.imagen}">
+                    </div>
+
+                    <div class="col s6 m6 l6 dades_usuari">
+                        <p>${datos.nombre}<p>
+                        <p>${datos.puntuacion}<p>
+
+                        
+                    </div>
+
+                    <div class="col s3 m3 l3">
+                        <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+                    </div>
+
+                    
                 </div>`;
     return text;
 }
