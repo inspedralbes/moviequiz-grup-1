@@ -60,8 +60,8 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
                     fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
                         method: "POST",
                         body: datosLogin
-                    }).then(response => response.json()).then(data => {
-                        console.log(data);
+                    }).then(response => {
+                        console.log(response);
                     });
                 });
             }

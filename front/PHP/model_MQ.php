@@ -32,7 +32,7 @@ class usuari extends BD_MovieQuiz
     public function dadesUsuari($user = "")
     {
         $this->query = "SELECT * FROM usuari WHERE user = '$user'";
-        $this->get_results_from_query();
+        $this->get_results_from_query();    
         return $this->rows;
     }
 
@@ -247,9 +247,9 @@ class pelicula extends BD_MovieQuiz
         return $this->rows;
     }
 
-    public function select($nom = "")
+    public function dadesPelicula($nom = "")
     {
-        $this->query = "SELECT ";
+        $this->query = "SELECT * FROM pelicula WHERE nomPelicula = '$nom'";
         $this->get_results_from_query();
         return $this->rows;
     }
@@ -308,26 +308,33 @@ class valoracio_pelicula extends BD_MovieQuiz
         if (array_key_exists("nomUsuari", $dadesValoracio)) {
             $this->dadesValoracio($dadesValoracio["nomUsuari"]);
             if (!isset($this->rows[0]['usuari'])) {
-                
-                //Obtindre el id del usuari que valora/guarda la peli
-                $usuari = new usuari();
-                $usuari->dadesUsuari($dadesValoracio['nomUsuari']);
-                $user = $this->rows[0]['idUsuari'];
 
                 foreach ($dadesValoracio as $campo => $dato) {
                     $$campo = $dato;
                 }
 
-                $this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES (NULL,'$nomPeli','','')";
+                //Afegir la peli a la BD
+                $this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES (NULL,'a','2005','c')";
+                //$this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES (NULL,'$nomPeli','$anyPeli','$imgPeli')";
+                $this->execute_single_query();
+                
+                //Obtindre el id del usuari que valora/guarda la peli
+                $usuari = new usuari();
+                $user = $usuari->dadesUsuari($nomUsuari)[0]['idUsuari'];
+                
+
+                //Obtindre el id de la peli valorada/guardada
+                $pelicula = new pelicula();
+                $peli = $pelicula->dadesPelicula($nomPeli)[0]['idPelicula'];
+                
+                //
+                $this->query = "INSERT INTO valoracio_pelicules(pelicula, usuari, comentari, favorit, valoracio) VALUES ('$peli','$user','$comentari','$favorit','$valoracio')";
                 $this->execute_single_query();
 
 
-
-                $this->query = "INSERT INTO valoracio_pelicules(pelicula, usuari, comentari, favorit, valoracio) VALUES ('','','','','')";
-                $this->execute_single_query();
-                $this->message  += "Usuari introduït";
-            } else $this->message = "L'usuari ja existeix";
-        } else $this->message = "Usuari no introduït";
+                $this->message  += "Valoració introduïda";
+            } else $this->message = "Valoració ja existent";
+        } else $this->message = "Valoració no introduïda";
 
         return $this->message;
     }
@@ -336,6 +343,6 @@ class valoracio_pelicula extends BD_MovieQuiz
     {
         $this->query = "SELECT * FROM valoracio_pelicules WHERE user = '$user'";
         $this->get_results_from_query();
-        return $this->rows;
+        return $this->rowss;
     }
 }

@@ -39,8 +39,8 @@ class controller
 
             case 'valoracio':
                 $dades = $this->recollirDadesPost();
-                $valoracio_pelicula->afegirValoracioPeli($dades);
-                echo "a";
+                $res = $valoracio_pelicula->afegirValoracioPeli($dades);
+                echo $res;
                 break;
 
             case 'login':
@@ -49,6 +49,14 @@ class controller
                 echo $res;
                 break;
         }
+    }
+
+    public function login()
+    {
+        $usuari_login = new usuari();
+        $dadesPOST = $this->recollirDadesPost();
+        $resposta = $usuari_login->comprovarLogin($dadesPOST);
+        return $resposta;
     }
 
     private function recollirDadesPost()
@@ -79,14 +87,6 @@ class controller
             );
         }
         return $dadesForm;
-    }
-
-    public function login()
-    {
-        $usuari_login = new usuari();
-        $dadesPOST = $this->recollirDadesPost();
-        $resposta = $usuari_login->comprovarLogin($dadesPOST);
-        return $resposta;
     }
 }
 
