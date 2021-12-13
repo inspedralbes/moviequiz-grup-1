@@ -77,7 +77,11 @@
     </div>
 
     <div id="apartadoMisPeliculas" class="row">
-
+        <div id="mispelis" class="col s12 m12 l8">
+                <div>
+                    <div id="mispelis-titol ">
+                        <h5>Les meves pel·lícules</h5>
+                    </div>
     </div>
 
 
