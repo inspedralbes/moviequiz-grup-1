@@ -55,8 +55,12 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
         console.log(data);
         if (data.exito == true) {
             console.log("hola");
+            let loginHTML = `<div id="info-usuari" class="col s12">a</div>`;
             document.getElementById("btn_login").classList.add("oculto");
-            document.getElementById("a").innerHTML = codigoHTMLuser(data);
+            document.getElementById("carrousel-fotos").classList.add("oculto");
+            document.getElementById("carrousel-titol").classList.add("oculto");
+            document.getElementById("apartadoCarrousel").insertAdjacentHTML("aftersbegin", loginHTML)
+            document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
         } else {
             console.log("adios");
 
