@@ -1,6 +1,6 @@
 <nav>
     <div id="nav" class="nav-wrapper">
-        <a href="index.php" class="brand-logo">MOVIES</a>
+        <a href="index.php" class="brand-logo"><img src="../IMG/logo.png" width="50px"></a>
         <ul class="right hide-on-med-and-down">
             <li><a id="btn_login" href="#login" class="modal-trigger waves-effect waves-light btn">LOGIN</a></li>
         </ul>
