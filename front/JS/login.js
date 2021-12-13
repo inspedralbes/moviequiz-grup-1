@@ -80,12 +80,11 @@ function codigoHTMLuser(datos) {
                     <div class="col s6 m6 l6 dades_usuari">
                         <p>${datos.nombre}<p>
                         <p>${datos.puntuacion}<p>
-
-                        
                     </div>
 
                     <div class="col s3 m3 l3">
-                        <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+                        <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">create</i></a>
+                        <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">save</i></a>
                     </div>
 
                     
