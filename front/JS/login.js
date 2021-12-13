@@ -40,10 +40,24 @@ function codigoHTMLuser(datos) {
                         <img src="${datos.imagen}">
                     </div>
 
-                    <div class="col s6 m6 l6 dades_usuari">
-                        <p>${datos.nombre}<p>
-                        <p>${datos.puntuacion}<p>
-                    </div>
+                    <div class="dades_usuari left-align">
+                        
+                        <div class="row">
+                            <div class=" col s6 m6 l6"> 
+                            <label for="nom">Nom</label>
+                                <input disabled id="nom" type="text" class="validate" value="${datos.nombre}">
+                                
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s6 m6 l6"> 
+                                <p>${datos.puntuacion}<p>
+                            </div>
+                        </div>
+
+                        
+
 
                     <div class="col s3 m3 l3">
                         <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">create</i></a>

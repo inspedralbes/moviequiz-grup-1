@@ -99,7 +99,7 @@ div {
 
 #apartadoCarrousel {
     border: 1px solid black;
-    height: 400px;
+    height: auto;
 }
 
 .carousel {
