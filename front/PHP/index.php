@@ -23,8 +23,6 @@ $controller->handler();
 <body>
     <?php include("header.php"); ?>
 
-    <div id="a"></div>
-
     <div id="apartadoBusqueda" class="row apartadoBusqueda">
 
         <div id="divsearch" class="col s9 m9 l10">
@@ -36,15 +34,16 @@ $controller->handler();
             <a id="ocultardivsearch" href="#!" class="btn-small red oculto"><i class="material-icons red">arrow_drop_up</i></a>
         </div>
 
-       <div id="resultat" class="row center-align"></div>
+        <div id="resultat" class="row center-align"></div>
 
     </div>
 
     <div id="apartadoCarrousel" class="row">
+        
         <div id="carrousel-titol" class="col s12 m12 l5">
-            <div><h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1></div>
+            <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>
-        <div class="carousel col s12 m12 l7">
+        <div id="carrousel-fotos" class="carousel col s12 m12 l7">
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=159&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=150&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=151&h=220"></a>

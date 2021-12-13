@@ -35,7 +35,7 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
                     document.getElementById(id).innerHTML = generarModal(data.Search[num]);
                     var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
 
-                    if (document.getElementById("a").innerHTML != "") {
+                    if (document.getElementById("info-usuari").innerHTML != "") {
                         document.getElementById("btn-guardar").classList.remove("disabled");
                         document.getElementById("diverror").classList.add("oculto");
                         document.getElementById("resultat").classList.remove("oculto");
