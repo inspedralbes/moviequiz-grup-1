@@ -1,9 +1,5 @@
-$(document).ready(function () {
-    $('input#input_text, textarea#textarea1').characterCounter();
-});
-
 /* Carrusel */
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     var imgs = document.querySelectorAll('.carousel');
     var instances = M.Carousel.init(imgs, {
         numVisible: 10,
@@ -11,64 +7,68 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.getElementById("btn_search").addEventListener("click", function (e) {
+document.getElementById("btn_search").addEventListener("click", function(e) {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
     var input = document.getElementById("search").value;
     let valoracio;
+
+
     fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${input}&type=movie`).
-        then(res => res.json()).
-        then(data => {
-            var text_movie = "  ";
-            for (var i = 0; i < data.Search.length; i++) {
-                var idMovie = "movie" + i;
-                let data_movie = data.Search[i];
-                text_movie += imprimirPelisModals(data_movie, idMovie);
-                document.getElementById("resultat").innerHTML = text_movie;
-            }
+    then(res => res.json()).
+    then(data => {
+        var text_movie = "  ";
+        for (var i = 0; i < data.Search.length; i++) {
+            var idMovie = "movie" + i;
+            let data_movie = data.Search[i];
+            text_movie += imprimirPelisModals(data_movie, idMovie);
+            document.getElementById("resultat").innerHTML = text_movie;
+        }
 
-            document.getElementById("resultat").addEventListener("click", function (e) {
-                if (e.target.classList == "material-icons") {
-                    id = e.target.parentElement.href.split("#")[1];
-                    num = id.split("e")[1];
-                    eliminarModals(data.Search);
-                    document.getElementById(id).innerHTML = generarModal(data.Search[num]);
-                    var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
+        document.getElementById("resultat").addEventListener("click", function(e) {
+            if (e.target.classList == "material-icons") {
+                id = e.target.parentElement.href.split("#")[1];
+                numPeli = id.split("e")[1];
+                eliminarModals(data.Search);
+                document.getElementById(id).innerHTML = generarModal(data.Search[numPeli]);
+                var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
 
-                    if (document.getElementById("info-usuari").innerHTML != "") {
-                        document.getElementById("btn-guardar").classList.remove("disabled");
-                        document.getElementById("diverror").classList.add("oculto");
-                        document.getElementById("resultat").classList.remove("oculto");
-                    }
-
-                    document.getElementById("formRadio").addEventListener("click", function (e) {
-                        valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
-                    })
-
-                    document.getElementById("btn-guardar").addEventListener("click", function (e) {
-                        let favorito = e.target.parentElement.querySelector("[name='fav']").checked;
-                        let comentario = e.target.parentElement.querySelector("#comentario").value;
-                        console.log(valoracio + " " + favorito + " " + comentario);
-                        
-                        const datosLogin = new FormData();
-                        datosLogin.append("valoracio", valoracio);
-                        datosLogin.append("favorit", favorito);
-                        datosLogin.append("comentari", comentario);
-
-                        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
-                            method: "POST",
-                            body: datosLogin
-                        }).then(response => response.json()).then(data => {
-                            console.log(data);
-                            
-                        });
-
-                    });
+                if (document.getElementById("info-usuari").innerHTML != "") {
+                    document.getElementById("btn-guardar").classList.remove("disabled");
+                    document.getElementById("diverror").classList.add("oculto");
+                    document.getElementById("resultat").classList.remove("oculto");
                 }
-            });
 
-        })
-    document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
+                document.getElementById("formRadio").addEventListener("click", function(e) {
+                    valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
+                })
+
+                document.getElementById("btn-guardar").addEventListener("click", function(e) {
+                    let favorito = e.target.parentElement.querySelector("[name='fav']").checked;
+                    let comentario = e.target.parentElement.querySelector("#comentario").value;
+                    let nomUsuari = document.getElementById('alias').value;
+
+                    const datosLogin = new FormData();
+                    datosLogin.append("valoracio", valoracio);
+                    datosLogin.append("favorit", favorito);
+                    datosLogin.append("comentari", comentario);
+                    datosLogin.append('nom-peli', data.Search[numPeli].Title);
+                    datosLogin.append('any-peli', data.Search[numPeli].Year);
+                    datosLogin.append('img-peli', data.Search[numPeli].Poster);
+                    datosLogin.append('nom-usuari', nomUsuari);
+
+                    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
+                        method: "POST",
+                        body: datosLogin
+                    }).then(response => response.json()).then(data => {
+                        console.log(data);
+                    });
+                });
+            }
+        });
+
+    })
+    document.getElementById("ocultardivsearch").addEventListener("click", function(e) {
         document.getElementById("resultat").classList.add("oculto");
         document.getElementById("ocultardivsearch").classList.add("oculto");
     })

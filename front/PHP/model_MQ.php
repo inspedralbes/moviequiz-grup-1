@@ -59,7 +59,16 @@ class usuari extends BD_MovieQuiz
         $this->get_results_from_query();
 
         if ($this->rows != null && $this->rows[0]["passw"] == $login_data['contrasenya']) {
-            $res = array('exito' => true, 'nombre' => $this->rows[0]["nom"], 'imagen' => 'https://randomuser.me/api/portraits/men/23.jpg', 'puntuacion'=>$this->rows[0]["punts"]);;
+            $res = array(
+                'exito' => true,
+                'idUsuari' => $this->rows[0]["idUsuari"],
+                'nombre' => $this->rows[0]["nom"],
+                'cognoms' => $this->rows[0]["cognoms"],
+                'usuari' => $this->rows[0]["user"],
+                'email' => $this->rows[0]["email"],
+                'imagen' => 'https://randomuser.me/api/portraits/men/23.jpg',
+                'puntuacion' => $this->rows[0]["punts"]
+            );;
         } else {
             $res = array('exito' => false);
         }
@@ -294,27 +303,38 @@ class valoracio_pelicula extends BD_MovieQuiz
     //select dels camps passats de tots els registres
     //stored in $rows property
 
-    public function afegirValoracioPeli($dadesvaloracio = array())
+    public function afegirValoracioPeli($dadesValoracio = array())
     {
-        if (array_key_exists("valoracio", $dadesvaloracio)) {
-            $this->dadesValoracio($user_data["usuari"]);
-            if (!isset($this->rows[0]['user'])) {
-                foreach ($user_data as $campo => $dato) {
+        if (array_key_exists("nomUsuari", $dadesValoracio)) {
+            $this->dadesValoracio($dadesValoracio["nomUsuari"]);
+            if (!isset($this->rows[0]['usuari'])) {
+                
+                //Obtindre el id del usuari que valora/guarda la peli
+                $usuari = new usuari();
+                $usuari->dadesUsuari($dadesValoracio['nomUsuari']);
+                $user = $this->rows[0]['idUsuari'];
+
+                foreach ($dadesValoracio as $campo => $dato) {
                     $$campo = $dato;
                 }
-                $this->query = "INSERT INTO usuari(idUsuari, nom, cognoms, email, user, passw, imatge, punts) VALUES (NULL, '$nom', '$cognoms', '$email', '$usuari', '$contrasenya', NULL, 0)";
+
+                $this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES (NULL,'$nomPeli','','')";
                 $this->execute_single_query();
-                $this->message  = "Usuari introduït";
+
+
+
+                $this->query = "INSERT INTO valoracio_pelicules(pelicula, usuari, comentari, favorit, valoracio) VALUES ('','','','','')";
+                $this->execute_single_query();
+                $this->message  += "Usuari introduït";
             } else $this->message = "L'usuari ja existeix";
         } else $this->message = "Usuari no introduït";
 
         return $this->message;
-        
     }
 
     public function dadesValoracio($user = "")
     {
-        $this->query = "SELECT * FROM usuari WHERE user = '$user'";
+        $this->query = "SELECT * FROM valoracio_pelicules WHERE user = '$user'";
         $this->get_results_from_query();
         return $this->rows;
     }

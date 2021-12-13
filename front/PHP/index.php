@@ -11,10 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="shortcut icon" href="../IMG/logo.png">
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/es/img/favicon.ico?v=a8def514be8a">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link rel="stylesheet" href="../CSS/normalize.css">
+    <link type="text/css" rel="stylesheet" href="../CSS/index.css">
     <link type="text/css" rel="stylesheet" href="../CSS/header.css">
     <title>Movies</title>
 </head>
@@ -79,20 +78,24 @@
     <div id="apartadoMisPeliculas" class="row">
         <div id="mispelis" class="col s12 m12 l8">
                 <div>
-                    <div id="mispelis-titol">
+                    <div id="mispelis-titol ">
                         <h5>Les meves pel·lícules</h5>
                     </div>
-                </div>
-        </div>
     </div>
+
+
+
+    <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"><i class="material-icons">trophy</i> Puntuació Joc </button></div>
 
 
     <?php include("footer.php"); ?>
 
+    <script type="text/javascript" src="../JS/login.js"></script>
+    <script src="js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../JS/login.js"></script>
     <script type="text/javascript" src="../JS/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>
