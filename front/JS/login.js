@@ -45,7 +45,7 @@ function codigoHTMLuser(datos) {
                         <div class="row">
                             <div class=" col s6 m6 l6"> 
                             <label for="nom">Nom</label>
-                                <input disabled id="nom" type="text" class="validate" value="${datos.nombre}">
+                                <input disabled id="alias" type="text" class="validate" value="${datos.nombre}">
                                 
                             </div>
                         </div>
