@@ -1,5 +1,5 @@
 INSERT INTO `usuari` (`idUsuari`, `nom`, `cognoms`, `email`, `user`, `passw`, `imatge`, `punts`) VALUES
-(NULL, 'admin', 'admin', 'admin@inspedralbes.cat', 'admin', 'admin', NULL, 0),
+(NULL, 'ausias', 'ausias', 'ausias@inspedralbes.cat', 'ausias', 'ausias', NULL, 0),
 (NULL, 'pedra', 'pedra', 'pedra@inspedralbes.cat', 'pedra', 'pedra', NULL, 0),
 (NULL, 'Pau', 'Muñoz Olivares', 'pau@gmail.com', 'pau', '1234', NULL, 0),
 (NULL, 'Sandra', 'Ortiz Vega', 'sandra@gmail.com', 'sandra', '1234', NULL, 0);
