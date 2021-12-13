@@ -1,7 +1,5 @@
 <?php
-require_once("controller_MQ.php");
-$controller = new controller();
-$controller->handler();
+    require_once("controller_MQ.php");
 ?>
 
 
@@ -13,6 +11,7 @@ $controller->handler();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/es/img/favicon.ico?v=a8def514be8a">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/index.css">
     <link rel="stylesheet" href="../CSS/normalize.css">
@@ -78,7 +77,11 @@ $controller->handler();
     </div>
 
     <div id="apartadoMisPeliculas" class="row">
-
+        <div id="mispelis" class="col s12 m12 l8">
+                <div>
+                    <div id="mispelis-titol ">
+                        <h5>Les meves pel·lícules</h5>
+                    </div>
     </div>
 
 

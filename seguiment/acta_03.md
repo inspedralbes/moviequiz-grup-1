@@ -4,7 +4,7 @@
 
 - carusel de pel·lícules (BD ordenar por mejor valoración)
 
-- página per a modificar la informació de l'usuari (codi básic)
+- apartat per a modificar la informació de l'usuari (codi básic)
 
-- página usuari - mostrar pel·lícules favorites (eliminar de favorites i canviar comentari i valoració)
+- apartat usuari - mostrar pel·lícules favorites (eliminar de favorites i canviar comentari i valoració)
 
