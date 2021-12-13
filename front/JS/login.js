@@ -36,33 +36,34 @@ function codigoHTMLuser(datos) {
     let text = `<div class="row">
                     <h3>¡Hola ${datos.nombre}!</h3>
                     <br>
+
                     <div class="col s3 m3 l3">
                         <img src="${datos.imagen}">
                     </div>
 
-                    <div class="dades_usuari left-align">
+                    <div class="dades_usuari center-align>
                         
                         <div class="row">
-                            <div class=" col s6 m6 l6"> 
-                            <label for="nom">Nom</label>
-                                <input disabled id="alias" type="text" class="validate" value="${datos.usuari}">
-                                
+                            <div class="col s4 m4 l4"> 
+                                <label for="alias">Nom</label>
+                                <input disabled id="nom" type="text" class="validate" value="${datos.nombre}">
+
+                                <label for="email">Correu</label>
+                                <input disabled id="email" type="email" class="validate" value="${datos.email}">
+                            
+                                <label for="puntuacio">Karma</label>
+                                <input disabled id="puntuacio" type="text" class="validate" value="${datos.puntuacion}">
+
+                                <input id="alias" type="hidden" value="${datos.usuari}">
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="input-field col s6 m6 l6"> 
-                                <p>${datos.puntuacion}<p>
+                            <div class="col s3 m3 l3 center-align">
+                                <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">create</i></a>
+                                <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">save</i></a>
                             </div>
                         </div>
-
-                        
-
-
-                    <div class="col s3 m3 l3">
-                        <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">create</i></a>
-                        <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">save</i></a>
-                    </div>
 
                     
                 </div>`;

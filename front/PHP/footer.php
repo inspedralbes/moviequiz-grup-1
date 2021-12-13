@@ -1,4 +1,4 @@
-<footer class="page-footer">
+<footer class="page-footer deep-purple">
     <div class="container">
         <div class="row center-align">
             <div class="col center-align">
