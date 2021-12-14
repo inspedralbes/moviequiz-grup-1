@@ -44,6 +44,10 @@ class usuari extends BD_MovieQuiz
                 foreach ($user_data as $campo => $dato) {
                     $$campo = $dato;
                 }
+
+                //Securitzar contrasenya
+                $contrasenya = password_hash($contrasenya, PASSWORD_DEFAULT);
+
                 $this->query = "INSERT INTO usuari(idUsuari, nom, cognoms, email, user, passw, imatge, punts) VALUES (NULL, '$nom', '$cognoms', '$email', '$usuari', '$contrasenya', NULL, 0)";
                 $this->execute_single_query();
                 $this->message  = "Usuari introduït";
@@ -58,7 +62,8 @@ class usuari extends BD_MovieQuiz
         $this->query = "SELECT * FROM usuari WHERE user = '" . $login_data['usuari'] . "'";
         $this->get_results_from_query();
 
-        if ($this->rows != null && $this->rows[0]["passw"] == $login_data['contrasenya']) {
+        //Utilitzar password_verify() per comprovar el hash de la contrasenya de la BD amb l'string que prove del login
+        if ($this->rows != null && password_verify($login_data['contrasenya'], $this->rows[0]["passw"])) {
             $res = array(
                 'exito' => true,
                 'idUsuari' => $this->rows[0]["idUsuari"],
