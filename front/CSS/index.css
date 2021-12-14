@@ -4,7 +4,7 @@ input[type="radio"] {
     background-color: red;
 }
 
-body {
+body{
     margin:auto;
     /*justify-content: center;
     align-items: center;
@@ -49,6 +49,7 @@ body {
         font-size: 18px !important;
     }
 }
+
 /*
 .disabled {
     disabled: "disabled";
@@ -70,7 +71,7 @@ body {
     display: none !important;
 }
 
-.btn-joc{
+.btn-joc {
     margin: 20px;
     font-size: 36px;
 }
@@ -90,7 +91,7 @@ body {
     height: 25vh;
 }
 
-#ranking-usuaris{
+#ranking-usuaris {
     text-align: center;
 }
 
@@ -117,23 +118,35 @@ body {
     height: 400px;
 }
 
-#info-usuari{
+#info-usuari {
     height: 400px;
 }
 
-#mispelis-titol{
+#mispelis-titol {
     text-align: center;
 }
 
-.centrar{
+.centrar {
     text-align: center;
 }
 
-.black_font{
+.black_font {
     color: black;
 }
 
-.white_font{
+.white_font {
     color: white !important;
+}
+
+.page-footer .l4 h5 {
+    text-decoration: underline;
+}
+
+.page-footer{
+    padding-top: 10px !important; 
+}
+
+.footer {
+    justify-content: center !important;
 }
 
