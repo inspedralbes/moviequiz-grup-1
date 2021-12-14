@@ -24,7 +24,7 @@
     <div id="apartadoBusqueda" class="row apartadoBusqueda">
 
         <div id="divsearch" class="col s9 m9 l10">
-            <input type="text" id="search" placeholder="Cercar pel·lícula">
+            <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
         </div>
 
         <div id="butons_search" class="col s3 m3 l2">
@@ -81,11 +81,9 @@
                     <div id="mispelis-titol ">
                         <h5>Les meves pel·lícules</h5>
                     </div>
+                </div>
+        </div>
     </div>
-
-
-
-    <div><button id="btn-joc" class="btn waves-effect waves-light btn-joc"><i class="material-icons">trophy</i> Puntuació Joc </button></div>
 
 
     <?php include("footer.php"); ?>

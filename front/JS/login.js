@@ -24,6 +24,27 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("carrousel-titol").classList.add("oculto");
             document.getElementById("apartadoCarrousel").insertAdjacentHTML("afterbegin", loginHTML);
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
+            document.getElementById("btn_save").classList.add("oculto");
+
+            document.getElementById("btn_edit").addEventListener("click", function (e) {
+                document.getElementById("nom_us").removeAttribute("disabled");
+                document.getElementById("email_us").removeAttribute("disabled");
+                document.getElementById("btn_save").classList.remove("oculto");
+                document.getElementById("btn_edit").classList.add("oculto");
+            })
+
+            document.getElementById("btn_save").addEventListener("click", function (e) {
+                document.getElementById("nom_us").setAttribute("disabled", "");
+                document.getElementById("email_us").setAttribute("disabled", "");
+                document.getElementById("btn_edit").classList.remove("oculto");
+                document.getElementById("btn_save").classList.add("oculto");
+            })
+
+            var text_header = " ";
+            text_header = codigoHTMLheaderuser(data);
+            document.getElementById("resultat_header").innerHTML = text_header;
+
+
         } else {
             console.log("adios");
 
@@ -31,13 +52,19 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
     });
 })
 
+function codigoHTMLheaderuser(datos) {
+    let text = `<li class="usuario_header">${datos.usuari}</li>
+                <li><img class="img_header" src="${datos.imagen}"></li>
+                <li><a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light btn">LOGOUT</a></li>`;
+    return text;
+}
+
+
 
 function codigoHTMLuser(datos) {
     let text = `<div class="row">
-                    <h3>¡Hola ${datos.nombre}!</h3>
-                    <br>
-
-                    <div class="col s3 m3 l3">
+                    <div class="col s3 m3 l3 centrar">
+                        <h3>¡Hola ${datos.nombre}!</h3>
                         <img src="${datos.imagen}">
                     </div>
 
@@ -45,14 +72,14 @@ function codigoHTMLuser(datos) {
                         
                         <div class="row">
                             <div class="col s4 m4 l4"> 
-                                <label for="alias">Nom</label>
-                                <input disabled id="nom" type="text" class="validate" value="${datos.nombre}">
+                                <label class="white_font" for="alias">Nom</label>
+                                <input disabled id="nom_us" type="text" class="white_font" value="${datos.nombre}">
 
-                                <label for="email">Correu</label>
-                                <input disabled id="email" type="email" class="validate" value="${datos.email}">
+                                <label class="white_font" for="email">Correu</label>
+                                <input disabled id="email_us" type="email" class="white_font" value="${datos.email}">
                             
-                                <label for="puntuacio">Karma</label>
-                                <input disabled id="puntuacio" type="text" class="validate" value="${datos.puntuacion}">
+                                <label class="white_font" for="puntuacio">Karma</label>
+                                <input disabled id="puntuacio_us" type="text" class="white_font" value="${datos.puntuacion}">
 
                                 <input id="alias" type="hidden" value="${datos.usuari}">
                             </div>
@@ -60,8 +87,8 @@ function codigoHTMLuser(datos) {
 
                         <div class="row">
                             <div class="col s3 m3 l3 center-align">
-                                <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">create</i></a>
-                                <a class="btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">save</i></a>
+                                <a class="btn-small waves-effect waves-light" id="btn_edit"><i class="material-icons">create</i></a>
+                                <a class="btn-small waves-effect waves-light" id="btn_save"><i class="material-icons">save</i></a>
                             </div>
                         </div>
 

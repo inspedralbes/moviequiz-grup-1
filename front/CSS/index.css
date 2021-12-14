@@ -11,7 +11,7 @@ body {
     text-align: center;*/
     width: 95%;
     background-color: rgb(39, 39, 39);
-    
+    color: white;
 }
 
 .divpelis {
@@ -49,10 +49,10 @@ body {
         font-size: 18px !important;
     }
 }
-
+/*
 .disabled {
     disabled: "disabled";
-}
+}*/
 
 .error {
     padding: 10px;
@@ -124,3 +124,16 @@ body {
 #mispelis-titol{
     text-align: center;
 }
+
+.centrar{
+    text-align: center;
+}
+
+.black_font{
+    color: black;
+}
+
+.white_font{
+    color: white !important;
+}
+
