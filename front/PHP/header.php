@@ -3,6 +3,7 @@
         <a href="index.php" class="brand-logo"><img src="../IMG/logo2.png" width="50px"></a>
         <ul class="right hide-on-med-and-down">
             <li><a id="btn_login" href="#login" class="modal-trigger waves-effect waves-light btn">LOGIN</a></li>
+            <li id="resultat_header"></li>
         </ul>
     </div>
 
