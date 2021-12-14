@@ -1,5 +1,5 @@
 <?php
-    require_once("controller_MQ.php");
+require_once("controller_MQ.php");
 ?>
 
 
@@ -21,15 +21,17 @@
 <body>
     <?php include("header.php"); ?>
 
-    <div id="apartadoBusqueda" class="row apartadoBusqueda">
-        
-        <div id="divsearch" class="col s9 m9 l10">
-            <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
-        </div>
+    <div id="apartadoBusqueda" >
 
-        <div id="butons_search" class="col s3 m3 l2">
+        <div class="row apartadoBusqueda">
+            <div id="divsearch" class="col s10">
+                <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
+            </div>
+
+            <div id="butons_search" class="col s2">
             <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
-            <a id="ocultardivsearch" href="#!" class="btn-small red oculto"><i class="material-icons red">arrow_drop_up</i></a>
+                <a id="ocultardivsearch" href="#!" class="btn-small red oculto"><i class="material-icons red">arrow_drop_up</i></a>
+            </div>
         </div>
 
         <div id="resultat" class="row center-align"></div>
@@ -77,11 +79,11 @@
 
     <div id="apartadoMisPeliculas" class="row">
         <div id="mispelis" class="col s12 m12 l8">
-                <div>
-                    <div id="mispelis-titol ">
-                        <h5>Les meves pel·lícules</h5>
-                    </div>
+            <div>
+                <div id="mispelis-titol ">
+                    <h5>Les meves pel·lícules</h5>
                 </div>
+            </div>
         </div>
     </div>
 
@@ -97,4 +99,3 @@
 </body>
 
 </html>
-
