@@ -1,9 +1,9 @@
 /* Inicialitzar modals */
-document.getElementById("btn_login").addEventListener("click", function (e) {
+document.getElementById("btn_login").addEventListener("click", function(e) {
     var instances = M.Modal.init(document.querySelector(".login"), {});
 })
 
-document.getElementById("btn_entrar").addEventListener("click", function () {
+document.getElementById("btn_entrar").addEventListener("click", function() {
     let usu = document.getElementById("usuari").value;
     let pwd = document.getElementById("pwd").value;
 
@@ -17,12 +17,11 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
     }).then(response => response.json()).then(data => {
         console.log(data);
         if (data.exito == true) {
-            console.log("hola");
-            let loginHTML = `<div id="info-usuari" class="col s12">a</div>`;
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
-            document.getElementById("apartadoCarrousel").insertAdjacentHTML("afterbegin", loginHTML);
+
+            document.getElementById("info-usuari").classList.remove("oculto");
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
@@ -46,8 +45,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
 
 
         } else {
-            console.log("adios");
-
+            console.log("error"); //FALLO al inciar sesion - falta
         }
     });
 })

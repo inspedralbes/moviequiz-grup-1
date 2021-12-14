@@ -32,7 +32,7 @@ class usuari extends BD_MovieQuiz
     public function dadesUsuari($user = "")
     {
         $this->query = "SELECT * FROM usuari WHERE user = '$user'";
-        $this->get_results_from_query();    
+        $this->get_results_from_query();
         return $this->rows;
     }
 
@@ -230,21 +230,9 @@ class pelicula extends BD_MovieQuiz
     {
     }
 
-    //select dels camps passats de tots els registres
-    //stored in $rows property
+
     public function selectAll($fields = array())
     {
-        $this->query = "SELECT ";
-        $firstField = true;
-        for ($i = 0; $i < count($fields); $i++) {
-            if ($firstField) {
-                $this->query .= $fields[$i];
-                $firstField = false;
-            } else $this->query .= ", " . $fields[$i];
-        }
-        $this->query .= " FROM persones";
-        $this->get_results_from_query();
-        return $this->rows;
     }
 
     public function dadesPelicula($nom = "")
@@ -254,29 +242,11 @@ class pelicula extends BD_MovieQuiz
         return $this->rows;
     }
 
-
-    public function insert($user_data = array())
+    public function comprovarSiExisteixPelicula($nom = "")
     {
-        /*
-        if (array_key_exists("nom", $user_data)) {
-            $this->select($user_data["nom"]);
-            if (!isset($this->rows[0]['nom'])) {
-                foreach ($user_data as $campo => $c) {
-                    $$campo = $c;
-                }
-                $this->query = "INSERT INTO persones(id, nom, edat, alcada) VALUES (NULL, '" . $nom . "', '" . $edat . "', '" . $alcada . "')";
-                $this->execute_single_query();
-                $this->message  = "Usuari introduït";
-            } else $this->message = "L'usuari ja existeix";
-        } else $this->message = "Usuari no introduït";*/
-    }
-
-    public function update($userData = array())
-    {
-    }
-
-    public function delete($nom = "")
-    {
+        $this->query = "SELECT * FROM pelicula WHERE nomPelicula = '$nom'";
+        $this->get_results_from_query();
+        return (!isset($this->rows[0]['nomPelicula'])) ? 1 : 0;
     }
 }
 
@@ -291,7 +261,7 @@ class valoracio_pelicula extends BD_MovieQuiz
 
     function __toString()
     {
-        echo "Dades pelicula<br>";
+        echo "Dades valoracio pel·lícula<br>";
         return "(" . $this->pelicula . ", " . $this->usuari . ", " .
             $this->comentari . ", " . $this->favorit .  ", " . $this->valoracio . ")";
     }
@@ -300,49 +270,59 @@ class valoracio_pelicula extends BD_MovieQuiz
     {
     }
 
-    //select dels camps passats de tots els registres
-    //stored in $rows property
-
     public function afegirValoracioPeli($dadesValoracio = array())
     {
         if (array_key_exists("nomUsuari", $dadesValoracio)) {
-            $this->dadesValoracio($dadesValoracio["nomUsuari"]);
-            if (!isset($this->rows[0]['usuari'])) {
 
-                foreach ($dadesValoracio as $campo => $dato) {
-                    $$campo = $dato;
-                }
+            foreach ($dadesValoracio as $campo => $dato) {
+                $$campo = $dato;
+            }
 
-                //Afegir la peli a la BD
-                $this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES (NULL,'a','2005','c')";
-                //$this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES (NULL,'$nomPeli','$anyPeli','$imgPeli')";
+            $pelicula = new pelicula();
+            $usuari = new usuari();
+
+            //Comprovar si la pelicula existeix a la BD
+            $bool = $pelicula->comprovarSiExisteixPelicula($nomPeli);
+            if ($bool) {
+                //Afegir la peli a la BD si no hi és a la BD
+                $this->query = "INSERT INTO pelicula(idPelicula, nomPelicula, any, img) VALUES ('$idPeli','$nomPeli','$anyPeli','$imgPeli')";
                 $this->execute_single_query();
-                
-                //Obtindre el id del usuari que valora/guarda la peli
-                $usuari = new usuari();
-                $user = $usuari->dadesUsuari($nomUsuari)[0]['idUsuari'];
-                
+            }
 
-                //Obtindre el id de la peli valorada/guardada
-                $pelicula = new pelicula();
-                $peli = $pelicula->dadesPelicula($nomPeli)[0]['idPelicula'];
-                
-                //
-                $this->query = "INSERT INTO valoracio_pelicules(pelicula, usuari, comentari, favorit, valoracio) VALUES ('$peli','$user','$comentari','$favorit','$valoracio')";
+            //Obtindre el id del usuari que valora/guarda la peli
+            $idUser = $usuari->dadesUsuari($nomUsuari)[0]['idUsuari'];
+
+            //Obtindre el id de la peli valorada/guardada
+            $idPeli = $pelicula->dadesPelicula($nomPeli)[0]['idPelicula'];
+
+            $bool = $this->comprovarSiExisteixValoracio($idUser, $idPeli);
+            if ($bool) {
+                //Afegir la valoracio a la BD
+                $this->query = "INSERT INTO valoracio_pelicules(pelicula, usuari, comentari, favorit, valoracio) VALUES ('$idPeli','$idUser','$comentari','$favorit','$valoracio')";
                 $this->execute_single_query();
+                $this->message = "be";
+            } else $this->message = "existeix";
+        } else $this->message = "error";
 
-
-                $this->message  += "Valoració introduïda";
-            } else $this->message = "Valoració ja existent";
-        } else $this->message = "Valoració no introduïda";
-
-        return $this->message;
+        return json_encode(array('resultat' => $this->message));
     }
 
-    public function dadesValoracio($user = "")
+    public function comprovarSiExisteixValoracio($user = "", $peli = "")
     {
-        $this->query = "SELECT * FROM valoracio_pelicules WHERE user = '$user'";
+        $this->query = "SELECT * FROM valoracio_pelicules WHERE usuari = '$user' AND pelicula = '$peli'";
         $this->get_results_from_query();
-        return $this->rowss;
+        return (!isset($this->rows[0]['usuari']) and !isset($this->rows[0]['pelicula'])) ? 1 : 0;
+    }
+
+    public function valoracionsUsuari($id = "")
+    {
+        $this->query = "SELECT
+                            pelicula.idPelicula
+                        FROM
+                            valoracio_pelicules
+                        JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
+                        WHERE valoracio_pelicules.usuari = $id;";
+        $this->get_results_from_query();
+        return $this->rows;
     }
 }
