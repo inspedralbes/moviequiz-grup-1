@@ -22,7 +22,7 @@
     <?php include("header.php"); ?>
 
     <div id="apartadoBusqueda" class="row apartadoBusqueda">
-
+        
         <div id="divsearch" class="col s9 m9 l10">
             <input type="text" id="search" placeholder="Cercar pel·lícula">
         </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div id="apartadoCarrousel" class="row">
-        
+        <div id="info-usuari" class="col s12 oculto"></div>
         <div id="carrousel-titol" class="col s12 m12 l5">
             <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>

@@ -21,8 +21,12 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
         for (var i = 0; i < data.Search.length; i++) {
             var idMovie = "movie" + i;
             let data_movie = data.Search[i];
-            text_movie += imprimirPelisModals(data_movie, idMovie);
+            text_movie += imprimirPelisCards(data_movie, idMovie);
             document.getElementById("resultat").innerHTML = text_movie;
+        }
+
+        if (document.getElementById("info-usuari").innerHTML != "") {
+            obtenerPelisGuardadasUsuario();
         }
 
         document.getElementById("resultat").addEventListener("click", function(e) {
@@ -31,43 +35,23 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
                 numPeli = id.split("e")[1];
                 eliminarModals(data.Search);
                 document.getElementById(id).innerHTML = generarModal(data.Search[numPeli]);
+
+                //Inicialitzar modals de les pelicules
                 var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
 
+                //Habilitar o no el boto de guarda comentari/valoracio/favorit en funcio de si l'usuari ha fet login
                 if (document.getElementById("info-usuari").innerHTML != "") {
                     document.getElementById("btn-guardar").classList.remove("disabled");
                     document.getElementById("diverror").classList.add("oculto");
                     document.getElementById("resultat").classList.remove("oculto");
                 }
 
-                document.getElementById("formRadio").addEventListener("click", function(e) {
-                    valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
-                })
-
-                document.getElementById("btn-guardar").addEventListener("click", function(e) {
-                    let favorito = e.target.parentElement.querySelector("[name='fav']").checked;
-                    let comentario = e.target.parentElement.querySelector("#comentario").value;
-                    let nomUsuari = document.getElementById('alias').value;
-
-                    const datosLogin = new FormData();
-                    datosLogin.append("valoracio", valoracio);
-                    datosLogin.append("favorit", favorito);
-                    datosLogin.append("comentari", comentario);
-                    datosLogin.append('nom-peli', data.Search[numPeli].Title);
-                    datosLogin.append('any-peli', data.Search[numPeli].Year);
-                    datosLogin.append('img-peli', data.Search[numPeli].Poster);
-                    datosLogin.append('nom-usuari', nomUsuari);
-
-                    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
-                        method: "POST",
-                        body: datosLogin
-                    }).then(response => {
-                        console.log(response);
-                    });
-                });
+                guardarValoracio(data);
             }
         });
 
     })
+
     document.getElementById("ocultardivsearch").addEventListener("click", function(e) {
         document.getElementById("resultat").classList.add("oculto");
         document.getElementById("ocultardivsearch").classList.add("oculto");
@@ -75,18 +59,17 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
 })
 
 /* Cards */
-function imprimirPelisModals(data_movie, id) {
-    var txt = `
-            <div class="col s6 m4 l3" id="divpelis" class="divpelis">
+function imprimirPelisCards(data_movie, id) {
+    var txt = `<div class="col s6 m4 l3" id="${data_movie.imdbID}" class="divpelis">
                 <div class="card">
                     <div class="card-image">
-                        <img class="poster" src="${data_movie.Poster}">
+                        <img class="poster" id="img-peli" src="${data_movie.Poster}" alt="${data_movie.Poster}">
                         <a id="btn-modal" class="btn-floating halfway-fab modal-trigger waves-effect waves-light red" href="#${id}"><i class="material-icons">add</i></a>
                     </div>
 
                     <div class="card-content card-title">
-                        <span>${data_movie.Title}</span><br>
-                        <span>${data_movie.Year}</span>
+                        <span class="titol-peli">${data_movie.Title}</span><br>
+                        <span class="any-peli">${data_movie.Year}</span>
                     </div>
                 </div>
                 <div id="${id}" class="modal"></div>
@@ -151,6 +134,56 @@ function eliminarModals(data) {
         document.getElementById("movie" + i).innerHTML = "";
     }
 }
-/*
-document.getElementById("btn-guardar").style
-*/
+
+function guardarValoracio(data) {
+    //Guardar la valoracio i el comentari d'una peli i si es favorita o no a la BD 
+
+
+    //Listener per obtenir el valor (del input radio seleccionat) de la valoracio de la peli 
+    document.getElementById("formRadio").addEventListener("click", function(e) {
+        valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
+    })
+
+    //Listener per recollir totes les dades i enviarles a la BD 
+    document.getElementById("btn-guardar").addEventListener("click", function(e) {
+
+        //Recollida de dades
+        let favorito = e.target.parentElement.querySelector("[name='fav']").checked;
+        favorito = (favorito == true) ? 1 : 0;
+        let comentario = e.target.parentElement.querySelector("#comentario").value;
+        let nomUsuari = document.getElementById('alias').value;
+
+        const datosLogin = new FormData();
+        datosLogin.append("valoracio", valoracio);
+        datosLogin.append("favorit", favorito);
+        datosLogin.append("comentari", comentario);
+        datosLogin.append('nom-peli', data.Search[numPeli].Title);
+        datosLogin.append('any-peli', data.Search[numPeli].Year);
+        datosLogin.append('img-peli', data.Search[numPeli].Poster);
+        datosLogin.append('id-peli', data.Search[numPeli].imdbID);
+        datosLogin.append('nom-usuari', nomUsuari);
+
+
+        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
+            method: "POST",
+            body: datosLogin
+        }).then(response => response.json()).then(data => { console.log(data); });
+    });
+}
+
+function obtenerPelisGuardadasUsuario(){
+    let user = document.getElementById("alias").value;
+
+    const datos = new FormData();
+    datos.append("user", user);
+    
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelisValoradesUsuari', {
+        method: "POST",
+        body: datos
+    }).then(response => response.json())
+    .then(pelisGuardadas => { 
+        for(var i=0; i<pelisGuardadas.length; i++){
+            document.querySelector(`#${pelisGuardadas[i].idPelicula} a`).setAttribute("disabled", '');
+        }   
+    });
+}

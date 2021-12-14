@@ -8,7 +8,7 @@ class controller
     //rutes o esdeveniments possibles
     //view1: nom i edat
     //view2: nom i alçada
-    private $peticions = array('login', 'signup', 'valoracio');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari');
 
     public function handler()
     {
@@ -33,30 +33,30 @@ class controller
 
         switch ($event) {
             case 'signup':
-                $dades = $this->recollirDadesPost();
-                echo $usuari->introduirUsuari($dades);
+                $dadesPOST = $this->recollirDadesPost();
+                echo $usuari->introduirUsuari($dadesPOST);
                 break;
 
             case 'valoracio':
-                $dades = $this->recollirDadesPost();
-                $res = $valoracio_pelicula->afegirValoracioPeli($dades);
+                $dadesPOST = $this->recollirDadesPost();
+                $res = $valoracio_pelicula->afegirValoracioPeli($dadesPOST);
                 echo $res;
                 break;
 
             case 'login':
-                $resposta = $this->login();
+                $dadesPOST = $this->recollirDadesPost();
+                $resposta = $usuari->comprovarLogin($dadesPOST);
                 $res = json_encode($resposta);
                 echo $res;
                 break;
-        }
-    }
 
-    public function login()
-    {
-        $usuari_login = new usuari();
-        $dadesPOST = $this->recollirDadesPost();
-        $resposta = $usuari_login->comprovarLogin($dadesPOST);
-        return $resposta;
+            case 'pelisValoradesUsuari':
+                $dadesPOST = $this->recollirDadesPost();
+                $datosUsuario = $usuari->dadesUsuari($dadesPOST);
+                $res = $valoracio_pelicula->valoracionsUsuari($datosUsuario[0]['idUsuari']);
+                echo json_encode($res);
+                break;
+        }
     }
 
     private function recollirDadesPost()
@@ -80,11 +80,14 @@ class controller
                 'valoracio' => $_POST["valoracio"],
                 'favorit' => $_POST["favorit"],
                 'comentari' => $_POST["comentari"],
+                'idPeli' => $_POST['id-peli'],
                 'nomPeli' => $_POST["nom-peli"],
                 'anyPeli' => $_POST["any-peli"],
                 'imgPeli' => $_POST["img-peli"],
                 'nomUsuari' => $_POST['nom-usuari']
             );
+        } else if (isset($_POST['user'])) {
+            $dadesForm = $_POST['user'];
         }
         return $dadesForm;
     }
