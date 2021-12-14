@@ -66,7 +66,7 @@
                 </div>
                 <div id="ranking-usuaris">
                     <ul>
-                        <li>Persona 1 - 50pt</li>
+                        <li>Persona 1 - 90pt</li>
                         <li>Persona 2 - 60pt</li>
                         <li>Persona 3 - 40pt</li>
                     </ul>
