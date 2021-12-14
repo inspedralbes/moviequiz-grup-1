@@ -13,7 +13,7 @@ CREATE TABLE usuari(
 ); 
 
 CREATE TABLE pelicula(
-	idPelicula int(5) AUTO_INCREMENT UNIQUE NOT NULL, 
+	idPelicula varchar(10) UNIQUE NOT NULL, 
     nomPelicula varchar(30) NOT NULL,
     any year NOT NULL,
     img varchar(100) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE partida(
 );
 
 CREATE TABLE valoracio_pelicules(
-	pelicula int(5) NOT NULL,
+	pelicula varchar(10) NOT NULL,
     usuari int(5) NOT NULL,
     comentari varchar(200) NOT NULL,
     favorit boolean NOT NULL,
