@@ -39,9 +39,7 @@ document.getElementById("btn_entrar").addEventListener("click", function() {
                 document.getElementById("btn_save").classList.add("oculto");
             })
 
-            var text_header = " ";
-            text_header = codigoHTMLheaderuser(data);
-            document.getElementById("resultat_header").innerHTML = text_header;
+            document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
 
 
         } else {
