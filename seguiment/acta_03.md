@@ -2,7 +2,7 @@
 
 - guardar valoració a la base de dades + afegir a pel·lícules favorites + deshabilitar boton guardar peli si ya se ha guardado antes (hecho)
 
-- securizar contraseña 
+- securizar contraseña
 
 - hacer login permanente (session_start())
 
