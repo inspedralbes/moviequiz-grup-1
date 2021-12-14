@@ -68,7 +68,10 @@ class usuari extends BD_MovieQuiz
                 'email' => $this->rows[0]["email"],
                 'imagen' => 'https://randomuser.me/api/portraits/men/23.jpg',
                 'puntuacion' => $this->rows[0]["punts"]
-            );;
+            );
+
+            session_start();
+            $_SESSION['user'] = $this->rows[0]["user"];
         } else {
             $res = array('exito' => false);
         }
