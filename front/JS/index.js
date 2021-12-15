@@ -59,6 +59,8 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
 
 })
 
+
+
 /* Cards */
 function imprimirPelisCards(data_movie, id) {
     var txt = `<div class="col s6 m4 l3" id="${data_movie.imdbID}" class="divpelis">
@@ -182,8 +184,14 @@ function obtenerPelisGuardadasUsuario() {
         method: "POST",
         body: datos
     }).then(response => response.json()).then(pelisGuardadas => {
+        console.log(pelisGuardadas)
         for (var i = 0; i < pelisGuardadas.length; i++) {
-            document.querySelector(`#${pelisGuardadas[i].idPelicula} a`).setAttribute("disabled", '');
+            console.log(pelisGuardadas[i].idPelicula);
+            if(document.getElementById(pelisGuardadas[i].idPelicula) != null){
+                document.querySelector(`#${pelisGuardadas[i].idPelicula} a`).setAttribute("disabled", '');
+            }
         }
+
+        return pelisGuardadas;
     });
 }
