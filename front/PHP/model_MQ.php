@@ -82,6 +82,27 @@ class usuari extends BD_MovieQuiz
         }
         return $res;
     }
+
+    /* FALTA ACABAR - EDITAR DADES USUARI */
+    public function modificarDadesUsuari($user = array())
+    {
+        foreach ($user as $u => $datos){
+            $$u = $datos;
+        }
+
+        $this->query = "UPDATE 
+                            usuari 
+                        SET 
+                            usuari.nom = '$nomU' ,
+                            usuari.email = '$emailU',
+                            usuari.imatge = '$imgU'
+                        WHERE 
+                            usuari.user = '$usuari'
+                        ";
+
+        $this->execute_single_query();
+        echo $this->query;
+    }
 }
 
 class partida extends BD_MovieQuiz
@@ -346,4 +367,6 @@ class valoracio_pelicula extends BD_MovieQuiz
         $this->get_results_from_query();
         return $this->rows;
     }
+
+
 }
