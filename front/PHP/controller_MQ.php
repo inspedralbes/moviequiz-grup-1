@@ -8,7 +8,7 @@ class controller
     //rutes o esdeveniments possibles
     //view1: nom i edat
     //view2: nom i alçada
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelismillorvalorades');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades');
 
     public function handler()
     {
@@ -53,7 +53,7 @@ class controller
             case 'pelisValoradesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
                 $datosUsuario = $usuari->dadesUsuari($dadesPOST);
-                $res = $valoracio_pelicula->valoracionsUsuari($datosUsuario[0]['idUsuari']);
+                $res = $valoracio_pelicula->pelisValoradesUsuari($datosUsuario[0]['idUsuari']);
                 echo json_encode($res);
                 break;
 
@@ -62,6 +62,19 @@ class controller
                 echo json_encode($res);
                 break;
 
+            case 'pelisGuardadesUsuari':
+                $dadesPOST = $this->recollirDadesPost();
+                $datosUsuario = $usuari->dadesUsuari($dadesPOST);
+                $res = $valoracio_pelicula->pelisGuardadesUsuari($datosUsuario[0]['idUsuari']);
+                echo json_encode($res);
+                break;
+
+            case 'modificarDadesUsuari':
+                $dadesPOST = $this->recollirDadesPost();
+                print_r($dadesPOST);
+                $dadesEditades = $usuari->modificarDadesUsuari($dadesPOST);
+
+                break;
         }
     }
 
@@ -92,11 +105,24 @@ class controller
                 'imgPeli' => $_POST["img-peli"],
                 'nomUsuari' => $_POST['nom-usuari']
             );
+
         } else if (isset($_POST['user'])) {
             $dadesForm = $_POST['user'];
-        }
+
+        /* Editar Dades Usuari */
+        }else if(isset($_POST['email_us'])) {
+              $dadesForm = array (
+                'usuari' => $_POST['alias'],
+                'nomU' => $_POST['nom_us'],
+                'emailU' => $_POST['email_us'],
+                'imgU' => $_POST['img_link']
+              );  
+        }           
         return $dadesForm;
     }
+
+
+
 }
 
 $controller = new controller();

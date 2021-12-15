@@ -82,6 +82,27 @@ class usuari extends BD_MovieQuiz
         }
         return $res;
     }
+
+    /* FALTA ACABAR - EDITAR DADES USUARI */
+    public function modificarDadesUsuari($user = array())
+    {
+        foreach ($user as $u => $datos){
+            $$u = $datos;
+        }
+
+        $this->query = "UPDATE 
+                            usuari 
+                        SET 
+                            usuari.nom = '$nomU' ,
+                            usuari.email = '$emailU',
+                            usuari.imatge = '$imgU'
+                        WHERE 
+                            usuari.user = '$usuari'
+                        ";
+
+        $this->execute_single_query();
+        echo $this->query;
+    }
 }
 
 class partida extends BD_MovieQuiz
@@ -322,7 +343,7 @@ class valoracio_pelicula extends BD_MovieQuiz
         return (!isset($this->rows[0]['usuari']) and !isset($this->rows[0]['pelicula'])) ? 1 : 0;
     }
 
-    public function valoracionsUsuari($id = "")
+    public function pelisValoradesUsuari($id = "")
     {
         $this->query = "SELECT
                             pelicula.idPelicula
@@ -352,4 +373,18 @@ class valoracio_pelicula extends BD_MovieQuiz
         $this->get_results_from_query();
         return $this->rows;
     }
+    public function pelisGuardadesUsuari($id = "")
+    {
+        $this->query = "SELECT
+                            valoracio_pelicules.comentari, valoracio_pelicules.valoracio, pelicula.nomPelicula, pelicula.img, pelicula.idPelicula
+                        FROM
+                            valoracio_pelicules
+                        INNER JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
+                        WHERE
+                            valoracio_pelicules.usuari = $id AND valoracio_pelicules.favorit = 1;";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
+
+
 }

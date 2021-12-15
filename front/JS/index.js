@@ -22,7 +22,7 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
             }
 
             if (document.getElementById("info-usuari").innerHTML != "") {
-                obtenerPelisGuardadasUsuario();
+                obtenerPelisValoradesUsuario();
             }
 
             document.getElementById("resultat").addEventListener("click", function (e) {
@@ -53,6 +53,8 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
         document.getElementById("ocultardivsearch").classList.add("oculto");
     })
 })
+
+
 
 /* Cards */
 function imprimirPelisCards(data_movie, id) {
@@ -167,7 +169,7 @@ function guardarValoracio(data) {
     });
 }
 
-function obtenerPelisGuardadasUsuario() {
+function obtenerPelisValoradesUsuario() {
     let user = document.getElementById("alias").value;
 
     const datos = new FormData();
@@ -176,9 +178,11 @@ function obtenerPelisGuardadasUsuario() {
     fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelisValoradesUsuari', {
         method: "POST",
         body: datos
-    }).then(response => response.json()).then(pelisGuardadas => {
+    }).then(response => response.json()).then(pelisValorades => {
         for (var i = 0; i < pelisGuardadas.length; i++) {
-            document.querySelector(`#${pelisGuardadas[i].idPelicula} a`).setAttribute("disabled", '');
+            if (document.getElementById(pelisValorades[i].idPelicula) != null) {
+                document.querySelector(`#${pelisValorades[i].idPelicula} a`).setAttribute("disabled", '');
+            }
         }
     });
 }
