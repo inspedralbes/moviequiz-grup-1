@@ -16,7 +16,7 @@ CREATE TABLE pelicula(
 	idPelicula varchar(10) UNIQUE NOT NULL, 
     nomPelicula varchar(30) NOT NULL,
     any year NOT NULL,
-    img varchar(100) NOT NULL,
+    img varchar(1000) NOT NULL,
     PRIMARY KEY(idPelicula)
 );
 
@@ -34,7 +34,6 @@ CREATE TABLE valoracio_pelicules(
     comentari varchar(200) NOT NULL,
     favorit boolean NOT NULL,
     valoracio int(1) NOT NULL,
-    PRIMARY KEY(pelicula, usuari),
     FOREIGN KEY (pelicula) REFERENCES pelicula(idPelicula),
     FOREIGN KEY (usuari) REFERENCES usuari(idUsuari)
 );

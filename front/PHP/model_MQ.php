@@ -355,6 +355,24 @@ class valoracio_pelicula extends BD_MovieQuiz
         return $this->rows;
     }
 
+    public function millorvalorades(){
+        $this->query = "SELECT
+                            pelicula.nomPelicula,
+                            pelicula.idPelicula,
+                            pelicula.img,
+                            AVG(valoracio_pelicules.valoracio) AS valoracio
+                        FROM
+                            valoracio_pelicules
+                        JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
+                        GROUP BY
+                            (pelicula.idPelicula)
+                        ORDER BY
+                            valoracio
+                        DESC
+                        LIMIT 10;";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
     public function pelisGuardadesUsuari($id = "")
     {
         $this->query = "SELECT

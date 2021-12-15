@@ -44,6 +44,8 @@ require_once("controller_MQ.php");
             <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>
         <div id="carrousel-fotos" class="carousel col s12 m12 l7">
+
+    
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=159&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=150&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=151&h=220"></a>
@@ -53,7 +55,7 @@ require_once("controller_MQ.php");
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=155&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=156&h=220"></a>
             <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=157&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=158&h=220"></a>
+            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=158&h=220"></a> 
         </div>
     </div>
 
