@@ -8,7 +8,7 @@ class controller
     //rutes o esdeveniments possibles
     //view1: nom i edat
     //view2: nom i alçada
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelismillorvalorades');
 
     public function handler()
     {
@@ -56,6 +56,12 @@ class controller
                 $res = $valoracio_pelicula->valoracionsUsuari($datosUsuario[0]['idUsuari']);
                 echo json_encode($res);
                 break;
+
+            case 'pelismillorvalorades':
+                $res = $valoracio_pelicula->millorvalorades();
+                echo json_encode($res);
+                break;
+
         }
     }
 

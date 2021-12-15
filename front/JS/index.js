@@ -1,11 +1,7 @@
 /* Carrusel */
-document.addEventListener("DOMContentLoaded", function () {
-    var imgs = document.querySelectorAll('.carousel');
-    var instances = M.Carousel.init(imgs, {
-        numVisible: 10,
-        padding: 2,
-    });
-});
+obtenermejorvaloracion();
+
+
 
 document.getElementById("btn_search").addEventListener("click", function (e) {
     document.getElementById("resultat").classList.remove("oculto");
@@ -56,7 +52,6 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
         document.getElementById("resultat").classList.add("oculto");
         document.getElementById("ocultardivsearch").classList.add("oculto");
     })
-
 })
 
 /* Cards */
@@ -186,4 +181,28 @@ function obtenerPelisGuardadasUsuario() {
             document.querySelector(`#${pelisGuardadas[i].idPelicula} a`).setAttribute("disabled", '');
         }
     });
+}
+
+function obtenermejorvaloracion() {
+
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelismillorvalorades', {
+    }).then(response => response.json()).then(data => {
+
+        document.getElementById("carrousel-fotos").innerHTML = generarcarrrousel(data);
+
+        var imgs = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(imgs, {
+            numVisible: 6,
+            padding: 2,
+        });
+
+    });
+}
+
+function generarcarrrousel(data) {
+    var carrousel = "";
+    for (let i = 0; i < data.length; i++) {
+        carrousel += `<a class="carousel-item" href="#"><img src="${data[i].img}" height="320px"></a>`;
+    }
+    return carrousel;
 }
