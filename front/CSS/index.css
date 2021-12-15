@@ -106,6 +106,10 @@ body {
     height: auto;
 }
 
+#apartadoMisPeliculas{
+    border: 2px solid black;
+}
+
 .carousel {
     margin-top: -50px;
     margin-bottom: 40px;
@@ -151,5 +155,23 @@ body {
     justify-content: center !important;
 }
 
-input#search{
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+}
+
+.collapsible-header p {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.collapsible, .collapsible-header, .collapsible-body{
+    background-color: rgb(39, 39, 39) !important;
+    color: white !important;
+}
+
+.coll{
+    border: white 1px solid !important;
 }

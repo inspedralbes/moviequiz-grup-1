@@ -25,14 +25,14 @@ document.getElementById("btn_entrar").addEventListener("click", function() {
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
-            document.getElementById("btn_edit").addEventListener("click", function (e) {
+            document.getElementById("btn_edit").addEventListener("click", function(e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
                 document.getElementById("btn_save").classList.remove("oculto");
                 document.getElementById("btn_edit").classList.add("oculto");
             })
 
-            document.getElementById("btn_save").addEventListener("click", function (e) {
+            document.getElementById("btn_save").addEventListener("click", function(e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
                 document.getElementById("btn_edit").classList.remove("oculto");
@@ -41,7 +41,7 @@ document.getElementById("btn_entrar").addEventListener("click", function() {
 
             document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
 
-
+            misPeliculas();
         } else {
             console.log("error"); //FALLO al inciar sesion - falta
         }
@@ -54,8 +54,6 @@ function codigoHTMLheaderuser(datos) {
                 <li><a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light btn">LOGOUT</a></li>`;
     return text;
 }
-
-
 
 function codigoHTMLuser(datos) {
     let text = `<div class="row">
@@ -90,5 +88,49 @@ function codigoHTMLuser(datos) {
 
                     
                 </div>`;
+    return text;
+}
+
+function misPeliculas() {
+    let user = document.getElementById("alias").value;
+    let codi;
+
+    const datos = new FormData();
+    datos.append("user", user);
+
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelisGuardadesUsuari', {
+        method: "POST",
+        body: datos
+    }).then(response => response.json()).then(pelisGuardades => {
+        codi = misPeliculasHTML(pelisGuardades);
+        document.getElementById("apartadoMisPeliculas").innerHTML = codi;
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {});
+    });
+}
+
+function misPeliculasHTML(datos) {
+    let text = `<h3>Les meves pel·lícules</h3><ul class="collapsible popout">`;
+    for (let i = 0; i < datos.length; i++) {
+        text += `<li class="coll">
+                    <div class="collapsible-header">
+                        <img src="${datos[i].img}" height="80px">
+                        <p>${datos[i].nomPelicula}</p>
+                    </div>
+                    <div class="collapsible-body">
+                        <label for='comentari-${datos[i].idPelicula}'>Comentari: </label>
+                        <textarea name="comentari-${datos[i].idPelicula}" id="comentari-${datos[i].idPelicula}" cols="30" rows="10" disabled>${datos[i].comentari}</textarea>
+                        <label for='valoracio-${datos[i].idPelicula}'>Valoració: </label>
+                        <input type="number" name="valoracio-${datos[i].idPelicula}" id="valoracio-${datos[i].idPelicula}" min=1 max=5 disabled value="${datos[i].valoracio}">
+                        <p>
+                            <label>
+                            <input type="checkbox" checked name="favorit-${datos[i].idPelicula}" id="favorit-${datos[i].idPelicula}"/>
+                            <span>Guardat</span>
+                            </label>
+                        </p>
+                    </div>
+                </li>`;
+    }
+    text += '</ul>';
     return text;
 }

@@ -322,7 +322,7 @@ class valoracio_pelicula extends BD_MovieQuiz
         return (!isset($this->rows[0]['usuari']) and !isset($this->rows[0]['pelicula'])) ? 1 : 0;
     }
 
-    public function valoracionsUsuari($id = "")
+    public function pelisValoradesUsuari($id = "")
     {
         $this->query = "SELECT
                             pelicula.idPelicula
@@ -330,6 +330,19 @@ class valoracio_pelicula extends BD_MovieQuiz
                             valoracio_pelicules
                         JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
                         WHERE valoracio_pelicules.usuari = $id;";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
+
+    public function pelisGuardadesUsuari($id = "")
+    {
+        $this->query = "SELECT
+                            valoracio_pelicules.comentari, valoracio_pelicules.valoracio, pelicula.nomPelicula, pelicula.img, pelicula.idPelicula
+                        FROM
+                            valoracio_pelicules
+                        INNER JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
+                        WHERE
+                            valoracio_pelicules.usuari = $id AND valoracio_pelicules.favorit = 1;";
         $this->get_results_from_query();
         return $this->rows;
     }

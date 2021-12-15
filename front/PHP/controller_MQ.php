@@ -8,7 +8,7 @@ class controller
     //rutes o esdeveniments possibles
     //view1: nom i edat
     //view2: nom i alçada
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari');
 
     public function handler()
     {
@@ -53,7 +53,14 @@ class controller
             case 'pelisValoradesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
                 $datosUsuario = $usuari->dadesUsuari($dadesPOST);
-                $res = $valoracio_pelicula->valoracionsUsuari($datosUsuario[0]['idUsuari']);
+                $res = $valoracio_pelicula->pelisValoradesUsuari($datosUsuario[0]['idUsuari']);
+                echo json_encode($res);
+                break;
+
+            case 'pelisGuardadesUsuari':
+                $dadesPOST = $this->recollirDadesPost();
+                $datosUsuario = $usuari->dadesUsuari($dadesPOST);
+                $res = $valoracio_pelicula->pelisGuardadesUsuari($datosUsuario[0]['idUsuari']);
                 echo json_encode($res);
                 break;
         }

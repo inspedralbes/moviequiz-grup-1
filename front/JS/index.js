@@ -26,7 +26,7 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
             }
 
             if (document.getElementById("info-usuari").innerHTML != "") {
-                obtenerPelisGuardadasUsuario();
+                obtenerPelisValoradesUsuario();
             }
 
             document.getElementById("resultat").addEventListener("click", function (e) {
@@ -174,7 +174,7 @@ function guardarValoracio(data) {
     });
 }
 
-function obtenerPelisGuardadasUsuario() {
+function obtenerPelisValoradesUsuario() {
     let user = document.getElementById("alias").value;
 
     const datos = new FormData();
@@ -183,15 +183,11 @@ function obtenerPelisGuardadasUsuario() {
     fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelisValoradesUsuari', {
         method: "POST",
         body: datos
-    }).then(response => response.json()).then(pelisGuardadas => {
-        console.log(pelisGuardadas)
+    }).then(response => response.json()).then(pelisValorades => {
         for (var i = 0; i < pelisGuardadas.length; i++) {
-            console.log(pelisGuardadas[i].idPelicula);
-            if(document.getElementById(pelisGuardadas[i].idPelicula) != null){
-                document.querySelector(`#${pelisGuardadas[i].idPelicula} a`).setAttribute("disabled", '');
+            if(document.getElementById(pelisValorades[i].idPelicula) != null){
+                document.querySelector(`#${pelisValorades[i].idPelicula} a`).setAttribute("disabled", '');
             }
         }
-
-        return pelisGuardadas;
     });
 }
