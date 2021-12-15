@@ -1,12 +1,12 @@
 # Acta de la tercera reunió (3º Reunió)
 
-- guardar valoració a la base de dades + afegir a pel·lícules favorites + deshabilitar boton guardar peli si ya se ha guardado antes (hecho)
+- guardar valoració a la base de dades + afegir a pel·lícules favorites + deshabilitar botó guardar peli si ja s'ha guardat avans (fet)
 
-- securizar contraseña
+- securitzar contrasenya
 
-- hacer login permanente (session_start())
+- fer login permanent (session_start())
 
-- carusel de pel·lícules (BD ordenar per millor valoración)
+- carusel de pel·lícules (BD ordenar per millor valoració)
 
 - apartat per a modificar la informació de l'usuari (codi básic)
 
