@@ -34,7 +34,6 @@ CREATE TABLE valoracio_pelicules(
     comentari varchar(200) NOT NULL,
     favorit boolean NOT NULL,
     valoracio int(1) NOT NULL,
-    PRIMARY KEY(pelicula, usuari),
     FOREIGN KEY (pelicula) REFERENCES pelicula(idPelicula),
     FOREIGN KEY (usuari) REFERENCES usuari(idUsuari)
 );
