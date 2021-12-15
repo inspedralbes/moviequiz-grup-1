@@ -41,6 +41,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
                 document.getElementById("img_usr_label").classList.add("oculto");
                 document.getElementById("btn_edit").classList.remove("oculto");
                 document.getElementById("btn_save").classList.add("oculto");
+                dadesUsuariModificades();
             })
 
             document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
@@ -88,7 +89,7 @@ function codigoHTMLuser(datos) {
                                         <input type="file" multiple accept="image/*"><i class="material-icons">insert_photo</i></input>
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path" type="text" class="white_font">
+                                        <input class="file-path" type="text" id="img_link" class="white_font">
                                     </div>
                                 </div>
 
@@ -106,4 +107,26 @@ function codigoHTMLuser(datos) {
                     
                 </div>`;
     return text;
+}
+
+
+/* FALTA ACABAR - EDITAR DADES USUARI */
+function dadesUsuariModificades() {
+    let nom_u = document.getElementById("nom_us").value;
+    let email_u = document.getElementById("email_us").value;
+    let img_u = document.getElementById("img_link").value;
+    let user = document.getElementById("alias").value;
+
+    const dades_u = new FormData();
+    dades_u.append("alias", user);
+    dades_u.append("nom_us", nom_u);
+    dades_u.append("email_us", email_u);
+    dades_u.append("img_link", img_u);
+
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=modificarDadesUsuari', {
+        method: "POST",
+        body: dades_u
+    }).then(response => response.json()).then(data => {
+        console.log(data);
+    });
 }
