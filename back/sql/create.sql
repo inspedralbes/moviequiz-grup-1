@@ -16,7 +16,7 @@ CREATE TABLE pelicula(
 	idPelicula varchar(10) UNIQUE NOT NULL, 
     nomPelicula varchar(30) NOT NULL,
     any year NOT NULL,
-    img varchar(100) NOT NULL,
+    img varchar(1000) NOT NULL,
     PRIMARY KEY(idPelicula)
 );
 
