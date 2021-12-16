@@ -1,3 +1,7 @@
 .row{
     margin-left: 25%;
 }
+
+.btn:hover {
+    background-color: #26c6da ;
+}

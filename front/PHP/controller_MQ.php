@@ -87,11 +87,13 @@ class controller
                 'nom' => $_POST['nom'],
                 'cognoms' => $_POST['cognom']
             );
+
         } else if (isset($_POST['usuari'])) {
             $dadesForm = array(
                 'usuari' => $_POST['usuari'],
                 'contrasenya' => $_POST['pwd']
             );
+
         } else if (isset($_POST['valoracio'])) {
             $dadesForm = array(
                 'valoracio' => $_POST["valoracio"],
@@ -103,24 +105,25 @@ class controller
                 'imgPeli' => $_POST["img-peli"],
                 'nomUsuari' => $_POST['nom-usuari']
             );
-
         } else if (isset($_POST['user'])) {
             $dadesForm = $_POST['user'];
 
-        /* Editar Dades Usuari */
-        }else if(isset($_POST['email_us'])) {
-              $dadesForm = array (
+            /* Editar Dades Usuari */
+        } else if (isset($_POST['email_us'])) {
+
+            print_r($_FILES);
+            move_uploaded_file($_FILES['foto']['tmp_name'], "../IMG/" . $_FILES['foto']['name']);
+            print_r($_FILES);
+
+            $dadesForm = array(
                 'usuari' => $_POST['alias'],
                 'nomU' => $_POST['nom_us'],
                 'emailU' => $_POST['email_us'],
-                'imgU' => $_POST['img_link']
-              );  
-        }           
+                'imgU' => "../IMG/" . $_FILES['foto']['name']
+            );
+        }
         return $dadesForm;
     }
-
-
-
 }
 
 $controller = new controller();

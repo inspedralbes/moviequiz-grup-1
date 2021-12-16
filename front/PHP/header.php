@@ -33,12 +33,12 @@
 
         <!-- BOTÓ LOGIN / LINK SING UP-->
         <div class="row center center-align">
-            <a id="btn_entrar" class="waves-effect waves-light btn-small">Entrar</a>
+            <a id="btn_entrar" class="waves-effect waves-light btn btn-small">Entrar</a>
             <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
         </div>
     </div>
 
     <div class="modal-footer">
-        <a href="#!" class="btn modal-close red ">Tancar</a>
+        <a href="#!" class="btn modal-close red "><i class="material-icons">close</i></a>
     </div>
 </div>
