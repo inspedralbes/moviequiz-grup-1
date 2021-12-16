@@ -1,0 +1,10 @@
+body {
+    margin: auto;
+    width: 95%;
+    background-color: rgb(39, 39, 39);
+    color: white;
+}
+
+.white_font {
+    color: white !important;
+}

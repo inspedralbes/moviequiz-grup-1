@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="../CSS/registrat.css">
     <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../CSS/registrat.css">
+    
+    <link type="text/css" rel="stylesheet" href="../CSS/signup.css">
     <title>Registre</title>
 </head>
 
@@ -22,7 +24,7 @@
     </div>
 
 
-    <!--Formulari Confirmació compra-->
+    <!-- Formulari registre d'usuari -->
     <?php
     if (!$_POST) {
     ?>
@@ -32,31 +34,31 @@
             <form class="col s12" action="./index.php?action=signup" method="POST">
                 <div class="row center">
                     <div class="input-field col s6">
-                        <input id="usuari" type="text" class="validate" name="user">
+                        <input id="usuari" type="text" class="validate  white_font" name="user">
                         <label for="usuari">Usuari/alias</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="password" type="password" class="validate" name="password">
+                        <input id="password" type="password" class="validate white_font" name="password">
                         <label for="password">Contrasenya</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="email" type="email" class="validate" name="email">
+                        <input id="email" type="email" class="validate white_font" name="email">
                         <label for="email">Email</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="nom" type="text" class="validate" name="nom">
+                        <input id="nom" type="text" class="validate white_font" name="nom">
                         <label for="nom">Nom</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="cognom" type="text" class="validate" name="cognom">
+                        <input id="cognom" type="text" class="validate white_font" name="cognom">
                         <label for="cognom">Cognoms</label>
                     </div>
                 </div>
@@ -78,10 +80,12 @@
         }
     }
     ?>
-
-    <script type="text/javascript" src="../JS/signup.js"></script>
-    <?php include("footer.php"); ?>
     </div>
+
+    <!-- SCRIPTS -->
+    <?php include("footer.php"); ?>
+    <script type="text/javascript" src="../JS/signup.js"></script>
+
 </body>
 
 </html>

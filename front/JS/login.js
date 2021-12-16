@@ -3,6 +3,7 @@ document.getElementById("btn_login").addEventListener("click", function (e) {
     var instances = M.Modal.init(document.querySelector(".login"), {});
 })
 
+/* USUARI REGISTRAT */
 document.getElementById("btn_entrar").addEventListener("click", function () {
     let usu = document.getElementById("usuari").value;
     let pwd = document.getElementById("pwd").value;
@@ -23,6 +24,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("carrousel-titol").classList.add("oculto");
 
             document.getElementById("info-usuari").classList.remove("oculto");
+            document.getElementById("apartadoMisPeliculas").classList.remove("oculto");
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
@@ -45,8 +47,10 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
                 dadesUsuariModificades();
             })
 
+            /* Inserir al header el nom de l'usuari y la seva imatge */
             document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
 
+            /* Mostrar les pel·lícules desades per l'usuari */
             misPeliculas();
         } else {
             console.log("error"); //FALLO al inciar sesion - falta
@@ -54,6 +58,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
     });
 })
 
+/* Codi per a  inserir al header el nom de l'usuari y la seva imatge */
 function codigoHTMLheaderuser(datos) {
     let text = `<li class="usuario_header">${datos.usuari}</li>
                 <li><img class="img_header circle responsive-img" src="${datos.imagen}"></li>
@@ -61,6 +66,8 @@ function codigoHTMLheaderuser(datos) {
     return text;
 }
 
+
+/* FORMULARI DADES (EDITABLES) USUARI */
 function codigoHTMLuser(datos) {
     let text = `<div class="row">
                     <div class="col s3 m3 l3 centrar">
@@ -88,7 +95,7 @@ function codigoHTMLuser(datos) {
                                         <input type="file" multiple accept="image/*"><i class="material-icons">insert_photo</i></input>
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path" type="text" id="img_link" class="white_font">
+                                        <input class="file-path white_font" type="text" id="img_link">
                                     </div>
                                 </div>
 
@@ -126,6 +133,7 @@ function misPeliculas() {
     });
 }
 
+/* Llista amb les pel·lícules favorites de l'usuari */
 function misPeliculasHTML(datos) {
     let text = `<h3>Les meves pel·lícules</h3><ul class="collapsible popout">`;
     for (let i = 0; i < datos.length; i++) {
@@ -151,7 +159,8 @@ function misPeliculasHTML(datos) {
     text += '</ul>';
     return text;
 }
-/* FALTA ACABAR - EDITAR DADES USUARI */
+
+/* EDITAR DADES USUARI */
 function dadesUsuariModificades() {
     let nom_u = document.getElementById("nom_us").value;
     let email_u = document.getElementById("email_us").value;
