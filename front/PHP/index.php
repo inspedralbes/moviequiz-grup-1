@@ -1,4 +1,8 @@
 <?php
+session_start();
+/*if(!isset($_SESSION['user'])){
+    header("Location: ./index.php");
+}*/
 require_once("controller_MQ.php");
 ?>
 
@@ -79,10 +83,10 @@ require_once("controller_MQ.php");
         </div>
     </div>
 
-    <div id="apartadoMisPeliculas" class="row">
+    <div id="apartadoMisPeliculas" class="row oculto">
         <div id="mispelis" class="col s12 m12 l8">
             <div>
-                <div id="mispelis-titol ">
+                <div id="mispelis-titol">
                     <h5>Les meves pel·lícules</h5>
                 </div>
             </div>
