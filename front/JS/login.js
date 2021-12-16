@@ -23,6 +23,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("carrousel-titol").classList.add("oculto");
 
             document.getElementById("info-usuari").classList.remove("oculto");
+            document.getElementById("apartadoMisPeliculas").classList.remove("oculto");
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
