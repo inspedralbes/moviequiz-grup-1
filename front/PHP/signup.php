@@ -22,7 +22,7 @@
     </div>
 
 
-    <!--Formulari Confirmació compra-->
+    <!-- Formulari registre d'usuari -->
     <?php
     if (!$_POST) {
     ?>
@@ -78,10 +78,12 @@
         }
     }
     ?>
-
-    <script type="text/javascript" src="../JS/signup.js"></script>
-    <?php include("footer.php"); ?>
     </div>
+
+    <!-- SCRIPTS -->
+    <?php include("footer.php"); ?>
+    <script type="text/javascript" src="../JS/signup.js"></script>
+
 </body>
 
 </html>

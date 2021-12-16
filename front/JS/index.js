@@ -1,8 +1,8 @@
-/* Carrusel */
+/* Carrusel amb les pel·lícules millor valorades */
 obtenermejorvaloracion();
 
 
-
+/* Mostrar resultats de la búsqueda */
 document.getElementById("btn_search").addEventListener("click", function (e) {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
@@ -75,6 +75,7 @@ function imprimirPelisCards(data_movie, id) {
     return txt;
 }
 
+/* MODALS PER A VALORAR LES PEL·LÍCULES */
 function generarModal(nom) {
     var modalHtml = `<div class="modal-content center-align">
                         <h4 class="center-align cyan-text text-darken-3 ">${nom.Title}</h4>

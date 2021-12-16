@@ -31,6 +31,7 @@
             </form>
         </div>
 
+        <!-- BOTÓ LOGIN / LINK SING UP-->
         <div class="row center center-align">
             <a id="btn_entrar" class="waves-effect waves-light btn-small">Entrar</a>
             <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>

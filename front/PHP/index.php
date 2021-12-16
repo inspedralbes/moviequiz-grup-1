@@ -21,8 +21,8 @@ require_once("controller_MQ.php");
 <body>
     <?php include("header.php"); ?>
 
+    <!-- CERCADOR PEL·LÍCULES-->
     <div id="apartadoBusqueda" >
-
         <div class="row apartadoBusqueda">
             <div id="divsearch" class="col s10">
                 <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
@@ -35,30 +35,21 @@ require_once("controller_MQ.php");
         </div>
 
         <div id="resultat" class="row center-align"></div>
-
     </div>
 
+    <!-- CARUSEL PEL·LÍCULES MÉS VALORADES-->
     <div id="apartadoCarrousel" class="row">
         <div id="info-usuari" class="col s12 oculto"></div>
+
         <div id="carrousel-titol" class="col s12 m12 l5">
             <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>
-        <div id="carrousel-fotos" class="carousel col s12 m12 l7">
 
-    
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=159&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=150&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=151&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=152&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=153&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=154&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=155&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=156&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=157&h=220"></a>
-            <a class="carousel-item" href="#"><img src="https://api.lorem.space/image/movie?w=158&h=220"></a> 
-        </div>
+        <div id="carrousel-fotos" class="carousel col s12 m12 l7"></div>
     </div>
 
+
+<!-- CONTINGUT VISIBLE PER L'USUARI REGISTRAT -->
     <div id="apartadoJuego" class="row">
         <div id="juego" class="col s12 m12 l4">
             <button id="btn-joc" class="btn waves-effect waves-light btn-joc"> Joc </button>
@@ -92,12 +83,13 @@ require_once("controller_MQ.php");
 
     <?php include("footer.php"); ?>
 
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="../JS/index.js"></script>
     <script type="text/javascript" src="../JS/login.js"></script>
     <script src="js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../JS/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
 </body>
 
 </html>

@@ -83,7 +83,7 @@ class usuari extends BD_MovieQuiz
         return $res;
     }
 
-    /* FALTA ACABAR - EDITAR DADES USUARI */
+    /* EDITAR DADES USUARI */
     public function modificarDadesUsuari($user = array())
     {
         foreach ($user as $u => $datos){
@@ -287,7 +287,7 @@ class valoracio_pelicula extends BD_MovieQuiz
     private $favorit;
     private $valoracio;
 
-
+    /* STRING VALORACIÓ PEL·LÍCULA */
     function __toString()
     {
         echo "Dades valoracio pel·lícula<br>";
@@ -299,6 +299,7 @@ class valoracio_pelicula extends BD_MovieQuiz
     {
     }
 
+    /* INSERTAR VALORACIÓ PELI B.D */
     public function afegirValoracioPeli($dadesValoracio = array())
     {
         if (array_key_exists("nomUsuari", $dadesValoracio)) {
@@ -343,6 +344,7 @@ class valoracio_pelicula extends BD_MovieQuiz
         return (!isset($this->rows[0]['usuari']) and !isset($this->rows[0]['pelicula'])) ? 1 : 0;
     }
 
+    /* PEL·LÍCULES VALORADES PER X USUARI */
     public function pelisValoradesUsuari($id = "")
     {
         $this->query = "SELECT
@@ -355,6 +357,7 @@ class valoracio_pelicula extends BD_MovieQuiz
         return $this->rows;
     }
 
+    /* PEL·LÍCULES AMB MILLOR PUNTUACIÓ */
     public function millorvalorades(){
         $this->query = "SELECT
                             pelicula.nomPelicula,
@@ -373,6 +376,7 @@ class valoracio_pelicula extends BD_MovieQuiz
         $this->get_results_from_query();
         return $this->rows;
     }
+
     public function pelisGuardadesUsuari($id = "")
     {
         $this->query = "SELECT
