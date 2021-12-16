@@ -95,7 +95,7 @@ function codigoHTMLuser(datos) {
                                         <input type="file" multiple accept="image/*"><i class="material-icons">insert_photo</i></input>
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path" type="text" id="img_link" class="white_font">
+                                        <input class="file-path white_font" type="text" id="img_link">
                                     </div>
                                 </div>
 
