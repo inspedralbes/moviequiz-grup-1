@@ -180,3 +180,15 @@ s
 .coll{
     border: white 1px solid !important;
 }
+
+.joc-carousel {
+    height: 60vh !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.joc-modal {
+    height: auto !important;
+    overflow: hidden;
+    padding: 0px !important;
+}
