@@ -6,9 +6,6 @@ input[type="radio"] {
 
 body {
     margin: auto;
-    /*justify-content: center;
-    align-items: center;
-    text-align: center;*/
     width: 95%;
     background-color: rgb(39, 39, 39);
     color: white;
@@ -26,7 +23,7 @@ body {
 }
 
 .row {
-    margin: 10px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 .card-image img {
@@ -70,6 +67,14 @@ body {
 
 .oculto {
     display: none !important;
+}
+s
+.btn {
+    background-color: #26c6da;
+}
+
+.btn:hover {
+    background-color: #4dd0e1 ;
 }
 
 .btn-joc {

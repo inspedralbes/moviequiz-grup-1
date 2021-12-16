@@ -75,8 +75,8 @@ class usuari extends BD_MovieQuiz
                 'puntuacion' => $this->rows[0]["punts"]
             );
 
-            session_start();
             $_SESSION['user'] = $this->rows[0]["user"];
+
         } else {
             $res = array('exito' => false);
         }

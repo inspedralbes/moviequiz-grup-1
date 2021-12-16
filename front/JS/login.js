@@ -18,16 +18,17 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
     }).then(response => response.json()).then(data => {
         console.log(data);
         if (data.exito == true) {
+            console.log("entro");
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
 
             document.getElementById("info-usuari").classList.remove("oculto");
+            document.getElementById("apartadoMisPeliculas").classList.remove("oculto");
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
-            /* AL EDITAR DADES USUARI */
-            document.getElementById("btn_edit").addEventListener("click", function(e) {
+            document.getElementById("btn_edit").addEventListener("click", function (e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
                 document.getElementById("canviar_img_usr").classList.remove("oculto");
@@ -36,8 +37,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
                 document.getElementById("btn_edit").classList.add("oculto");
             })
 
-            /* AL DESAR DADES USUARI / NO EDITAR*/
-            document.getElementById("btn_save").addEventListener("click", function(e) {
+            document.getElementById("btn_save").addEventListener("click", function (e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
                 document.getElementById("canviar_img_usr").classList.add("oculto");
@@ -91,11 +91,11 @@ function codigoHTMLuser(datos) {
                                 <label class="white_font oculto" id="img_usr_label" for="imatge">Imatge</label>
 
                                 <div class="file-field input-field oculto" id="canviar_img_usr">
-                                    <div class="btn-small">
+                                    <div class="btn btn-small">
                                         <input type="file" id="foto-input" multiple accept="image/*"><i class="material-icons">insert_photo</i></input>
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path" type="text" id="img_link" class="white_font">
+                                        <input class="file-path white_font" type="text" id="img_link">
                                     </div>
                                 </div>
 
@@ -105,8 +105,8 @@ function codigoHTMLuser(datos) {
 
                         <div class="row">
                             <div class="col s3 m3 l3 center-align">
-                                <a class="btn-small waves-effect waves-light" id="btn_edit"><i class="material-icons">create</i></a>
-                                <a class="btn-small waves-effect waves-light" id="btn_save"><i class="material-icons">save</i></a>
+                                <a class="btn btn-small waves-effect waves-light" id="btn_edit"><i class="material-icons">create</i></a>
+                                <a class="btn btn-small waves-effect waves-light" id="btn_save"><i class="material-icons">save</i></a>
                             </div>
                         </div>
 
