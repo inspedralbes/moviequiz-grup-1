@@ -18,6 +18,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
     }).then(response => response.json()).then(data => {
         console.log(data);
         if (data.exito == true) {
+            console.log("entro");
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
@@ -27,8 +28,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
-            /* AL EDITAR DADES USUARI */
-            document.getElementById("btn_edit").addEventListener("click", function(e) {
+            document.getElementById("btn_edit").addEventListener("click", function (e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
                 document.getElementById("canviar_img_usr").classList.remove("oculto");
@@ -37,8 +37,7 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
                 document.getElementById("btn_edit").classList.add("oculto");
             })
 
-            /* AL DESAR DADES USUARI / NO EDITAR*/
-            document.getElementById("btn_save").addEventListener("click", function(e) {
+            document.getElementById("btn_save").addEventListener("click", function (e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
                 document.getElementById("canviar_img_usr").classList.add("oculto");
