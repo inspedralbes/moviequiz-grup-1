@@ -8,3 +8,19 @@ body {
 .white_font {
     color: white !important;
 }
+
+.btn {
+    background-color: #26c6da;
+}
+
+.btn:hover {
+    background-color: #4dd0e1  ;
+}
+
+.row{
+    margin-left: 25%;
+}
+
+#back {
+    margin-top: 20px;
+}

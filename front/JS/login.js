@@ -92,7 +92,7 @@ function codigoHTMLuser(datos) {
                                 <label class="white_font oculto" id="img_usr_label" for="imatge">Imatge</label>
 
                                 <div class="file-field input-field oculto" id="canviar_img_usr">
-                                    <div class="btn-small">
+                                    <div class="btn btn-small">
                                         <input type="file" multiple accept="image/*"><i class="material-icons">insert_photo</i></input>
                                     </div>
                                     <div class="file-path-wrapper">
@@ -106,8 +106,8 @@ function codigoHTMLuser(datos) {
 
                         <div class="row">
                             <div class="col s3 m3 l3 center-align">
-                                <a class="btn-small waves-effect waves-light" id="btn_edit"><i class="material-icons">create</i></a>
-                                <a class="btn-small waves-effect waves-light" id="btn_save"><i class="material-icons">save</i></a>
+                                <a class="btn btn-small waves-effect waves-light" id="btn_edit"><i class="material-icons">create</i></a>
+                                <a class="btn btn-small waves-effect waves-light" id="btn_save"><i class="material-icons">save</i></a>
                             </div>
                         </div>
 

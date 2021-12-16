@@ -10,11 +10,13 @@ require_once("controller_MQ.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="shortcut icon" href="../IMG/logo2.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CSS -->
     <link type="text/css" rel="stylesheet" href="../CSS/index.css">
     <link type="text/css" rel="stylesheet" href="../CSS/header.css">
+    <link type="text/css" rel="stylesheet" href="../CSS/footer.css">
     <title>Movies</title>
 </head>
 
@@ -29,8 +31,8 @@ require_once("controller_MQ.php");
             </div>
 
             <div id="butons_search" class="col s2">
-            <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
-                <a id="ocultardivsearch" href="#!" class="btn-small red oculto"><i class="material-icons red">arrow_drop_up</i></a>
+            <a class="btn btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+                <a id="ocultardivsearch" href="#!" class="btn-small oculto red"><i class="material-icons">arrow_drop_up</i></a>
             </div>
         </div>
 

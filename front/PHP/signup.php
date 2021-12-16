@@ -5,24 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/logo2.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/header.css">
-    <link rel="stylesheet" href="../CSS/registrat.css">
-    
-    <link type="text/css" rel="stylesheet" href="../CSS/signup.css">
+    <link  rel="stylesheet" href="../CSS/signup.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
     <title>Registre</title>
 </head>
 
 <body>
     <?php include("header.php"); ?>
 
+    <!-- Botó tornar enrrere -->
     <div>
-        <!-- Botó tornar enrrere -->
-        <!-- <input type="button" id="back" class="boton btn_back" value="Back"> -->
-        <button id="back" class="btn waves-effect waves-light" type="button" name="action">Back</button>
+        <button id="back" class="btn waves-effect waves-light" type="button" name="action"><i class="material-icons">arrow_back</i></button>
     </div>
 
+
+  
 
     <!-- Formulari registre d'usuari -->
     <?php
@@ -62,6 +64,7 @@
                         <label for="cognom">Cognoms</label>
                     </div>
                 </div>
+
                 <div class="submit">
                     <button class="btn waves-effect waves-light" type="submit" name="signup">Registrat</button>
                 </div>

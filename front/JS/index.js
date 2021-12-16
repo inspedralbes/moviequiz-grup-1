@@ -62,7 +62,7 @@ function imprimirPelisCards(data_movie, id) {
                 <div class="card">
                     <div class="card-image">
                         <img class="poster" id="img-peli" src="${data_movie.Poster}" alt="${data_movie.Poster}">
-                        <a id="btn-modal" class="btn-floating halfway-fab modal-trigger waves-effect waves-light red" href="#${id}"><i class="material-icons">add</i></a>
+                        <a id="btn btn-modal" class="btn-floating halfway-fab modal-trigger waves-effect waves-light deep-purple darken-1" href="#${id}"><i class="material-icons">add</i></a>
                     </div>
 
                     <div class="card-content card-title">
@@ -78,7 +78,7 @@ function imprimirPelisCards(data_movie, id) {
 /* MODALS PER A VALORAR LES PEL·LÍCULES */
 function generarModal(nom) {
     var modalHtml = `<div class="modal-content center-align">
-                        <h4 class="center-align cyan-text text-darken-3 ">${nom.Title}</h4>
+                        <h4 class="center-align purple-text text-darken-3 ">${nom.Title}</h4>
                         </br>
                         <div>
                             <label>
