@@ -8,7 +8,7 @@
 
 - carusel de pel·lícules dinàmic (BD ordenar per millor valoració) (fet)
 
-- apartat per a modificar la informació de l'usuari (codi básic) (fet)
+- apartat per a modificar la informació de l'usuari (fet) (Falta canviar la imatge)
 
 - apartat usuari - mostrar pel·lícules favorites (fet)
 
