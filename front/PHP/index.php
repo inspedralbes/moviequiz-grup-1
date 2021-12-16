@@ -22,14 +22,14 @@ require_once("controller_MQ.php");
     <?php include("header.php"); ?>
 
     <!-- CERCADOR PEL·LÍCULES-->
-    <div id="apartadoBusqueda" >
+    <div id="apartadoBusqueda">
         <div class="row apartadoBusqueda">
             <div id="divsearch" class="col s10">
                 <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
             </div>
 
             <div id="butons_search" class="col s2">
-            <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+                <a class=" btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
                 <a id="ocultardivsearch" href="#!" class="btn-small red oculto"><i class="material-icons red">arrow_drop_up</i></a>
             </div>
         </div>
@@ -49,7 +49,7 @@ require_once("controller_MQ.php");
     </div>
 
 
-<!-- CONTINGUT VISIBLE PER L'USUARI REGISTRAT -->
+    <!-- CONTINGUT VISIBLE PER L'USUARI REGISTRAT -->
     <div id="apartadoJuego" class="row">
         <div id="juego" class="col s12 m12 l4">
             <button id="btn-joc" class="btn waves-effect waves-light btn-joc"> Joc </button>
@@ -89,7 +89,7 @@ require_once("controller_MQ.php");
     <script src="js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+
 </body>
 
 </html>

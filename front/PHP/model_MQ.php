@@ -71,7 +71,7 @@ class usuari extends BD_MovieQuiz
                 'cognoms' => $this->rows[0]["cognoms"],
                 'usuari' => $this->rows[0]["user"],
                 'email' => $this->rows[0]["email"],
-                'imagen' => 'https://randomuser.me/api/portraits/men/23.jpg',
+                'imagen' => $this->rows[0]["imatge"],
                 'puntuacion' => $this->rows[0]["punts"]
             );
 
