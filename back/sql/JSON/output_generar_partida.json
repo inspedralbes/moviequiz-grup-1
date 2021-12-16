@@ -1,0 +1,49 @@
+{
+    "id_partida": "10",
+    "peliculas": [{
+            "ImdbID": "tt0317219",
+            "Nombre": "Cars",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg",
+            "choice1": "2000",
+            "choice2": "2006",
+            "choice3": "2011",
+            "choice4": "2008"
+        },
+        {
+            "ImdbID": "tt0068646",
+            "Nombre": "The Godfather",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNm…Tk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+            "choice1": "1970",
+            "choice2": "1980",
+            "choice3": "1965",
+            "choice4": "1972"
+        },
+        {
+            "ImdbID": "tt1323045",
+            "Nombre": "Frozen",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMTc5MTg0ODgxMF5BMl5BanBnXkFtZTcwODEzOTYwMw@@._V1_SX300.jpg",
+            "choice1": "2005",
+            "choice2": "2000",
+            "choice3": "2010",
+            "choice4": "2008"
+        },
+        {
+            "ImdbID": "tt0120737",
+            "Nombre": "The Lord of the Rings: The Fellowship of the Ring",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg",
+            "choice1": "2001",
+            "choice2": "1995",
+            "choice3": "2009",
+            "choice4": "2010"
+        },
+        {
+            "ImdbID": "tt0120915",
+            "Nombre": "Star Wars: Episode I - The Phantom Menace",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BYTRhNjcwNW…WI0ZDA2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
+            "choice1": "1995",
+            "choice2": "2007",
+            "choice3": "1999",
+            "choice4": "1990"
+        }
+    ]
+}
