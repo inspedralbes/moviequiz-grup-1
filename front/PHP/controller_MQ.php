@@ -6,7 +6,7 @@ require_once('view_MQ.php');
 class controller
 {
     //rutes o esdeveniments possibles
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc');
 
     public function handler()
     {
@@ -71,8 +71,16 @@ class controller
                 $dadesPOST = $this->recollirDadesPost();
                 print_r($dadesPOST);
                 $dadesEditades = $usuari->modificarDadesUsuari($dadesPOST);
-
                 break;
+            case 'joc':
+                $dadesPOST = $this->recollirDadesPost();
+                print_r($dadesPOST);
+                if($dadesPOST['juego'] == 1){
+                    echo "Juego login";
+                }else{
+                    $partida->generarjocNoLogin();
+                    echo "Juego no login";
+                }
         }
     }
 
@@ -87,13 +95,11 @@ class controller
                 'nom' => $_POST['nom'],
                 'cognoms' => $_POST['cognom']
             );
-
         } else if (isset($_POST['usuari'])) {
             $dadesForm = array(
                 'usuari' => $_POST['usuari'],
                 'contrasenya' => $_POST['pwd']
             );
-
         } else if (isset($_POST['valoracio'])) {
             $dadesForm = array(
                 'valoracio' => $_POST["valoracio"],
@@ -108,7 +114,13 @@ class controller
         } else if (isset($_POST['user'])) {
             $dadesForm = $_POST['user'];
 
-            /* Editar Dades Usuari */
+        } else if (isset($_POST['joc'])) {
+            $dadesForm = array("juego" => $_POST['joc']);
+            if($_POST['joc'] == true){
+                $dadesForm = array_merge($dadesForm, array('user' => $_POST['jocUser']));
+            }
+            
+        //Editar Dades Usuari
         } else if (isset($_POST['email_us'])) {
 
             print_r($_FILES);

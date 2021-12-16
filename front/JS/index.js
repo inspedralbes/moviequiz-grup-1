@@ -1,7 +1,6 @@
 /* Carrusel amb les pel·lícules millor valorades */
 obtenermejorvaloracion();
 
-
 /* Mostrar resultats de la búsqueda */
 document.getElementById("btn_search").addEventListener("click", function (e) {
     document.getElementById("resultat").classList.remove("oculto");

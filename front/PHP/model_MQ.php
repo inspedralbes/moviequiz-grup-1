@@ -76,7 +76,6 @@ class usuari extends BD_MovieQuiz
             );
 
             $_SESSION['user'] = $this->rows[0]["user"];
-
         } else {
             $res = array('exito' => false);
         }
@@ -86,7 +85,7 @@ class usuari extends BD_MovieQuiz
     /* EDITAR DADES USUARI */
     public function modificarDadesUsuari($user = array())
     {
-        foreach ($user as $u => $datos){
+        foreach ($user as $u => $datos) {
             $$u = $datos;
         }
 
@@ -139,36 +138,64 @@ class partida extends BD_MovieQuiz
         return $this->rows;
     }
 
-    public function select($nom = "")
+    public function generarjocNoLogin()
     {
-        $this->query = "SELECT ";
+        $jsonJS = array( "idPartida" => "1");
+
+        $this->query = "SELECT
+                            pelicula.nomPelicula,
+                            pelicula.idPelicula,
+                            pelicula.img,
+                            pelicula.any,
+                            AVG(valoracio_pelicules.valoracio) AS valoracio
+                        FROM
+                            valoracio_pelicules
+                        JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
+                        GROUP BY
+                            (pelicula.idPelicula)
+                        ORDER BY
+                            valoracio
+                        DESC
+                        LIMIT 10;";
         $this->get_results_from_query();
-        return $this->rows;
+        $dadesPelicules = $this->rows;
+
+        //Escollir 5 pelis aleatoriament d'entre les que s'han obtingut al fer la cerca anterior
+        $numAleatorio = range(0, 7);
+        shuffle($numAleatorio);
+
+        $arr_pelis = array();
+        for ($i = 0; $i < 5; $i++) {
+            $peli = $dadesPelicules[$numAleatorio[$i]];
+            $anys = $this->generarAñosAleatorios($peli['any']);
+            array_push($arr_pelis, array(
+                'idPeli' => $peli['idPelicula'],
+                'nomPeli' => $peli['nomPelicula'],
+                'imgPeli' => $peli['img'],
+                'opcio1' => $anys[0],
+                'opcio2' => $anys[1],
+                'opcio3' => $anys[2],
+                'opcio4' => $anys[3],
+                'opcio5' => $anys[4]
+            ));
+        }
+
+        $jsonJS = array_merge($jsonJS, ["pelis" => $arr_pelis]);
+        print_r($jsonJS);
     }
 
-
-    public function insert($user_data = array())
+    public function generarAñosAleatorios($any = "")
     {
-        /*
-        if (array_key_exists("nom", $user_data)) {
-            $this->select($user_data["nom"]);
-            if (!isset($this->rows[0]['nom'])) {
-                foreach ($user_data as $campo => $c) {
-                    $$campo = $c;
-                }
-                $this->query = "INSERT INTO persones(id, nom, edat, alcada) VALUES (NULL, '" . $nom . "', '" . $edat . "', '" . $alcada . "')";
-                $this->execute_single_query();
-                $this->message  = "Usuari introduït";
-            } else $this->message = "L'usuari ja existeix";
-        } else $this->message = "Usuari no introduït";*/
-    }
+        $valors = array(-15, -10, -5, -2, 2, +5, +10, +15);
+        shuffle($valors);
+        $arr_anys = array($any);
 
-    public function update($userData = array())
-    {
-    }
+        for ($i = 0; $i < 4; $i++) {
+            array_push($arr_anys, ($any + $valors[$i]));
+        }
 
-    public function delete($nom = "")
-    {
+        shuffle($arr_anys);
+        return $arr_anys;
     }
 }
 
@@ -358,7 +385,8 @@ class valoracio_pelicula extends BD_MovieQuiz
     }
 
     /* PEL·LÍCULES AMB MILLOR PUNTUACIÓ */
-    public function millorvalorades(){
+    public function millorvalorades()
+    {
         $this->query = "SELECT
                             pelicula.nomPelicula,
                             pelicula.idPelicula,
@@ -389,6 +417,4 @@ class valoracio_pelicula extends BD_MovieQuiz
         $this->get_results_from_query();
         return $this->rows;
     }
-
-
 }
