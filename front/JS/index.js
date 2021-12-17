@@ -274,7 +274,19 @@ function generarjuego() {
 };
 
 function generarpreguntas() {
-    fetch('http://localhost/moviequiz-grup-1/back/sql/JSON/output_generar_partida.json').then(response => response.json())
+    const datos = new FormData();
+    let val = 'fallo';
+    if (document.getElementById("info-usuari").innerHTML != "") {
+        let user = document.getElementById("alias").value;
+        val = 'exito';
+        datos.append('jocUser', user);
+    }
+
+    datos.append('joc', val);
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=joc', {
+        method: "POST",
+        body: datos
+    }).then(response => response.json())
         .then(data => {
             console.log(data);
             let preguntas;
@@ -305,8 +317,12 @@ function generarpreguntas() {
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice4}"/>
                                             <span>${data.peliculas[i].choice4}</span>
                                         </label>
+                                        </br>
+                                        <label>
+                                            <input name="resposta" type="radio" value="${data.peliculas[i].choice5}"/>
+                                            <span>${data.peliculas[i].choice5}</span>
+                                        </label>
                                     </div>
-
                                 </div>`;
 
                 document.getElementById("generarpreguntas").innerHTML = preguntas;
