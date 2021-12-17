@@ -229,28 +229,32 @@ function generarjuego() {
             console.log(data);
             let juego = `
                         <div class="modal-content joc-modal">
+                            <div class="header-joc center">
+                                <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
+                                <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
+                            </div>
                                 <div class="carousel joc-carousel carousel-slider center black-text">
-                                    <div class="carousel-fixed-item center">
-                                        <a class="btn waves-effect white grey-text darken-text-2">button</a>
+                                    <div class="caption carousel-fixed-item">
+                                        
                                     </div>
-                                    <h3>funciona</h3>
-                                    <div class="carousel-item red black-text" href="#one!">
+    
+                                    <div class="carousel-item deep-purple black-text" href="#one!">
                                         <h2>First Panel</h2>
                                         <p class="white-text">${data.peliculas[0].Nombre}</p>
                                     </div>
-                                    <div class="carousel-item amber black-text" href="#two!">
+                                    <div class="carousel-item deep-purple black-text" href="#two!">
                                         <h2>Second Panel</h2>
                                         <p class="white-text">This is your second panel</p>
                                     </div>
-                                    <div class="carousel-item green white-text" href="#three!">
+                                    <div class="carousel-item  deep-purple white-text" href="#three!">
                                         <h2>Third Panel</h2>
                                         <p class="white-text">This is your third panel</p>
                                     </div>
-                                    <div class="carousel-item blue white-text" href="#four!">
+                                    <div class="carousel-item  deep-purple white-text" href="#four!">
                                         <h2>Fourth Panel</h2>
                                         <p class="white-text">This is your fourth panel</p>
                                     </div>
-                                    <div class="carousel-item blue white-text" href="#four!">
+                                    <div class="carousel-item deep-purple white-text" href="#four!">
                                         <h2>Fifth Panel</h2>
                                         <p class="white-text">This is your fourth panel</p>
                                     </div>
