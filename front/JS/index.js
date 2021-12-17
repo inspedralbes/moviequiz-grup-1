@@ -236,18 +236,22 @@ function generarjuego() {
                                     <h3>funciona</h3>
                                     <div class="carousel-item red black-text" href="#one!">
                                         <h2>First Panel</h2>
-                                        <p class="white-text">${data.peliculas[i].Nombre}</p>
+                                        <p class="white-text">${data.peliculas[0].Nombre}</p>
                                     </div>
                                     <div class="carousel-item amber black-text" href="#two!">
                                         <h2>Second Panel</h2>
                                         <p class="white-text">This is your second panel</p>
                                     </div>
-                                        <div class="carousel-item green white-text" href="#three!">
+                                    <div class="carousel-item green white-text" href="#three!">
                                         <h2>Third Panel</h2>
                                         <p class="white-text">This is your third panel</p>
                                     </div>
-                                        <div class="carousel-item blue white-text" href="#four!">
+                                    <div class="carousel-item blue white-text" href="#four!">
                                         <h2>Fourth Panel</h2>
+                                        <p class="white-text">This is your fourth panel</p>
+                                    </div>
+                                    <div class="carousel-item blue white-text" href="#four!">
+                                        <h2>Fifth Panel</h2>
                                         <p class="white-text">This is your fourth panel</p>
                                     </div>
                                 </div>
