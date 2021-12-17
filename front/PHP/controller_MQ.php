@@ -117,7 +117,7 @@ class controller
 
         } else if (isset($_POST['joc'])) {
             $dadesForm = array("juego" => $_POST['joc']);
-            if ($_POST['joc'] == true) {
+            if ($_POST['joc'] == 'exito') {
                 $dadesForm = array_merge($dadesForm, array('user' => $_POST['jocUser']));
             }
 
