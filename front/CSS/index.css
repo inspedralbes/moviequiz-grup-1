@@ -1,15 +1,56 @@
-/* CSS INDEX */
-
-input[type="radio"] {
-    background-color: red;
-}
-
 body {
     margin: auto;
     width: 95%;
     background-color: rgb(39, 39, 39);
     color: white;
 }
+
+.row {
+    margin: 20px 0 0 0;
+}
+
+
+/*-----------TEXT-----------*/
+
+.black_font {
+    color: black;
+}
+
+.white_font {
+    color: white !important;
+}
+
+.centrar {
+    text-align: center;
+}
+
+
+/*------------FOOTER------------*/
+
+.footer {
+    justify-content: center !important;
+}
+
+.page-footer .l4 h5 {
+    text-decoration: underline;
+}
+
+.page-footer {
+    padding-top: 10px !important;
+}
+
+
+/*------------BOTONS------------*/
+.btn {
+    background-color: #24bdd1;
+}
+
+.btn:hover {
+    background-color: #53dcee ;
+}
+
+
+/*------SECCIÓ CERCA DE PELIS------*/
 
 .divpelis {
     display: inline-block;
@@ -22,9 +63,17 @@ body {
     align-items: center;
 }
 
-.row {
-    margin: 20px 0 0 0;
+
+
+
+
+input[type="radio"] {
+    background-color: red;
 }
+
+
+
+
 
 .card-image img {
     min-height: 20vh;
@@ -48,11 +97,6 @@ body {
     }
 }
 
-/*
-.disabled {
-    disabled: "disabled";
-}*/
-
 .error {
     padding: 10px;
     width: max-content;
@@ -68,14 +112,8 @@ body {
 .oculto {
     display: none !important;
 }
-s
-.btn {
-    background-color: #24bdd1;
-}
 
-.btn:hover {
-    background-color: #53dcee ;
-}
+
 
 .btn-joc {
     margin: 20px;
@@ -136,35 +174,10 @@ s
     text-align: center;
 }
 
-.centrar {
-    text-align: center;
-}
-
-.black_font {
-    color: black;
-}
-
-.white_font {
-    color: white !important;
-}
-
-.page-footer .l4 h5 {
-    text-decoration: underline;
-}
-
-.page-footer {
-    padding-top: 10px !important;
-}
-
-.footer {
-    justify-content: center !important;
-}
-
 .collapsible-header {
     display: flex;
     align-items: center;
     justify-content: start;
-
 }
 
 .collapsible-header p {
@@ -193,4 +206,17 @@ s
     padding: 7px 0px 0px 0px !important;
     background-color: rgb(39, 39, 39);
     border-radius: 2%;
+}
+
+.resposta-joc {
+    /*font-size: 23px !important;*/
+
+}
+
+.opcions-joc {
+    /*margin-bottom: 1px;*/
+}
+
+.form-joc {
+    /*font-size: 20% !important;*/
 }
