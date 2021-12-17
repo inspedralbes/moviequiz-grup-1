@@ -222,9 +222,43 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 
 })
 
+
+
+
+/*                                    
+</div >
+
+<div class="carousel-item deep-purple black-text" href="#one!">
+<h2>First Panel</h2>
+<p class="white-text">${data.peliculas[0].Nombre}</p>
+</div>
+<div class="carousel-item deep-purple black-text" href="#two!">
+<h2>Second Panel</h2>
+<p class="white-text">This is your second panel</p>
+</div>
+<div class="carousel-item  deep-purple white-text" href="#three!">
+<h2>Third Panel</h2>
+<p class="white-text">This is your third panel</p>
+</div>
+<div class="carousel-item  deep-purple white-text" href="#four!">
+<h2>Fourth Panel</h2>
+<p class="white-text">This is your fourth panel</p>
+</div>
+<div class="carousel-item deep-purple white-text" href="#four!">
+<h2>Fifth Panel</h2>
+<p class="white-text">This is your fourth panel</p>
+</div>
+*/
+
+
+
 function generarjuego() {
     let juego = `
                         <div class="modal-content joc-modal">
+                            <div class="header-joc center">
+                                <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
+                                <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
+                            </div>
                                 <div class="carousel joc-carousel carousel-slider center black-text">
                                     <div id="generarpreguntas">
                                 </div>
@@ -245,7 +279,7 @@ function generarpreguntas() {
             console.log(data);
             let preguntas;
             for (let i = 0; i < data.peliculas.length; i++) {
-                preguntas += `<div class="carousel-item red black-text" href="#">
+                preguntas += `<div class="carousel-item deep-purple black-text" href="#">
                                     <h2>Minijoc</h2>
                                     <p class="white-text left">${data.peliculas[i].Nombre}</p>
                                     <img style="width: 30%" class="left" src="${data.peliculas[i].Poster}">
