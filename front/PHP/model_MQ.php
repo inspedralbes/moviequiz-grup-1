@@ -138,10 +138,18 @@ class partida extends BD_MovieQuiz
         return $this->rows;
     }
 
+    public function generarjocLogin($nomuser = "")
+    {
+        $val = new valoracio_pelicula();
+        $per = new usuari();
+        $user = $per->dadesUsuari($nomuser)[0]['idUsuari'];
+        $dadesPelicules = $val->pelisGuardadesUsuari($user);
+        $json = $this->generarJSONjoc($dadesPelicules);
+        return $json;
+    }
+
     public function generarjocNoLogin()
     {
-        $jsonJS = array( "idPartida" => "1");
-
         $this->query = "SELECT
                             pelicula.nomPelicula,
                             pelicula.idPelicula,
@@ -157,11 +165,19 @@ class partida extends BD_MovieQuiz
                             valoracio
                         DESC
                         LIMIT 10;";
+
         $this->get_results_from_query();
         $dadesPelicules = $this->rows;
+        $json = $this->generarJSONjoc($dadesPelicules);
+        return $json;
+    }
+
+    public function generarJSONjoc($dadesPelicules = array())
+    {
+        $jsonJS = array();
 
         //Escollir 5 pelis aleatoriament d'entre les que s'han obtingut al fer la cerca anterior
-        $numAleatorio = range(0, 7);
+        $numAleatorio = range(0, (count($dadesPelicules) - 1));
         shuffle($numAleatorio);
 
         $arr_pelis = array();
@@ -169,19 +185,27 @@ class partida extends BD_MovieQuiz
             $peli = $dadesPelicules[$numAleatorio[$i]];
             $anys = $this->generarAñosAleatorios($peli['any']);
             array_push($arr_pelis, array(
-                'idPeli' => $peli['idPelicula'],
-                'nomPeli' => $peli['nomPelicula'],
-                'imgPeli' => $peli['img'],
-                'opcio1' => $anys[0],
-                'opcio2' => $anys[1],
-                'opcio3' => $anys[2],
-                'opcio4' => $anys[3],
-                'opcio5' => $anys[4]
+                'ImdbID' => $peli['idPelicula'],
+                'Nombre' => $peli['nomPelicula'],
+                'Poster' => $peli['img'],
+                'choice1' => $anys[0],
+                'choice2' => $anys[1],
+                'choice3' => $anys[2],
+                'choice4' => $anys[3],
+                'choice5' => $anys[4]
             ));
         }
 
-        $jsonJS = array_merge($jsonJS, ["pelis" => $arr_pelis]);
-        print_r($jsonJS);
+        $jsonJS = array_merge($jsonJS, ["peliculas" => $arr_pelis]);
+
+        $this->guardarPartida($jsonJS);
+
+        $id = $this->obtenerIDPartida();
+
+        $id = array('id_partida' => $id);
+        $jsonJS = array_merge($id, $jsonJS);
+
+        return (json_encode($jsonJS));
     }
 
     public function generarAñosAleatorios($any = "")
@@ -197,6 +221,22 @@ class partida extends BD_MovieQuiz
         shuffle($arr_anys);
         return $arr_anys;
     }
+
+    public function guardarPartida($partida)
+    {
+        $partida = json_encode($partida);
+        $this->query = "INSERT INTO partida(idPartida, nomPartida, pelicules, fecha) VALUES (NULL,'no-defined-yet','$partida', CURRENT_TIMESTAMP())";
+        $this->execute_single_query();
+    }
+
+    public function obtenerIDPartida()
+    {
+        $this->query = "SELECT MAX(partida.idPartida) AS 'id' FROM partida";
+        $this->get_results_from_query();
+        return $this->rows[0]['id'];
+    }
+
+
 }
 
 class partida_jugada extends BD_MovieQuiz
@@ -408,7 +448,7 @@ class valoracio_pelicula extends BD_MovieQuiz
     public function pelisGuardadesUsuari($id = "")
     {
         $this->query = "SELECT
-                            valoracio_pelicules.comentari, valoracio_pelicules.valoracio, pelicula.nomPelicula, pelicula.img, pelicula.idPelicula
+                            valoracio_pelicules.comentari, valoracio_pelicules.valoracio, pelicula.nomPelicula, pelicula.img, pelicula.idPelicula, pelicula.any
                         FROM
                             valoracio_pelicules
                         INNER JOIN pelicula ON pelicula.idPelicula = valoracio_pelicules.pelicula
