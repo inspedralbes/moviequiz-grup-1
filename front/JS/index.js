@@ -285,28 +285,25 @@ function generarpreguntas() {
                                     <img style="width: 30%" class="left" src="${data.peliculas[i].Poster}">
                                     <div id="formRadio">
                                     </br>
-                                        <h5 class="red-text darken-1">Resposta</h5>
-                                        </br>
 
                                         <label>
-                                            <input name="resposta" type="radio" value="${data.peliculas[i].}"/>
-                                            <span>1</span>
+                                            <input name="resposta" type="radio" value="${data.peliculas[i].choice1}"/>
+                                            <span>${data.peliculas[i].choice1}</span>
                                         </label>
+                                        </br>
                                         <label>
-                                            <input name="resposta" type="radio" value="2"/>
-                                            <span>2</span>
+                                            <input name="resposta" type="radio" value="${data.peliculas[i].choice2}"/>
+                                            <span>${data.peliculas[i].choice2}</span>
                                         </label>
+                                        </br>
                                         <label>
-                                            <input name="resposta" type="radio" value="3"/>
-                                            <span>3</span>
+                                            <input name="resposta" type="radio" value="${data.peliculas[i].choice3}"/>
+                                            <span>${data.peliculas[i].choice3}</span>
                                         </label>
+                                        </br>
                                         <label>
-                                            <input name="resposta" type="radio" value="4"/>
-                                            <span>4</span>
-                                        </label>
-                                        <label>
-                                            <input name="resposta" type="radio" value="5"/>
-                                            <span>5</span>
+                                            <input name="resposta" type="radio" value="${data.peliculas[i].choice4}"/>
+                                            <span>${data.peliculas[i].choice4}</span>
                                         </label>
                                     </div>
 
