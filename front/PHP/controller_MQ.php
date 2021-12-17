@@ -72,14 +72,15 @@ class controller
                 print_r($dadesPOST);
                 $dadesEditades = $usuari->modificarDadesUsuari($dadesPOST);
                 break;
+
             case 'joc':
                 $dadesPOST = $this->recollirDadesPost();
-                print_r($dadesPOST);
-                if($dadesPOST['juego'] == 1){
-                    echo "Juego login";
-                }else{
-                    $partida->generarjocNoLogin();
-                    echo "Juego no login";
+                if ($dadesPOST['juego'] == 'exito') {
+                    $json = $partida->generarjocLogin($dadesPOST['user']);
+                    echo $json;
+                } else if ($dadesPOST['juego'] == 'fallo'){
+                    $json = $partida->generarjocNoLogin();
+                    echo $json;
                 }
         }
     }
@@ -116,11 +117,11 @@ class controller
 
         } else if (isset($_POST['joc'])) {
             $dadesForm = array("juego" => $_POST['joc']);
-            if($_POST['joc'] == true){
+            if ($_POST['joc'] == 'exito') {
                 $dadesForm = array_merge($dadesForm, array('user' => $_POST['jocUser']));
             }
-            
-        //Editar Dades Usuari
+
+            //Editar Dades Usuari
         } else if (isset($_POST['email_us'])) {
 
             print_r($_FILES);
