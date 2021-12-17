@@ -194,3 +194,16 @@ s
     background-color: rgb(39, 39, 39);
     border-radius: 2%;
 }
+
+.resposta-joc {
+    /*font-size: 23px !important;*/
+
+}
+
+.opcions-joc {
+    /*margin-bottom: 1px;*/
+}
+
+.form-joc {
+    /*font-size: 20% !important;*/
+}

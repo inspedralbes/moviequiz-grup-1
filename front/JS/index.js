@@ -250,8 +250,6 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 </div>
 */
 
-
-
 function generarjuego() {
     let juego = `
                         <div class="modal-content joc-modal">
@@ -279,32 +277,38 @@ function generarpreguntas() {
             console.log(data);
             let preguntas;
             for (let i = 0; i < data.peliculas.length; i++) {
-                preguntas += `<div class="carousel-item deep-purple black-text" href="#">
-                                    <h2>Minijoc</h2>
-                                    <p class="white-text left">${data.peliculas[i].Nombre}</p>
-                                    <img style="width: 30%" class="left" src="${data.peliculas[i].Poster}">
-                                    <div id="formRadio">
-                                    </br>
+                preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
-                                        <label>
+                                    <div class="col s5">
+                                        <img style="width: 70%; margin: 10% 10% 10% 10%" class="center" src="${data.peliculas[i].Poster}">
+                                    </div>
+
+                                    <div class="col s5 center">
+                                        <h4 class="white-text center" style="margin: 4%; margin-top: 10%">${data.peliculas[i].Nombre}</h4>
+                                    
+                                    <div id="formRadio" class="form-joc col s6 center" style="margin-top: 10%; margin-left: 20px">
+ 
+                                        <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice1}"/>
-                                            <span>${data.peliculas[i].choice1}</span>
+                                            <span class="resposta-joc">${data.peliculas[i].choice1}</span>
                                         </label>
                                         </br>
-                                        <label>
+                                        <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice2}"/>
-                                            <span>${data.peliculas[i].choice2}</span>
+                                            <span class="resposta-joc">${data.peliculas[i].choice2}</span>
                                         </label>
                                         </br>
-                                        <label>
+                                        <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice3}"/>
-                                            <span>${data.peliculas[i].choice3}</span>
+                                            <span class="resposta-joc">${data.peliculas[i].choice3}</span>
                                         </label>
                                         </br>
-                                        <label>
+                                        <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice4}"/>
-                                            <span>${data.peliculas[i].choice4}</span>
+                                            <span class="resposta-joc">${data.peliculas[i].choice4}</span>
                                         </label>
+                                        </br>
+                                        </div>
                                     </div>
 
                                 </div>`;
