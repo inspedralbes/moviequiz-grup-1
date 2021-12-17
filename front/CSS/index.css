@@ -70,11 +70,11 @@ body {
 }
 s
 .btn {
-    background-color: #26c6da;
+    background-color: #24bdd1;
 }
 
 .btn:hover {
-    background-color: #4dd0e1 ;
+    background-color: #53dcee ;
 }
 
 .btn-joc {
@@ -182,7 +182,7 @@ s
 }
 
 .joc-carousel {
-    height: 60vh !important;
+    height: 58vh !important;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -190,5 +190,7 @@ s
 .joc-modal {
     height: auto !important;
     overflow: hidden;
-    padding: 0px !important;
+    padding: 7px 0px 0px 0px !important;
+    background-color: rgb(39, 39, 39);
+    border-radius: 2%;
 }

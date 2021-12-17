@@ -35,7 +35,7 @@ require_once("controller_MQ.php");
             </div>
 
             <div id="butons_search" class="col s2">
-            <a class="btn btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+                <a class="btn btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
                 <a id="ocultardivsearch" href="#!" class="btn-small oculto red"><i class="material-icons">arrow_drop_up</i></a>
             </div>
         </div>
@@ -58,8 +58,8 @@ require_once("controller_MQ.php");
     <!-- CONTINGUT VISIBLE PER L'USUARI REGISTRAT -->
     <div id="apartadoJuego" class="row">
         <div id="juego" class="col s12 m12 l4">
-                <!--<h3>Minijoc</h3>-->
-            <button id="btn-joc" class="btn waves-effect waves-light btn-joc modal-trigger" href="#modaljoc"> Jugar </button>
+            <!--<h3>Minijoc</h3>-->
+            <button id="btn-joc" class="waves-effect waves-light btn btn-joc modal-trigger" href="#modaljoc"> Jugar </button>
         </div>
         <div id="ranking" class="col s12 m12 l8">
             <div>
@@ -76,7 +76,7 @@ require_once("controller_MQ.php");
             </div>
         </div>
 
-        <div id="modaljoc" class="modal joc">
+        <div id="modaljoc" class="modal joc joc-modal">
         </div>
 
     </div>
@@ -87,6 +87,7 @@ require_once("controller_MQ.php");
                 <div id="mispelis-titol">
                     <h5>Les meves pel·lícules</h5>
                 </div>
+            </div>
         </div>
     </div>
 
@@ -96,7 +97,7 @@ require_once("controller_MQ.php");
     <!-- SCRIPTS -->
     <script type="text/javascript" src="../JS/index.js"></script>
     <script type="text/javascript" src="../JS/login.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
