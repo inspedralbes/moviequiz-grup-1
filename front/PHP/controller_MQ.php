@@ -75,10 +75,10 @@ class controller
 
             case 'joc':
                 $dadesPOST = $this->recollirDadesPost();
-                if ($dadesPOST['juego'] == 1) {
+                if ($dadesPOST['juego'] == 'exito') {
                     $json = $partida->generarjocLogin($dadesPOST['user']);
                     echo $json;
-                } else {
+                } else if ($dadesPOST['juego'] == 'fallo'){
                     $json = $partida->generarjocNoLogin();
                     echo $json;
                 }
