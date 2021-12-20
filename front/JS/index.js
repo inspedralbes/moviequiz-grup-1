@@ -230,7 +230,16 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
         }
     });
 
-    document.getElementById('pr').addEventListener('click', e => {
+    enviarResposta(pelis);
+
+});
+
+function enviarResposta(pelis) {
+    document.getElementById('btn-acabarJoc').addEventListener('click', e => {
+
+        document.getElementById("gif-loading").classList.remove("oculto");
+
+
         let idPelis = [], respuestas = [];
 
         //Guardar el id de cada una de las 5 peliculas que aparecen en el juego
@@ -264,55 +273,74 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
         jsonPartida = {
             'id_partida': idParitda,
             'nom_partida': nombrePartida,
-            'respostes' : respuestas
+            'respostes': respuestas
         }
 
-        console.log(jsonPartida);
+        jsonPartida = JSON.stringify(jsonPartida);
+
+
+
+        const datos = new FormData();
+        datos.append("respostes", jsonPartida);
+
+        if (document.getElementById("info-usuari").innerHTML != "") {
+            let user = document.getElementById("alias").value;
+            datos.append('userPartida', user);
+
+        }
+        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprovarJoc', {
+            method: "POST",
+            body: datos
+        }).then(response => response.json())
+            .then(data => {
+
+                document.getElementById("gif-loading").classList.add("oculto");
+                console.log(data);
+            });
+
+
+        document.getElementById("joc-carousel").classList.add("oculto");
+        verpuntuacion();
+        document.getElementById("gifloading").classList.remove("oculto");
+        document.getElementById("btn-acabarJoc").classList.add("oculto");
+        document.getElementById("enunciatJoc").classList.add("oculto");
+
+        document.getElementById("cerrarModal-joc").classList.remove("oculto");
 
     });
-});
+}
 
-
-
-
-/*                                    
-</div >
-
-<div class="carousel-item deep-purple black-text" href="#one!">
-<h2>First Panel</h2>
-<p class="white-text">${data.peliculas[0].Nombre}</p>
-</div>
-<div class="carousel-item deep-purple black-text" href="#two!">
-<h2>Second Panel</h2>
-<p class="white-text">This is your second panel</p>
-</div>
-<div class="carousel-item  deep-purple white-text" href="#three!">
-<h2>Third Panel</h2>
-<p class="white-text">This is your third panel</p>
-</div>
-<div class="carousel-item  deep-purple white-text" href="#four!">
-<h2>Fourth Panel</h2>
-<p class="white-text">This is your fourth panel</p>
-</div>
-<div class="carousel-item deep-purple white-text" href="#four!">
-<h2>Fifth Panel</h2>
-<p class="white-text">This is your fourth panel</p>
-</div>
-*/
 
 function generarjuego() {
     let juegoHTML = `<div class="modal-content joc-modal">
-                    <div class="header-joc center" id="pr">
-                        <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
-                        <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
-                    </div>
-                    <div class="carousel joc-carousel carousel-slider center black-text">
-                        <div id="generarpreguntas"></div>
-                    </div>
-                </div>
-                <!--<div class="modal-footer">
-                    <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
-                </div>-->`;
+                        <div class="header-joc center" id="pr">
+                            <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
+                            <h6 id="enunciatJoc">En quin any es va estrenar aquesta pel·lícula?</h6>
+                            <div class="center">
+                                <a id="btn-acabarJoc" class="btn waves-effect">Enviar</a>
+                            </div>
+                        </div>
+                        
+                        <div id="joc-carousel" class="carousel joc-carousel carousel-slider center black-text">
+                            <div id="generarpreguntas"></div>
+                        </div>
+                        <div id="joc-puntuacio" class="center">
+                        <div id="gif-loading" class="preloader-wrapper big active oculto margen-top margen-bottom">
+                            <div class="spinner-layer spinner-blue-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <!--<div class="modal-footer">
+                        <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
+                    </div>-->`;
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
 
@@ -335,19 +363,19 @@ function generarpreguntas() {
     }).then(response => response.json())
         .then(data => {
             console.log(data);
-            let preguntas;
+            let preguntas = "";
             for (let i = 0; i < data.peliculas.length; i++) {
                 preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
-                                <div class="col s5">
-                                    <img style="width: 70%; margin: 10% 10% 10% 10%" class="center" src="${data.peliculas[i].Poster}">
+                                <div class="col s12 m5">
+                                    <img class="img_joc center" src="${data.peliculas[i].Poster}">
                                 </div>
 
-                                <div class="col s5 center">
-                                    <h4 class="white-text center" style="margin: 4%; margin-top: 10%">${data.peliculas[i].Nombre}</h4>
+                                <div class="col s12 m5 center">
+                                    <h4 class="white-text center titol_peli_joc">${data.peliculas[i].Nombre}</h4>
                                 </div>
                                 
-                                <div id="${data.peliculas[i].ImdbID}" class="form-joc col s6 center" style="margin-top: 10%; margin-left: 20px">
+                                <div id="${data.peliculas[i].ImdbID}" class="form-joc col s6 center">
                                     <form>
                                         <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice1}"/>
@@ -371,15 +399,17 @@ function generarpreguntas() {
                                         </br>
                                         <label>
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice5}"/>
-                                            <span>${data.peliculas[i].choice5}</span>
+                                            <span class="resposta-joc">${data.peliculas[i].choice5}</span>
                                         </label>
                                     </form>
-                                </div>
+                                </div>  
                             </div>`;
-
-                document.getElementById("generarpreguntas").innerHTML = preguntas;
-                document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
             }
+
+            document.getElementById("generarpreguntas").innerHTML = preguntas;
+            document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
+
+
             //Inicialitzar carousel joc 
             var carr = document.querySelectorAll('.joc-carousel');
             var instance = M.Carousel.init(carr, {
@@ -387,4 +417,27 @@ function generarpreguntas() {
                 indicators: true
             });
         });
+}
+
+function verpuntuacion() {
+    fetch('http://localhost/moviequiz-grup-1/back/sql/JSON/output_comprovar_partida.json', {
+        //method: "POST",
+        //body: datos
+    }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let puntuacion;
+            var tpunts = data.encerts * 3 + data.fallos * -1;
+            puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
+                                <h4>— ${data.nom_partida} —</h4>
+                                </br>
+                                <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
+                                <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
+                                </br>
+                                <h5>Puntuació: ${tpunts}/15</h5>
+                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
+                        </div>`;
+
+            document.getElementById("joc-puntuacio").innerHTML = puntuacion;
+        })
 }
