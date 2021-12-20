@@ -15,8 +15,11 @@
 <div id="login" class=" login modal">
     <div class="modal-content">
         <div class="row center">
-            <h5 class="red-text darken-1">Inicia Sessió</h5>
-            <form class="col s4 offset-m3 l4 offset-l4">
+            <div class="col s12">
+                <h5 class="red-text darken-1">Inicia Sessió</h5>
+            </div>
+
+            <div class="col s12">
                 <div class="input-field">
                     <i class="material-icons prefix">person</i>
                     <label for="usuari">Usuari</label>
@@ -28,13 +31,13 @@
                     <label for="pwd">Contrasenya</label>
                     <input type="password" id="pwd" name="pwd">
                 </div>
-            </form>
-        </div>
+            </div>
 
-        <!-- BOTÓ LOGIN / LINK SING UP-->
-        <div class="row center center-align">
-            <a id="btn_entrar" class="waves-effect waves-light btn btn-small">Entrar</a>
-            <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
+            <!-- BOTÓ LOGIN / LINK SING UP-->
+            <div class="col s12">
+                <a id="btn_entrar" class="waves-effect waves-light btn btn-small">Entrar</a>
+                <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
+            </div>
         </div>
     </div>
 
