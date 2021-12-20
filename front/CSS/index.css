@@ -166,10 +166,6 @@ input[type="radio"] {
     height: 400px;
 }
 
-#info-usuari {
-    height: 400px;
-}
-
 #mispelis-titol {
     text-align: center;
 }
@@ -219,4 +215,8 @@ input[type="radio"] {
 
 .form-joc {
     /*font-size: 20% !important;*/
+}
+
+.centrar h3{
+    margin: 0;
 }
