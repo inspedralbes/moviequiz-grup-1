@@ -198,6 +198,12 @@ body {
     font-size: 23px !important;
 }
 
+.gifJoc {
+    width: 450px;
+    margin-bottom: 20px !important;
+    margin-top: 40px !important;
+}
+
 /* Pantalla Gran */
 @media only screen and (max-width: 1000px) {
     .img_joc {
@@ -225,10 +231,18 @@ body {
     .resposta-joc {
         font-size: 16px !important;
     }
+
+    .gifJoc {
+        width: 450px;
+        margin-bottom: 6%;
+        margin-top: 4%;
+    }
 }
 
 .resultat-joc {
     margin-top: 14px;
+    color: white;
+    height: 100%;
 }
 
 .icon-resultat {
@@ -239,6 +253,13 @@ body {
     background-color: #24bdd1;
     width: fit-content;
     padding: 5px;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 
