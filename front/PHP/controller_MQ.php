@@ -86,6 +86,7 @@ class controller
 
             case 'comprovarJoc':
                 $dadesPOST = $this->recollirDadesPost();
+                sleep(1.5);
                 if (isset($_POST['userPartida'])) {
                     $json = $partida->comprovarPartidaConLogin($dadesPOST);
                     echo $json;

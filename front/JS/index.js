@@ -237,10 +237,10 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 function enviarResposta(pelis) {
     document.getElementById('btn-acabarJoc').addEventListener('click', e => {
 
-        document.getElementById("gifLoading").classList.remove("oculto");
 
 
-        let idPelis = [], respuestas = [];
+        let idPelis = [],
+            respuestas = [];
 
         //Guardar el id de cada una de las 5 peliculas que aparecen en el juego
         for (let i = 0; i < pelis.length; i++) {
@@ -278,6 +278,20 @@ function enviarResposta(pelis) {
 
         jsonPartida = JSON.stringify(jsonPartida);
 
+        document.getElementById("joc-carousel").innerHTML = `<div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
+                                                                <div class="spinner-layer spinner-blue-only">
+                                                                    <div class="circle-clipper left">
+                                                                        <div class="circle"></div>
+                                                                    </div>
+                                                                    <div class="gap-patch">
+                                                                        <div class="circle"></div>
+                                                                    </div>
+                                                                    <div class="circle-clipper right">
+                                                                        <div class="circle"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>`;
+
         const datos = new FormData();
         datos.append("respostes", jsonPartida);
 
@@ -286,24 +300,36 @@ function enviarResposta(pelis) {
             datos.append('userPartida', user);
 
         }
+
         fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprovarJoc', {
             method: "POST",
             body: datos
         }).then(response => response.json())
             .then(data => {
 
-                document.getElementById("gifLoading").classList.add("oculto");
+                document.getElementById("btn-acabarJoc").classList.add("oculto");
+                document.getElementById("enunciatJoc").classList.add("oculto");
+
+
                 console.log(data);
+                let puntuacion;
+                var tpunts = data.encerts * 3 + data.fallos * -1;
+                puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
+                                <h4>— ${data.nom_partida} —</h4>
+                                </br>
+                                <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
+                                <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
+                                </br>
+                                <h5>Puntuació: ${tpunts}/15</h5>
+                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
+                        </div>`;
+
+                document.getElementById("joc-carousel").innerHTML = puntuacion;
+                document.getElementById("cerrarModal-joc").classList.remove("oculto");
             });
 
 
-        document.getElementById("joc-carousel").classList.add("oculto");
-        verpuntuacion();
-        /*document.getElementById("gifloading").classList.remove("oculto");*/
-        document.getElementById("btn-acabarJoc").classList.add("oculto");
-        document.getElementById("enunciatJoc").classList.add("oculto");
 
-        document.getElementById("cerrarModal-joc").classList.remove("oculto");
 
     });
 }
@@ -323,25 +349,10 @@ function generarjuego() {
                             <div id="generarpreguntas"></div>
                         </div>
 
-                        <div id="joc-puntuacio" class="center">
-                            <div id="gifLoading" class="preloader-wrapper big active oculto margen-top margen-bottom">
-                                <div class="spinner-layer spinner-blue-only">
-                                    <div class="circle-clipper left">
-                                        <div class="circle"></div>
-                                    </div>
-                                    
-                                    <div class="gap-patch">
-                                        <div class="circle"></div>
-                                    </div>
-                                    
-                                    <div class="circle-clipper right">
-                                        <div class="circle"></div>
-                                    </div>
+                        
+                    </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    
+                                            
                     <!--<div class="modal-footer">
                         <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
                     -->`;
@@ -421,27 +432,4 @@ function generarpreguntas() {
                 indicators: true
             });
         });
-}
-
-function verpuntuacion() {
-    fetch('http://localhost/moviequiz-grup-1/back/sql/JSON/output_comprovar_partida.json', {
-        //method: "POST",
-        //body: datos
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data);
-            let puntuacion;
-            var tpunts = data.encerts * 3 + data.fallos * -1;
-            puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
-                                <h4>— ${data.nom_partida} —</h4>
-                                </br>
-                                <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
-                                <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
-                                </br>
-                                <h5>Puntuació: ${tpunts}/15</h5>
-                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
-                        </div>`;
-
-            document.getElementById("joc-puntuacio").innerHTML = puntuacion;
-        })
 }
