@@ -230,7 +230,12 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
         }
     });
 
-    document.getElementById('pr').addEventListener('click', e => {
+    enviarResposta(pelis);
+    
+});
+
+function enviarResposta (pelis) {
+    document.getElementById('acabarJoc').addEventListener('click', e => {
         let idPelis = [], respuestas = [];
 
         //Guardar el id de cada una de las 5 peliculas que aparecen en el juego
@@ -270,49 +275,27 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
         console.log(jsonPartida);
 
     });
-});
-
-
-
-
-/*                                    
-</div >
-
-<div class="carousel-item deep-purple black-text" href="#one!">
-<h2>First Panel</h2>
-<p class="white-text">${data.peliculas[0].Nombre}</p>
-</div>
-<div class="carousel-item deep-purple black-text" href="#two!">
-<h2>Second Panel</h2>
-<p class="white-text">This is your second panel</p>
-</div>
-<div class="carousel-item  deep-purple white-text" href="#three!">
-<h2>Third Panel</h2>
-<p class="white-text">This is your third panel</p>
-</div>
-<div class="carousel-item  deep-purple white-text" href="#four!">
-<h2>Fourth Panel</h2>
-<p class="white-text">This is your fourth panel</p>
-</div>
-<div class="carousel-item deep-purple white-text" href="#four!">
-<h2>Fifth Panel</h2>
-<p class="white-text">This is your fourth panel</p>
-</div>
-*/
+}
 
 function generarjuego() {
-    let juegoHTML = `<div class="modal-content joc-modal">
-                    <div class="header-joc center" id="pr">
-                        <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
-                        <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
+    let juegoHTML = `
+                    <div class="modal-content joc-modal">
+                        <div class="header-joc center" id="pr">
+                            <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
+                            <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
+                            <div class="carousel-fixed-item center">
+                                <a id="acabarJoc" class="btn waves-effect">Enviar</a>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel joc-carousel carousel-slider center black-text">
+                            <div id="generarpreguntas"></div>
+                        </div>
                     </div>
-                    <div class="carousel joc-carousel carousel-slider center black-text">
-                        <div id="generarpreguntas"></div>
-                    </div>
-                </div>
-                <!--<div class="modal-footer">
-                    <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
-                </div>-->`;
+                    
+                    <!--<div class="modal-footer">
+                        <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
+                    </div>-->`;
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
 
@@ -335,7 +318,7 @@ function generarpreguntas() {
     }).then(response => response.json())
         .then(data => {
             console.log(data);
-            let preguntas;
+            let preguntas="";
             for (let i = 0; i < data.peliculas.length; i++) {
                 preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
@@ -374,12 +357,14 @@ function generarpreguntas() {
                                             <span>${data.peliculas[i].choice5}</span>
                                         </label>
                                     </form>
-                                </div>
+                                </div>  
                             </div>`;
-
-                document.getElementById("generarpreguntas").innerHTML = preguntas;
-                document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
             }
+
+            document.getElementById("generarpreguntas").innerHTML = preguntas;
+            document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
+            
+
             //Inicialitzar carousel joc 
             var carr = document.querySelectorAll('.joc-carousel');
             var instance = M.Carousel.init(carr, {

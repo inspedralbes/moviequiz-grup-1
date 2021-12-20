@@ -114,11 +114,18 @@ input[type="radio"] {
 }
 
 
+/*----------JOC---------*/ 
 
 .btn-joc {
     margin: 20px;
     font-size: 36px;
 }
+
+#acabarJoc {
+    margin-top: 10px;
+
+}
+
 
 .divranking {
     background-color: lightslategrey;
@@ -195,7 +202,7 @@ input[type="radio"] {
 }
 
 .joc-carousel {
-    height: 58vh !important;
+    height: 57vh !important;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -208,15 +215,16 @@ input[type="radio"] {
     border-radius: 2%;
 }
 
+/*
 .resposta-joc {
-    /*font-size: 23px !important;*/
+    font-size: 23px !important;
 
 }
 
 .opcions-joc {
-    /*margin-bottom: 1px;*/
+    margin-bottom: 1px;
 }
 
 .form-joc {
-    /*font-size: 20% !important;*/
-}
+    font-size: 20% !important;
+}*/
