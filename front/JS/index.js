@@ -2,7 +2,16 @@
 obtenermejorvaloracion();
 
 /* Mostrar resultats de la búsqueda */
-document.getElementById("btn_search").addEventListener("click", function (e) {
+document.getElementById("btn_search").addEventListener("click", function () {
+    buscador();
+});
+document.getElementById("search").addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        buscador();
+    }
+})
+
+function buscador() {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
     var input = document.getElementById("search").value;
@@ -51,8 +60,7 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
         document.getElementById("resultat").classList.add("oculto");
         document.getElementById("ocultardivsearch").classList.add("oculto");
     })
-})
-
+}
 
 
 /* Cards */
@@ -294,7 +302,7 @@ function enviarResposta(pelis) {
         }).then(response => response.json())
             .then(data => {
 
-                document.getElementById("gif-loading").classList.add("oculto");
+                //document.getElementById("gif-loading").classList.add("oculto");
                 console.log(data);
             });
 
