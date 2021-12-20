@@ -93,11 +93,9 @@ class usuari extends BD_MovieQuiz
                             usuari.email = '$emailU',
                             usuari.imatge = '$imgU'
                         WHERE 
-                            usuari.user = '$usuari'
-                        ";
+                            usuari.user = '$usuari'";
 
         $this->execute_single_query();
-        echo $this->query;
     }
 }
 

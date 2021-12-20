@@ -21,7 +21,6 @@ class controller
         $event = 'inici';
 
         $uri = $_SERVER['REQUEST_URI'];
-        //echo $uri;
 
         foreach ($this->peticions as $peticio) {
             if (strpos($uri, $peticio) == true) {
@@ -69,8 +68,7 @@ class controller
 
             case 'modificarDadesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
-                print_r($dadesPOST);
-                $dadesEditades = $usuari->modificarDadesUsuari($dadesPOST);
+                $usuari->modificarDadesUsuari($dadesPOST);
                 break;
 
             case 'joc':

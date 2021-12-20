@@ -1,10 +1,16 @@
 /* Inicialitzar modals */
-document.getElementById("btn_login").addEventListener("click", function (e) {
+document.getElementById("btn_login").addEventListener("click", function(e) {
     var instances = M.Modal.init(document.querySelector(".login"), {});
 })
 
 /* USUARI REGISTRAT */
-document.getElementById("btn_entrar").addEventListener("click", function () {
+document.getElementById("btn_entrar").addEventListener("click", function() { login(); });
+
+document.getElementById("pwd").addEventListener('keydown', e => {
+    if (e.key === 'Enter') { login(); }
+});
+
+function login() {
     let usu = document.getElementById("usuari").value;
     let pwd = document.getElementById("pwd").value;
 
@@ -16,9 +22,15 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
         method: "POST",
         body: datosLogin
     }).then(response => response.json()).then(data => {
-        console.log(data);
         if (data.exito == true) {
-            console.log("entro");
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'S\'ha iniciat la sessió!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
@@ -28,16 +40,16 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
             document.getElementById("btn_save").classList.add("oculto");
 
-            document.getElementById("btn_edit").addEventListener("click", function (e) {
+            document.getElementById("btn_edit").addEventListener("click", function(e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
                 document.getElementById("canviar_img_usr").classList.remove("oculto");
                 document.getElementById("img_usr_label").classList.remove("oculto");
                 document.getElementById("btn_save").classList.remove("oculto");
                 document.getElementById("btn_edit").classList.add("oculto");
-            })
+            });
 
-            document.getElementById("btn_save").addEventListener("click", function (e) {
+            document.getElementById("btn_save").addEventListener("click", function(e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
                 document.getElementById("canviar_img_usr").classList.add("oculto");
@@ -45,18 +57,25 @@ document.getElementById("btn_entrar").addEventListener("click", function () {
                 document.getElementById("btn_edit").classList.remove("oculto");
                 document.getElementById("btn_save").classList.add("oculto");
                 dadesUsuariModificades();
-            })
+            });
 
             /* Inserir al header el nom de l'usuari y la seva imatge */
             document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
 
             /* Mostrar les pel·lícules desades per l'usuari */
             misPeliculas();
+
         } else {
-            console.log("error"); //FALLO al inciar sesion - falta
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'No s\'ha iniciat la sessió!',
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     });
-})
+}
 
 /* Codi per a  inserir al header el nom de l'usuari y la seva imatge */
 function codigoHTMLheaderuser(datos) {
@@ -182,5 +201,7 @@ function dadesUsuariModificades() {
         processData: false
     }).then(response => response.json()).then(data => {
         console.log(data);
-    });
+    }).catch((error) => {
+        console.log(error)
+    });;
 }
