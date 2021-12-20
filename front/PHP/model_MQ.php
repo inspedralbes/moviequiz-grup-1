@@ -19,15 +19,12 @@ class usuari extends BD_MovieQuiz
             $this->alcada . ")";
     }
 
-    function __destruct()
+    public function actualizarPuntosUsuario($puntos, $id)
     {
+        $this->query = "UPDATE usuari SET punts = '$puntos' WHERE idUsuari = '$id'";
+        $this->execute_single_query();
     }
 
-    //select dels camps passats de tots els registres
-    //stored in $rows property
-    public function selectAll($fields = array())
-    {
-    }
 
     public function dadesUsuari($user = "")
     {
@@ -115,27 +112,6 @@ class partida extends BD_MovieQuiz
         echo "Dades pelicula<br>";
         return "(" . $this->nomPartida . ", " . $this->pelicules . ", " .
             $this->fecha . ")";
-    }
-
-    function __destruct()
-    {
-    }
-
-    //select dels camps passats de tots els registres
-    //stored in $rows property
-    public function selectAll($fields = array())
-    {
-        $this->query = "SELECT ";
-        $firstField = true;
-        for ($i = 0; $i < count($fields); $i++) {
-            if ($firstField) {
-                $this->query .= $fields[$i];
-                $firstField = false;
-            } else $this->query .= ", " . $fields[$i];
-        }
-        $this->query .= " FROM persones";
-        $this->get_results_from_query();
-        return $this->rows;
     }
 
     public function generarjocLogin($nomuser = "")
@@ -236,7 +212,64 @@ class partida extends BD_MovieQuiz
         return $this->rows[0]['id'];
     }
 
+    public function comprovarPartidaConLogin($dadesPartida = array())
+    {
+        $datos = $this->comprovarPartida($dadesPartida);
+        $this->actualizarPartida($dadesPartida['respostes']['id_partida'], $dadesPartida['respostes']['nom_partida']);
+        $user = new usuari();
+        $partidaJugada = new partida_jugada();
+        $idUser = $user->dadesUsuari($dadesPartida['user'])[0]['idUsuari'];
+        $user->actualizarPuntosUsuario($datos['puntos'], $idUser);
+        $partidaJugada->guardarPartida($dadesPartida['respostes']['id_partida'], $idUser, $datos['encerts'], $datos['fallos']);
+        unset($datos['puntos']);
+        return json_encode($datos);
+    }
 
+    public function comprovarPartidaSinLogin($dadesPartida = array())
+    {
+        $datos = $this->comprovarPartida($dadesPartida);
+        $this->actualizarPartida($dadesPartida['respostes']['id_partida'], $dadesPartida['respostes']['nom_partida']);
+        unset($datos['puntos']);
+        return json_encode($datos);
+    }
+
+    public function comprovarPartida($dadesPartida = array())
+    {
+        $pelicula = new pelicula();
+        $punts = 0;
+        $fallos = 0;
+        $aciertos = 0;
+
+        $respuestas = $dadesPartida['respostes']['respostes'];
+        foreach ($respuestas as $peli) {
+            $any = $pelicula->dadesPeliculaPerID($peli['ImdbID'])[0]['any'];
+            if ($peli['resposta'] == $any) {
+                $punts = $punts + 3;
+                $aciertos++;
+            } else {
+                $punts--;
+                $fallos++;
+            }
+        }
+
+        if ($punts < 0) $punts = 0;
+
+        $aciertosFallos = array(
+            'id_partida' => $dadesPartida['respostes']['id_partida'],
+            'nom_partida' => $dadesPartida['respostes']['nom_partida'],
+            'encerts' => $aciertos,
+            'fallos' => $fallos,
+            'puntos' => $punts
+        );
+
+        return $aciertosFallos;
+    }
+
+    public function actualizarPartida($id = "", $nom = '')
+    {
+        $this->query = "UPDATE partida SET nomPartida = '$nom' WHERE idPartida = '$id'";
+        $this->execute_single_query();
+    }
 }
 
 class partida_jugada extends BD_MovieQuiz
@@ -254,57 +287,10 @@ class partida_jugada extends BD_MovieQuiz
             $this->encerts . ", " . $this->errades . ")";
     }
 
-    function __destruct()
+    public function guardarPartida($idPartida, $idUsuari, $encerts, $errades)
     {
-    }
-
-    //select dels camps passats de tots els registres
-    //stored in $rows property
-    public function selectAll($fields = array())
-    {
-        $this->query = "SELECT ";
-        $firstField = true;
-        for ($i = 0; $i < count($fields); $i++) {
-            if ($firstField) {
-                $this->query .= $fields[$i];
-                $firstField = false;
-            } else $this->query .= ", " . $fields[$i];
-        }
-        $this->query .= " FROM persones";
-        $this->get_results_from_query();
-        return $this->rows;
-    }
-
-    public function select($nom = "")
-    {
-        $this->query = "SELECT ";
-        $this->get_results_from_query();
-        return $this->rows;
-    }
-
-
-    public function insert($user_data = array())
-    {
-        /*
-        if (array_key_exists("nom", $user_data)) {
-            $this->select($user_data["nom"]);
-            if (!isset($this->rows[0]['nom'])) {
-                foreach ($user_data as $campo => $c) {
-                    $$campo = $c;
-                }
-                $this->query = "INSERT INTO persones(id, nom, edat, alcada) VALUES (NULL, '" . $nom . "', '" . $edat . "', '" . $alcada . "')";
-                $this->execute_single_query();
-                $this->message  = "Usuari introduït";
-            } else $this->message = "L'usuari ja existeix";
-        } else $this->message = "Usuari no introduït";*/
-    }
-
-    public function update($userData = array())
-    {
-    }
-
-    public function delete($nom = "")
-    {
+        $this->query = "INSERT INTO partida_jugada VALUES ('$idPartida','$idUsuari','$encerts','$errades')";
+        $this->execute_single_query();
     }
 }
 
@@ -334,6 +320,13 @@ class pelicula extends BD_MovieQuiz
     public function dadesPelicula($nom = "")
     {
         $this->query = "SELECT * FROM pelicula WHERE nomPelicula = '$nom'";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
+
+    public function dadesPeliculaPerID($id = "")
+    {
+        $this->query = "SELECT * FROM pelicula WHERE pelicula.idPelicula = '$id'";
         $this->get_results_from_query();
         return $this->rows;
     }

@@ -266,8 +266,8 @@ body {
 
 
 
-#info-usuari {
-    height: 400px;
+#mispelis-titol {
+    text-align: center;
 }
 
 .collapsible-header {
@@ -292,3 +292,19 @@ body {
 
 
 
+.resposta-joc {
+    /*font-size: 23px !important;*/
+
+}
+
+.opcions-joc {
+    /*margin-bottom: 1px;*/
+}
+
+.form-joc {
+    /*font-size: 20% !important;*/
+}
+
+.centrar h3{
+    margin: 0;
+}

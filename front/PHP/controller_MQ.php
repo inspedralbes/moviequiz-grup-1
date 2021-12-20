@@ -6,7 +6,7 @@ require_once('view_MQ.php');
 class controller
 {
     //rutes o esdeveniments possibles
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc', 'comprovarJoc');
 
     public function handler()
     {
@@ -78,8 +78,19 @@ class controller
                 if ($dadesPOST['juego'] == 'exito') {
                     $json = $partida->generarjocLogin($dadesPOST['user']);
                     echo $json;
-                } else if ($dadesPOST['juego'] == 'fallo'){
+                } else if ($dadesPOST['juego'] == 'fallo') {
                     $json = $partida->generarjocNoLogin();
+                    echo $json;
+                }
+                break;
+
+            case 'comprovarJoc':
+                $dadesPOST = $this->recollirDadesPost();
+                if (isset($_POST['userPartida'])) {
+                    $json = $partida->comprovarPartidaConLogin($dadesPOST);
+                    echo $json;
+                } else {
+                    $json = $partida->comprovarPartidaSinLogin($dadesPOST);
                     echo $json;
                 }
         }
@@ -114,7 +125,6 @@ class controller
             );
         } else if (isset($_POST['user'])) {
             $dadesForm = $_POST['user'];
-
         } else if (isset($_POST['joc'])) {
             $dadesForm = array("juego" => $_POST['joc']);
             if ($_POST['joc'] == 'exito') {
@@ -134,6 +144,11 @@ class controller
                 'emailU' => $_POST['email_us'],
                 'imgU' => "../IMG/" . $_FILES['foto']['name']
             );
+        } else if (isset($_POST['respostes'])) {
+            $dadesForm = array("respostes" => json_decode($_POST['respostes'], true));
+            if (isset($_POST['userPartida'])) {
+                $dadesForm = array_merge($dadesForm, array('user' => $_POST['userPartida']));
+            }
         }
         return $dadesForm;
     }
