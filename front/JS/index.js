@@ -356,15 +356,15 @@ function generarpreguntas() {
             for (let i = 0; i < data.peliculas.length; i++) {
                 preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
-                                <div class="col s5">
-                                    <img style="width: 70%; margin: 10% 10% 10% 10%" class="center" src="${data.peliculas[i].Poster}">
+                                <div class="col s12 m5">
+                                    <img class="img_joc center" src="${data.peliculas[i].Poster}">
                                 </div>
 
-                                <div class="col s5 center">
-                                    <h4 class="white-text center" style="margin: 4%; margin-top: 10%">${data.peliculas[i].Nombre}</h4>
+                                <div class="col s12 m5 center">
+                                    <h4 class="white-text center titol_peli_joc">${data.peliculas[i].Nombre}</h4>
                                 </div>
                                 
-                                <div id="${data.peliculas[i].ImdbID}" class="form-joc col s6 center" style="margin-top: 10%; margin-left: 20px">
+                                <div id="${data.peliculas[i].ImdbID}" class="form-joc col s6 center">
                                     <form>
                                         <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice1}"/>
@@ -388,7 +388,7 @@ function generarpreguntas() {
                                         </br>
                                         <label>
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice5}"/>
-                                            <span>${data.peliculas[i].choice5}</span>
+                                            <span class="resposta-joc">${data.peliculas[i].choice5}</span>
                                         </label>
                                     </form>
                                 </div>  

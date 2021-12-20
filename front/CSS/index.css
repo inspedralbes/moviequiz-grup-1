@@ -10,6 +10,7 @@ body {
 }
 
 
+
 /*-----------TEXT-----------*/
 
 .black_font {
@@ -23,6 +24,7 @@ body {
 .centrar {
     text-align: center;
 }
+
 
 
 /*------------FOOTER------------*/
@@ -40,7 +42,9 @@ body {
 }
 
 
+
 /*------------BOTONS------------*/
+
 .btn {
     background-color: #24bdd1;
 }
@@ -48,6 +52,7 @@ body {
 .btn:hover {
     background-color: #53dcee ;
 }
+
 
 
 /*------SECCIÓ CERCA DE PELIS------*/
@@ -62,18 +67,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
-
-
-
-input[type="radio"] {
-    background-color: red;
-}
-
-
-
-
 
 .card-image img {
     min-height: 20vh;
@@ -97,6 +90,10 @@ input[type="radio"] {
     }
 }
 
+.diverror {
+    margin-top: 20px;
+}
+
 .error {
     padding: 10px;
     width: max-content;
@@ -105,59 +102,13 @@ input[type="radio"] {
     font-weight: bold;
 }
 
-.diverror {
-    margin-top: 20px;
-}
-
-.oculto {
-    display: none !important;
-}
 
 
-/*----------JOC---------*/ 
-
-.btn-joc {
-    margin: 20px;
-    font-size: 36px;
-}
-
-#acabarJoc {
-    margin-top: 10px;
-
-}
-
-
-.divranking {
-    background-color: lightslategrey;
-    margin: 10px;
-    border-radius: 5px;
-}
-
-#ranking,
-#juego {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    height: 25vh;
-}
-
-#ranking-usuaris {
-    text-align: center;
-}
-
-#apartadoJuego {
-    height: auto;
-    border: solid black 2px;
-}
+/*-------CAROUSEL PELIS-------*/ 
 
 #apartadoCarrousel {
     border: 1px solid black;
     height: auto;
-}
-
-#apartadoMisPeliculas{
-    border: 2px solid black;
 }
 
 .carousel {
@@ -173,12 +124,129 @@ input[type="radio"] {
     height: 400px;
 }
 
-#info-usuari {
-    height: 400px;
+
+
+/*----LES MEVES PEL·LÍCUELES----*/
+
+#apartadoMisPeliculas{
+    border: 2px solid black;
+}
+
+.oculto {
+    display: none !important;
 }
 
 #mispelis-titol {
     text-align: center;
+}
+
+
+
+/*----------JOC---------*/ 
+
+#apartadoJuego {
+    height: auto;
+    border: solid black 2px;
+}
+
+.btn-joc {
+    margin: 20px;
+    font-size: 36px;
+}
+
+.joc-carousel {
+    height: 57vh !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.joc-modal {
+    height: auto !important;
+    overflow: hidden;
+    padding: 7px 0px 0px 0px !important;
+    background-color: rgb(39, 39, 39);
+    border-radius: 2%;
+}
+
+#acabarJoc {
+    margin-top: 10px;
+}
+
+.img_joc {
+    margin-top: 20px !important;
+}
+
+.titol_peli_joc{
+    margin: 4% !important; 
+    margin-top: 10% !important;
+}
+
+.form-joc {
+    margin-top: 10%; 
+    margin-left: 20px;
+}
+
+.resposta-joc {
+    font-size: 23px !important;
+}
+
+/* Pantalla Gran */
+@media only screen and (max-width: 1000px) {
+    .img_joc {
+        width: 100% !important;   
+    }
+}
+
+/* Pantalla Petita */
+@media only screen and (max-width: 600px) {
+    .img_joc {
+        width: 50%  !important;
+        margin: 5% 5% 5% 5% !important;
+    }
+
+    .titol_peli_joc{
+        margin: 4%; 
+        margin-top: 0 !important;
+    }
+
+    .form-joc {
+        margin-top: 3%; 
+        margin-left: 20px;
+    }
+
+    .resposta-joc {
+        font-size: 16px !important;
+    }
+}
+
+
+
+/*------RANKING JOC------*/
+
+.divranking {
+    background-color: lightslategrey;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+#ranking, #juego {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 25vh;
+}
+
+#ranking-usuaris {
+    text-align: center;
+}
+
+
+
+
+
+#info-usuari {
+    height: 400px;
 }
 
 .collapsible-header {
@@ -201,30 +269,5 @@ input[type="radio"] {
     border: white 1px solid !important;
 }
 
-.joc-carousel {
-    height: 57vh !important;
-    margin-top: 0;
-    margin-bottom: 0;
-}
 
-.joc-modal {
-    height: auto !important;
-    overflow: hidden;
-    padding: 7px 0px 0px 0px !important;
-    background-color: rgb(39, 39, 39);
-    border-radius: 2%;
-}
 
-/*
-.resposta-joc {
-    font-size: 23px !important;
-
-}
-
-.opcions-joc {
-    margin-bottom: 1px;
-}
-
-.form-joc {
-    font-size: 20% !important;
-}*/
