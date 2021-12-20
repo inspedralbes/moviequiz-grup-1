@@ -299,8 +299,7 @@ function enviarResposta(pelis) {
 }
 
 function generarjuego() {
-    let juegoHTML = `
-                    <div class="modal-content joc-modal">
+    let juegoHTML = `<div class="modal-content joc-modal">
                         <div class="header-joc center" id="pr">
                             <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
                             <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
@@ -417,13 +416,13 @@ function verpuntuacion() {
             console.log(data);
             let puntuacion;
             var tpunts = data.encerts * 3 + data.fallos * -1;
-            puntuacion = `<div class="deep-purple center">
-                                <h3>${data.nom_partida}</h3>
-                                <h4>Encerts: ${data.encerts}</h4>
-                                <h4>Falls: ${data.fallos}</h4>
-                                <h4>Puntuació: ${tpunts}/15</h4>
-                        </div>
-                                `;
+            puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
+                                <h4>${data.nom_partida}</h4>
+                                <h5><i class="material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
+                                <h5><i class="material-icons red-text">close</i>Errors: ${data.fallos}</h5>
+                                <h5>Puntuació: ${tpunts}/15</h5>
+                        </div>`;
+
             document.getElementById("joc-puntuacio").innerHTML = puntuacion;
         })
 }
