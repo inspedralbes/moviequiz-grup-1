@@ -236,6 +236,21 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 
 function enviarResposta(pelis) {
     document.getElementById('acabarJoc').addEventListener('click', e => {
+
+        let val = 'fallo';
+        const datos = new FormData();
+
+        if (document.getElementById("info-usuari").innerHTML != "") {
+            let user = document.getElementById("alias").value;
+            val = 'exito';
+            datos.append('userPartida', user);
+            datos.append("respostes", respostes);
+        }
+        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprobarJoc', {
+            method: "POST",
+            body: datos
+        }).then(response => response.json()).then(data => { console.log(data); });
+
         let idPelis = [], respuestas = [];
 
         //Guardar el id de cada una de las 5 peliculas que aparecen en el juego
@@ -274,6 +289,12 @@ function enviarResposta(pelis) {
 
         console.log(jsonPartida);
 
+        document.getElementById("joc-carousel").classList.add("oculto");
+        verpuntuacion();
+        document.getElementById("gifloading").classList.remove("oculto");
+        document.getElementById("acabarJoc").classList.add("oculto");
+        document.getElementById("cerrarModal-joc").classList.remove("oculto");
+
     });
 }
 
@@ -285,13 +306,26 @@ function generarjuego() {
                             <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
                             <div class="center">
                                 <a id="acabarJoc" class="btn waves-effect">Enviar</a>
+                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
                             </div>
                         </div>
                         
-                        <div class="carousel joc-carousel carousel-slider center black-text">
+                        <div id="joc-carousel" class="carousel joc-carousel carousel-slider center black-text">
                             <div id="generarpreguntas"></div>
                         </div>
-                    </div>
+                        <div id="joc-puntuacio">
+                        <div id="gif-loading" class="preloader-wrapper big active oculto">
+                            <div class="spinner-layer spinner-blue-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     
                     <!--<div class="modal-footer">
                         <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
@@ -383,11 +417,13 @@ function verpuntuacion() {
             console.log(data);
             let puntuacion;
             var tpunts = data.encerts * 3 + data.fallos * -1;
-            puntuacion = `<div>
-                                <span>${data.nom_partida}</span>
-                                <span>Encerts: ${data.encerts}</span>
-                                <span>Fallos: ${data.fallos}</span>
-                                <span>Puntuació: ${tpunts}/15</span>
+            puntuacion = `<div class="deep-purple center">
+                                <h3>${data.nom_partida}</h3>
+                                <h4>Encerts: ${data.encerts}</h4>
+                                <h4>Falls: ${data.fallos}</h4>
+                                <h4>Puntuació: ${tpunts}/15</h4>
+                        </div>
                                 `;
+            document.getElementById("joc-puntuacio").innerHTML = puntuacion;
         })
 }
