@@ -2,7 +2,16 @@
 obtenermejorvaloracion();
 
 /* Mostrar resultats de la búsqueda */
-document.getElementById("btn_search").addEventListener("click", function (e) {
+document.getElementById("btn_search").addEventListener("click", function () {
+    buscador();
+});
+document.getElementById("search").addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        buscador();
+    }
+})
+
+function buscador() {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
     var input = document.getElementById("search").value;
@@ -51,8 +60,7 @@ document.getElementById("btn_search").addEventListener("click", function (e) {
         document.getElementById("resultat").classList.add("oculto");
         document.getElementById("ocultardivsearch").classList.add("oculto");
     })
-})
-
+}
 
 
 /* Cards */
@@ -321,16 +329,16 @@ function enviarResposta(pelis) {
                                 <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
                                 <h5 class="karma">Puntuació: ${tpunts}/15</h5>`;
 
-                if (tpunts<7) {
+                if (tpunts < 7) {
                     puntuacion += `<img class="gifJoc" src="../IMG/bad.gif">`;
-                }else {
+                } else {
                     puntuacion += `<img class="gifJoc" src="../IMG/welldone.gif">`;
                 }
 
 
 
-                puntuacion+= `<a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
-                            </div>`;                
+                puntuacion += `<a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
+                            </div>`;
 
                 document.getElementById("joc-carousel").innerHTML = puntuacion;
                 document.getElementById("cerrarModal-joc").classList.remove("oculto");
