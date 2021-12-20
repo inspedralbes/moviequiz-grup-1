@@ -237,7 +237,7 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 function enviarResposta(pelis) {
     document.getElementById('btn-acabarJoc').addEventListener('click', e => {
 
-        document.getElementById("gif-loading").classList.remove("oculto");
+        document.getElementById("gifLoading").classList.remove("oculto");
 
 
         let idPelis = [], respuestas = [];
@@ -278,8 +278,6 @@ function enviarResposta(pelis) {
 
         jsonPartida = JSON.stringify(jsonPartida);
 
-
-
         const datos = new FormData();
         datos.append("respostes", jsonPartida);
 
@@ -294,13 +292,14 @@ function enviarResposta(pelis) {
         }).then(response => response.json())
             .then(data => {
 
-                document.getElementById("gif-loading").classList.add("oculto");
+                document.getElementById("gifLoading").classList.add("oculto");
                 console.log(data);
             });
 
 
         document.getElementById("joc-carousel").classList.add("oculto");
         verpuntuacion();
+        /*document.getElementById("gifloading").classList.remove("oculto");*/
         document.getElementById("btn-acabarJoc").classList.add("oculto");
         document.getElementById("enunciatJoc").classList.add("oculto");
 
@@ -323,23 +322,29 @@ function generarjuego() {
                         <div id="joc-carousel" class="carousel joc-carousel carousel-slider center black-text">
                             <div id="generarpreguntas"></div>
                         </div>
+
                         <div id="joc-puntuacio" class="center">
-                        <div id="gif-loading" class="preloader-wrapper big active oculto margen-top margen-bottom">
-                            <div class="spinner-layer spinner-blue-only">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
+                            <div id="gifLoading" class="preloader-wrapper big active oculto margen-top margen-bottom">
+                                <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     
                     <!--<div class="modal-footer">
                         <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
-                    </div>-->`;
+                    -->`;
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
 
