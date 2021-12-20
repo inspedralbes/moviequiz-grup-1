@@ -11,20 +11,23 @@ document.getElementById("search").addEventListener('keydown', (e) => {
     }
 })
 
+
+/*  CERCADOR PEL·LÍCULES  */
 function buscador() {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
     var input = document.getElementById("search").value;
     let valoracio;
 
-
+    //Agafa les dades de pel·lícules de l'api de Omdb 
     fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${input}&type=movie`).
         then(res => res.json()).
         then(data => {
-            var text_movie = "  ";
+            var text_movie = "";
             for (var i = 0; i < data.Search.length; i++) {
                 var idMovie = "movie" + i;
                 let data_movie = data.Search[i];
+                //insereix al div "resultat" de l'index.php les pel·lícules a les seves cards
                 text_movie += imprimirPelisCards(data_movie, idMovie);
                 document.getElementById("resultat").innerHTML = text_movie;
             }
@@ -43,7 +46,7 @@ function buscador() {
                     //Inicialitzar modals de les pelicules
                     var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
 
-                    //Habilitar o no el boto de guarda comentari/valoracio/favorit en funcio de si l'usuari ha fet login
+                    //Habilitar o no el boto de guarda comentari/valoracio/favorit si l'usuari no ha fet login
                     if (document.getElementById("info-usuari").innerHTML != "") {
                         document.getElementById("btn-guardar").classList.remove("disabled");
                         document.getElementById("diverror").classList.add("oculto");
@@ -56,14 +59,14 @@ function buscador() {
 
         })
 
-    document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
-        document.getElementById("resultat").classList.add("oculto");
-        document.getElementById("ocultardivsearch").classList.add("oculto");
+        document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
+            document.getElementById("resultat").classList.add("oculto");
+            document.getElementById("ocultardivsearch").classList.add("oculto");
     })
 }
 
 
-/* Cards */
+/* Cards pel·lícules */
 function imprimirPelisCards(data_movie, id) {
     var txt = `<div class="col s6 m4 l3" id="${data_movie.imdbID}" class="divpelis">
                 <div class="card">
@@ -169,7 +172,6 @@ function guardarValoracio(data) {
         datosLogin.append('id-peli', data.Search[numPeli].imdbID);
         datosLogin.append('nom-usuari', nomUsuari);
 
-
         fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
             method: "POST",
             body: datosLogin
@@ -188,12 +190,15 @@ function obtenerPelisValoradesUsuario() {
         body: datos
     }).then(response => response.json()).then(pelisValorades => {
         for (var i = 0; i < pelisValorades.length; i++) {
+            //deshabilita el botó per a obrir el modal (de valorar) d'una peli ja valorada per l'usuari
             if (document.getElementById(pelisValorades[i].idPelicula) != null) {
                 document.querySelector(`#${pelisValorades[i].idPelicula} a`).setAttribute("disabled", '');
             }
         }
     });
 }
+
+
 
 function obtenermejorvaloracion() {
 
@@ -202,6 +207,8 @@ function obtenermejorvaloracion() {
         document.getElementById("carrousel-fotos").innerHTML = generarcarrrousel(data);
 
         var imgs = document.querySelectorAll('.carousel');
+
+        //Característiques del carousel
         var instances = M.Carousel.init(imgs, {
             numVisible: 6,
             padding: 2,
@@ -210,6 +217,7 @@ function obtenermejorvaloracion() {
     });
 }
 
+//Funció que genera el carosuel amb les imatges de les pel·lícules
 function generarcarrrousel(data) {
     var carrousel = "";
     for (let i = 0; i < data.length; i++) {
@@ -219,10 +227,11 @@ function generarcarrrousel(data) {
 }
 
 
+/*-------------JOC------------- */
 document.getElementById("btn-joc").addEventListener("click", function (e) {
     let pelis = [];
 
-    //Inicialitzar modal joc 
+    //Inicialitzar modal del joc 
     var joc = document.querySelectorAll('.joc');
     var instances = M.Modal.init(joc, {});
 
@@ -245,12 +254,9 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 function enviarResposta(pelis) {
     document.getElementById('btn-acabarJoc').addEventListener('click', e => {
 
+        let idPelis = [], respuestas = [];
 
-
-        let idPelis = [],
-            respuestas = [];
-
-        //Guardar el id de cada una de las 5 peliculas que aparecen en el juego
+        //Guarda l'id de cada una de les 5 pel·lícules que apareixen al joc
         for (let i = 0; i < pelis.length; i++) {
             var n = 0;
             for (let j = 0; j < idPelis.length; j++) {
@@ -264,7 +270,6 @@ function enviarResposta(pelis) {
             return peli.ImdbID;
         })
 
-
         for (let i = 0; i < idPelis.length; i++) {
 
             //Obtener el ultimo indice en el que el id de una pelicula puede encontrase en el array aux 
@@ -275,7 +280,6 @@ function enviarResposta(pelis) {
         }
 
         let idParitda = document.getElementById('generarpreguntas').className;
-
         let nombrePartida = prompt('Nom de la partida: ');
 
         jsonPartida = {
@@ -306,7 +310,6 @@ function enviarResposta(pelis) {
         if (document.getElementById("info-usuari").innerHTML != "") {
             let user = document.getElementById("alias").value;
             datos.append('userPartida', user);
-
         }
 
         fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprovarJoc', {
@@ -315,13 +318,14 @@ function enviarResposta(pelis) {
         }).then(response => response.json())
             .then(data => {
 
+                //Oculta dades innecessaries al mostrar el resultat del joc
                 document.getElementById("btn-acabarJoc").classList.add("oculto");
                 document.getElementById("enunciatJoc").classList.add("oculto");
-
 
                 console.log(data);
                 let puntuacion;
                 var tpunts = data.encerts * 3 + data.fallos * -1;
+                //Imprimeix el resultat del joc
                 puntuacion = `<div class="modal-content resultat-joc deep-purple center">
                                 <h4>${data.nom_partida}</h4>
                                 </br>
@@ -329,21 +333,21 @@ function enviarResposta(pelis) {
                                 <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
                                 <h5 class="karma">Puntuació: ${tpunts}/15</h5>`;
 
+                // Depenent de si s'ha arribat a la mitja o no mostra un gif que enfatitza 
                 if (tpunts < 7) {
                     puntuacion += `<img class="gifJoc" src="../IMG/bad.gif">`;
                 } else {
                     puntuacion += `<img class="gifJoc" src="../IMG/welldone.gif">`;
                 }
 
-
-
+                //Botó per a tancar el modaldel resultat del joc
                 puntuacion += `<a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
                             </div>`;
 
+                //Sobrescriu el modal que ja hi existia amb els resultats
                 document.getElementById("joc-carousel").innerHTML = puntuacion;
                 document.getElementById("cerrarModal-joc").classList.remove("oculto");
             });
-
     });
 }
 
@@ -362,15 +366,11 @@ function generarjuego() {
                             <div id="generarpreguntas"></div>
                         </div>
 
-                        
-                    </div>
-
-                                            
-                    <!--<div class="modal-footer">
-                        <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
-                    -->`;
+                    </div>`;
+                    
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
+
 
 function generarpreguntas() {
 
@@ -392,6 +392,7 @@ function generarpreguntas() {
         .then(data => {
             console.log(data);
             let preguntas = "";
+            //Genera les 5 preguntes / pel·lícules com a diapositives del carousel
             for (let i = 0; i < data.peliculas.length; i++) {
                 preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
@@ -434,6 +435,7 @@ function generarpreguntas() {
                             </div>`;
             }
 
+            //Insereix les 5 preguntes/pel·lícules
             document.getElementById("generarpreguntas").innerHTML = preguntas;
             document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
 

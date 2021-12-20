@@ -10,7 +10,6 @@ body {
 }
 
 
-
 /*-----------TEXT-----------*/
 
 .black_font {
@@ -31,6 +30,10 @@ body {
 
 .margen-bottom {
     margin-bottom: 20px;
+}
+
+.centrar h3{
+    margin: 0;
 }
 
 
@@ -301,6 +304,9 @@ body {
     text-align: center;
 }
 
+
+
+/*-----APARTAT "LES MEVES PEL·LÍCULES"-----*/
 #mispelis-titol {
     text-align: center;
 }
@@ -323,8 +329,4 @@ body {
 
 .coll{
     border: white 1px solid !important;
-}
-
-.centrar h3{
-    margin: 0;
 }

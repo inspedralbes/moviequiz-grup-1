@@ -112,6 +112,7 @@ class partida extends BD_MovieQuiz
             $this->fecha . ")";
     }
 
+    //GENERAR EL JOC PER ALS USUARIS LOGGEJATS
     public function generarjocLogin($nomuser = "")
     {
         $val = new valoracio_pelicula();
@@ -122,8 +123,10 @@ class partida extends BD_MovieQuiz
         return $json;
     }
 
+    //GENERAR EL JOC PER ALS USUARIS NO LOGGEJATS
     public function generarjocNoLogin()
     {
+        //Selecciona les dades de les pel·lícules valorades pels usuaris
         $this->query = "SELECT
                             pelicula.nomPelicula,
                             pelicula.idPelicula,
@@ -146,11 +149,12 @@ class partida extends BD_MovieQuiz
         return $json;
     }
 
+    //JSON DEL JOC
     public function generarJSONjoc($dadesPelicules = array())
     {
         $jsonJS = array();
 
-        //Escollir 5 pelis aleatoriament d'entre les que s'han obtingut al fer la cerca anterior
+        //Escollir 5 pelis aleatoriament d'entre les que s'han obtingut a la funció anterior
         $numAleatorio = range(0, (count($dadesPelicules) - 1));
         shuffle($numAleatorio);
 
@@ -175,13 +179,14 @@ class partida extends BD_MovieQuiz
         $this->guardarPartida($jsonJS);
 
         $id = $this->obtenerIDPartida();
-
         $id = array('id_partida' => $id);
+
         $jsonJS = array_merge($id, $jsonJS);
 
         return (json_encode($jsonJS));
     }
 
+    //Genera aleatoria els anys de les posibles opcions de resposta al joc
     public function generarAñosAleatorios($any = "")
     {
         $valors = array(-15, -10, -5, -2, 2, +5, +10, +15);
@@ -196,6 +201,7 @@ class partida extends BD_MovieQuiz
         return $arr_anys;
     }
 
+    //Desa les dades de la partida jugada a la Base de Dades
     public function guardarPartida($partida)
     {
         $partida = json_encode($partida);
@@ -203,12 +209,14 @@ class partida extends BD_MovieQuiz
         $this->execute_single_query();
     }
 
+
     public function obtenerIDPartida()
     {
         $this->query = "SELECT MAX(partida.idPartida) AS 'id' FROM partida";
         $this->get_results_from_query();
         return $this->rows[0]['id'];
     }
+
 
     public function comprovarPartidaConLogin($dadesPartida = array())
     {
@@ -223,6 +231,7 @@ class partida extends BD_MovieQuiz
         return json_encode($datos);
     }
 
+
     public function comprovarPartidaSinLogin($dadesPartida = array())
     {
         $datos = $this->comprovarPartida($dadesPartida);
@@ -230,6 +239,7 @@ class partida extends BD_MovieQuiz
         unset($datos['puntos']);
         return json_encode($datos);
     }
+
 
     public function comprovarPartida($dadesPartida = array())
     {
@@ -377,10 +387,10 @@ class valoracio_pelicula extends BD_MovieQuiz
                 $this->execute_single_query();
             }
 
-            //Obtindre el id del usuari que valora/guarda la peli
+            //Obtenir l'id de l'usuari que valora/guarda la peli
             $idUser = $usuari->dadesUsuari($nomUsuari)[0]['idUsuari'];
 
-            //Obtindre el id de la peli valorada/guardada
+            //Obtenir l'id de la peli valorada/guardada
             $idPeli = $pelicula->dadesPelicula($nomPeli)[0]['idPelicula'];
 
             $bool = $this->comprovarSiExisteixValoracio($idUser, $idPeli);
