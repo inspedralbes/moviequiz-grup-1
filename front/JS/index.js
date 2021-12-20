@@ -231,10 +231,10 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
     });
 
     enviarResposta(pelis);
-    
+
 });
 
-function enviarResposta (pelis) {
+function enviarResposta(pelis) {
     document.getElementById('acabarJoc').addEventListener('click', e => {
         let idPelis = [], respuestas = [];
 
@@ -269,7 +269,7 @@ function enviarResposta (pelis) {
         jsonPartida = {
             'id_partida': idParitda,
             'nom_partida': nombrePartida,
-            'respostes' : respuestas
+            'respostes': respuestas
         }
 
         console.log(jsonPartida);
@@ -283,7 +283,7 @@ function generarjuego() {
                         <div class="header-joc center" id="pr">
                             <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
                             <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
-                            <div class="carousel-fixed-item center">
+                            <div class="center">
                                 <a id="acabarJoc" class="btn waves-effect">Enviar</a>
                             </div>
                         </div>
@@ -318,7 +318,7 @@ function generarpreguntas() {
     }).then(response => response.json())
         .then(data => {
             console.log(data);
-            let preguntas="";
+            let preguntas = "";
             for (let i = 0; i < data.peliculas.length; i++) {
                 preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
@@ -363,7 +363,7 @@ function generarpreguntas() {
 
             document.getElementById("generarpreguntas").innerHTML = preguntas;
             document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
-            
+
 
             //Inicialitzar carousel joc 
             var carr = document.querySelectorAll('.joc-carousel');
@@ -372,4 +372,22 @@ function generarpreguntas() {
                 indicators: true
             });
         });
+}
+
+function verpuntuacion() {
+    fetch('http://localhost/moviequiz-grup-1/back/sql/JSON/output_comprovar_partida.json', {
+        //method: "POST",
+        //body: datos
+    }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let puntuacion;
+            var tpunts = data.encerts * 3 + data.fallos * -1;
+            puntuacion = `<div>
+                                <span>${data.nom_partida}</span>
+                                <span>Encerts: ${data.encerts}</span>
+                                <span>Fallos: ${data.fallos}</span>
+                                <span>Puntuació: ${tpunts}/15</span>
+                                `;
+        })
 }
