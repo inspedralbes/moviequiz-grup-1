@@ -25,6 +25,14 @@ body {
     text-align: center;
 }
 
+.margen-top {
+    margin-top: 20px;
+}
+
+.margen-bottom {
+    margin-bottom: 20px;
+}
+
 
 
 /*------------FOOTER------------*/

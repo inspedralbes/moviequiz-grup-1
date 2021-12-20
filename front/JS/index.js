@@ -237,19 +237,8 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 function enviarResposta(pelis) {
     document.getElementById('acabarJoc').addEventListener('click', e => {
 
-        let val = 'fallo';
-        const datos = new FormData();
+        document.getElementById("gif-loading").classList.remove("oculto");
 
-        if (document.getElementById("info-usuari").innerHTML != "") {
-            let user = document.getElementById("alias").value;
-            val = 'exito';
-            datos.append('userPartida', user);
-            datos.append("respostes", respostes);
-        }
-        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprobarJoc', {
-            method: "POST",
-            body: datos
-        }).then(response => response.json()).then(data => { console.log(data); });
 
         let idPelis = [], respuestas = [];
 
@@ -287,16 +276,37 @@ function enviarResposta(pelis) {
             'respostes': respuestas
         }
 
-        console.log(jsonPartida);
+        jsonPartida = JSON.stringify(jsonPartida);
+
+
+
+        const datos = new FormData();
+        datos.append("respostes", jsonPartida);
+
+        if (document.getElementById("info-usuari").innerHTML != "") {
+            let user = document.getElementById("alias").value;
+            datos.append('userPartida', user);
+
+        }
+        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprovarJoc', {
+            method: "POST",
+            body: datos
+        }).then(response => response.json())
+            .then(data => {
+
+                document.getElementById("gif-loading").classList.add("oculto");
+                console.log(data);
+            });
+
 
         document.getElementById("joc-carousel").classList.add("oculto");
         verpuntuacion();
-        document.getElementById("gifloading").classList.remove("oculto");
         document.getElementById("acabarJoc").classList.add("oculto");
         document.getElementById("cerrarModal-joc").classList.remove("oculto");
 
     });
 }
+
 
 function generarjuego() {
     let juegoHTML = `
@@ -313,8 +323,8 @@ function generarjuego() {
                         <div id="joc-carousel" class="carousel joc-carousel carousel-slider center black-text">
                             <div id="generarpreguntas"></div>
                         </div>
-                        <div id="joc-puntuacio">
-                        <div id="gif-loading" class="preloader-wrapper big active oculto">
+                        <div id="joc-puntuacio" class="center">
+                        <div id="gif-loading" class="preloader-wrapper big active oculto margen-top margen-bottom">
                             <div class="spinner-layer spinner-blue-only">
                                 <div class="circle-clipper left">
                                     <div class="circle"></div>
