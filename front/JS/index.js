@@ -314,22 +314,27 @@ function enviarResposta(pelis) {
                 console.log(data);
                 let puntuacion;
                 var tpunts = data.encerts * 3 + data.fallos * -1;
-                puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
-                                <h4>— ${data.nom_partida} —</h4>
+                puntuacion = `<div class="modal-content resultat-joc deep-purple center">
+                                <h4>${data.nom_partida}</h4>
                                 </br>
                                 <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
                                 <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
-                                </br>
-                                <h5>Puntuació: ${tpunts}/15</h5>
-                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
-                        </div>`;
+                                <h5 class="karma">Puntuació: ${tpunts}/15</h5>`;
+
+                if (tpunts<7) {
+                    puntuacion += `<img class="gifJoc" src="../IMG/bad.gif">`;
+                }else {
+                    puntuacion += `<img class="gifJoc" src="../IMG/welldone.gif">`;
+                }
+
+
+
+                puntuacion+= `<a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
+                            </div>`;                
 
                 document.getElementById("joc-carousel").innerHTML = puntuacion;
                 document.getElementById("cerrarModal-joc").classList.remove("oculto");
             });
-
-
-
 
     });
 }
