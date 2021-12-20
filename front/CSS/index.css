@@ -227,6 +227,19 @@ body {
     }
 }
 
+.resultat-joc {
+    margin-top: 14px;
+}
+
+.icon-resultat {
+    margin-right: 4px;
+}
+
+.puntuacioJoc {
+    background-color: #24bdd1;
+    width: fit-content;
+    padding: 5px;
+}
 
 
 /*------RANKING JOC------*/
