@@ -235,7 +235,7 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
 });
 
 function enviarResposta(pelis) {
-    document.getElementById('acabarJoc').addEventListener('click', e => {
+    document.getElementById('btn-acabarJoc').addEventListener('click', e => {
 
         let val = 'fallo';
         const datos = new FormData();
@@ -292,7 +292,9 @@ function enviarResposta(pelis) {
         document.getElementById("joc-carousel").classList.add("oculto");
         verpuntuacion();
         document.getElementById("gifloading").classList.remove("oculto");
-        document.getElementById("acabarJoc").classList.add("oculto");
+        document.getElementById("btn-acabarJoc").classList.add("oculto");
+        document.getElementById("enunciatJoc").classList.add("oculto");
+        
         document.getElementById("cerrarModal-joc").classList.remove("oculto");
 
     });
@@ -302,10 +304,9 @@ function generarjuego() {
     let juegoHTML = `<div class="modal-content joc-modal">
                         <div class="header-joc center" id="pr">
                             <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
-                            <h6>En quin any es va estrenar aquesta pel·lícula?</h6>
+                            <h6 id="enunciatJoc">En quin any es va estrenar aquesta pel·lícula?</h6>
                             <div class="center">
-                                <a id="acabarJoc" class="btn waves-effect">Enviar</a>
-                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
+                                <a id="btn-acabarJoc" class="btn waves-effect">Enviar</a>
                             </div>
                         </div>
                         
@@ -417,10 +418,13 @@ function verpuntuacion() {
             let puntuacion;
             var tpunts = data.encerts * 3 + data.fallos * -1;
             puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
-                                <h4>${data.nom_partida}</h4>
-                                <h5><i class="material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
-                                <h5><i class="material-icons red-text">close</i>Errors: ${data.fallos}</h5>
+                                <h4>— ${data.nom_partida} —</h4>
+                                </br>
+                                <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
+                                <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
+                                </br>
                                 <h5>Puntuació: ${tpunts}/15</h5>
+                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
                         </div>`;
 
             document.getElementById("joc-puntuacio").innerHTML = puntuacion;
