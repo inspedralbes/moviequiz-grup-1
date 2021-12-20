@@ -115,7 +115,7 @@ body {
 /*-------CAROUSEL PELIS-------*/ 
 
 #apartadoCarrousel {
-    border: 1px solid black;
+    border: 5px solid rgb(39, 39, 39);
     height: auto;
 }
 
@@ -154,7 +154,7 @@ body {
 
 #apartadoJuego {
     height: auto;
-    border: solid black 2px;
+    border: solid rgb(39, 39, 39) 5px;
 }
 
 .btn-joc {
@@ -198,6 +198,12 @@ body {
     font-size: 23px !important;
 }
 
+.gifJoc {
+    width: 450px;
+    margin-bottom: 20px !important;
+    margin-top: 40px !important;
+}
+
 /* Pantalla Gran */
 @media only screen and (max-width: 1000px) {
     .img_joc {
@@ -225,10 +231,18 @@ body {
     .resposta-joc {
         font-size: 16px !important;
     }
+
+    .gifJoc {
+        width: 450px;
+        margin-bottom: 6%;
+        margin-top: 4%;
+    }
 }
 
 .resultat-joc {
     margin-top: 14px;
+    color: white;
+    height: 100%;
 }
 
 .icon-resultat {
@@ -239,6 +253,13 @@ body {
     background-color: #24bdd1;
     width: fit-content;
     padding: 5px;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 
@@ -254,17 +275,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 5px solid rgb(39, 39, 39);
     height: 25vh;
+    
 }
+
+#ranking {
+    background-color: #311b922d;
+}
+
+#juego {
+    background-color: #311b922d;
+}
+
 
 #ranking-usuaris {
     text-align: center;
 }
-
-
-
-
 
 #mispelis-titol {
     text-align: center;
@@ -288,21 +315,6 @@ body {
 
 .coll{
     border: white 1px solid !important;
-}
-
-
-
-.resposta-joc {
-    /*font-size: 23px !important;*/
-
-}
-
-.opcions-joc {
-    /*margin-bottom: 1px;*/
-}
-
-.form-joc {
-    /*font-size: 20% !important;*/
 }
 
 .centrar h3{

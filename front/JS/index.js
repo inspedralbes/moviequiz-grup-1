@@ -2,7 +2,16 @@
 obtenermejorvaloracion();
 
 /* Mostrar resultats de la búsqueda */
-document.getElementById("btn_search").addEventListener("click", function(e) {
+document.getElementById("btn_search").addEventListener("click", function () {
+    buscador();
+});
+document.getElementById("search").addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        buscador();
+    }
+})
+
+function buscador() {
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
     var input = document.getElementById("search").value;
@@ -10,49 +19,48 @@ document.getElementById("btn_search").addEventListener("click", function(e) {
 
 
     fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${input}&type=movie`).
-    then(res => res.json()).
-    then(data => {
-        var text_movie = "  ";
-        for (var i = 0; i < data.Search.length; i++) {
-            var idMovie = "movie" + i;
-            let data_movie = data.Search[i];
-            text_movie += imprimirPelisCards(data_movie, idMovie);
-            document.getElementById("resultat").innerHTML = text_movie;
-        }
-
-        if (document.getElementById("info-usuari").innerHTML != "") {
-            obtenerPelisValoradesUsuario();
-        }
-
-        document.getElementById("resultat").addEventListener("click", function(e) {
-            if (e.target.classList == "material-icons") {
-                id = e.target.parentElement.href.split("#")[1];
-                numPeli = id.split("e")[1];
-                eliminarModals(data.Search);
-                document.getElementById(id).innerHTML = generarModal(data.Search[numPeli]);
-
-                //Inicialitzar modals de les pelicules
-                var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
-
-                //Habilitar o no el boto de guarda comentari/valoracio/favorit en funcio de si l'usuari ha fet login
-                if (document.getElementById("info-usuari").innerHTML != "") {
-                    document.getElementById("btn-guardar").classList.remove("disabled");
-                    document.getElementById("diverror").classList.add("oculto");
-                    document.getElementById("resultat").classList.remove("oculto");
-                }
-
-                guardarValoracio(data);
+        then(res => res.json()).
+        then(data => {
+            var text_movie = "  ";
+            for (var i = 0; i < data.Search.length; i++) {
+                var idMovie = "movie" + i;
+                let data_movie = data.Search[i];
+                text_movie += imprimirPelisCards(data_movie, idMovie);
+                document.getElementById("resultat").innerHTML = text_movie;
             }
-        });
 
-    })
+            if (document.getElementById("info-usuari").innerHTML != "") {
+                obtenerPelisValoradesUsuario();
+            }
 
-    document.getElementById("ocultardivsearch").addEventListener("click", function(e) {
+            document.getElementById("resultat").addEventListener("click", function (e) {
+                if (e.target.classList == "material-icons") {
+                    id = e.target.parentElement.href.split("#")[1];
+                    numPeli = id.split("e")[1];
+                    eliminarModals(data.Search);
+                    document.getElementById(id).innerHTML = generarModal(data.Search[numPeli]);
+
+                    //Inicialitzar modals de les pelicules
+                    var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
+
+                    //Habilitar o no el boto de guarda comentari/valoracio/favorit en funcio de si l'usuari ha fet login
+                    if (document.getElementById("info-usuari").innerHTML != "") {
+                        document.getElementById("btn-guardar").classList.remove("disabled");
+                        document.getElementById("diverror").classList.add("oculto");
+                        document.getElementById("resultat").classList.remove("oculto");
+                    }
+
+                    guardarValoracio(data);
+                }
+            });
+
+        })
+
+    document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
         document.getElementById("resultat").classList.add("oculto");
         document.getElementById("ocultardivsearch").classList.add("oculto");
     })
-})
-
+}
 
 
 /* Cards */
@@ -138,12 +146,12 @@ function guardarValoracio(data) {
 
 
     //Listener per obtenir el valor (del input radio seleccionat) de la valoracio de la peli 
-    document.getElementById("formRadio").addEventListener("click", function(e) {
+    document.getElementById("formRadio").addEventListener("click", function (e) {
         valoracio = e.target.parentElement.querySelector("[name='valoracio']").value;
     })
 
     //Listener per recollir totes les dades i enviarles a la BD 
-    document.getElementById("btn-guardar").addEventListener("click", function(e) {
+    document.getElementById("btn-guardar").addEventListener("click", function (e) {
 
         //Recollida de dades
         let favorito = e.target.parentElement.querySelector("[name='fav']").checked;
@@ -211,7 +219,7 @@ function generarcarrrousel(data) {
 }
 
 
-document.getElementById("btn-joc").addEventListener("click", function(e) {
+document.getElementById("btn-joc").addEventListener("click", function (e) {
     let pelis = [];
 
     //Inicialitzar modal joc 
@@ -221,7 +229,7 @@ document.getElementById("btn-joc").addEventListener("click", function(e) {
     generarjuego();
     generarpreguntas();
 
-    document.getElementById('generarpreguntas').addEventListener('click', function(e) {
+    document.getElementById('generarpreguntas').addEventListener('click', function (e) {
         if (e.target.name == "resposta") {
             let idPregunta = e.target.parentElement.parentElement.parentElement.id
             let resposta = e.target.value;
@@ -237,7 +245,7 @@ document.getElementById("btn-joc").addEventListener("click", function(e) {
 function enviarResposta(pelis) {
     document.getElementById('btn-acabarJoc').addEventListener('click', e => {
 
-        
+
 
         let idPelis = [],
             respuestas = [];
@@ -302,34 +310,39 @@ function enviarResposta(pelis) {
         }
 
         fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprovarJoc', {
-                method: "POST",
-                body: datos
-            }).then(response => response.json())
+            method: "POST",
+            body: datos
+        }).then(response => response.json())
             .then(data => {
-               
+
                 document.getElementById("btn-acabarJoc").classList.add("oculto");
                 document.getElementById("enunciatJoc").classList.add("oculto");
-                
+
 
                 console.log(data);
                 let puntuacion;
                 var tpunts = data.encerts * 3 + data.fallos * -1;
-                puntuacion = `<div class=" modal-content resultat-joc deep-purple center">
-                                <h4>— ${data.nom_partida} —</h4>
+                puntuacion = `<div class="modal-content resultat-joc deep-purple center">
+                                <h4>${data.nom_partida}</h4>
                                 </br>
                                 <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
                                 <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
-                                </br>
-                                <h5>Puntuació: ${tpunts}/15</h5>
-                                <a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
-                        </div>`;
+                                <h5 class="karma">Puntuació: ${tpunts}/15</h5>`;
+
+                if (tpunts < 7) {
+                    puntuacion += `<img class="gifJoc" src="../IMG/bad.gif">`;
+                } else {
+                    puntuacion += `<img class="gifJoc" src="../IMG/welldone.gif">`;
+                }
+
+
+
+                puntuacion += `<a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
+                            </div>`;
 
                 document.getElementById("joc-carousel").innerHTML = puntuacion;
                 document.getElementById("cerrarModal-joc").classList.remove("oculto");
             });
-
-
-
 
     });
 }
@@ -355,7 +368,7 @@ function generarjuego() {
                                             
                     <!--<div class="modal-footer">
                         <a href="#!" class="btn modal-close red "><i class="material-icons red">close</i></a>
-                    </div>-->`;
+                    -->`;
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
 
@@ -373,9 +386,9 @@ function generarpreguntas() {
     datos.append('joc', val);
 
     fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=joc', {
-            method: "POST",
-            body: datos
-        }).then(response => response.json())
+        method: "POST",
+        body: datos
+    }).then(response => response.json())
         .then(data => {
             console.log(data);
             let preguntas = "";
