@@ -301,7 +301,6 @@ function enviarResposta(pelis) {
 
         document.getElementById("joc-carousel").classList.add("oculto");
         verpuntuacion();
-        document.getElementById("gifloading").classList.remove("oculto");
         document.getElementById("btn-acabarJoc").classList.add("oculto");
         document.getElementById("enunciatJoc").classList.add("oculto");
 
