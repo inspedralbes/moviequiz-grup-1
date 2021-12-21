@@ -1,10 +1,10 @@
 /* Inicialitzar modals */
-document.getElementById("btn_login").addEventListener("click", function(e) {
+document.getElementById("btn_login").addEventListener("click", function (e) {
     var instances = M.Modal.init(document.querySelector(".login"), {});
 })
 
 /* USUARI REGISTRAT */
-document.getElementById("btn_entrar").addEventListener("click", function() { login(); });
+document.getElementById("btn_entrar").addEventListener("click", function () { login(); });
 
 document.getElementById("pwd").addEventListener('keydown', e => {
     if (e.key === 'Enter') { login(); }
@@ -50,7 +50,7 @@ function login() {
             document.getElementById("btn_save").classList.add("oculto");
 
             //Mostrar totes les dades modificables al pressionar el botó d'editar i habilitar la seva edició
-            document.getElementById("btn_edit").addEventListener("click", function(e) {
+            document.getElementById("btn_edit").addEventListener("click", function (e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
                 document.getElementById("canviar_img_usr").classList.remove("oculto");
@@ -60,7 +60,7 @@ function login() {
             });
 
             //Ocultar dades modificables al pressionar el botó de dessar i deshabilitar la seva edició
-            document.getElementById("btn_save").addEventListener("click", function(e) {
+            document.getElementById("btn_save").addEventListener("click", function (e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
                 document.getElementById("canviar_img_usr").classList.add("oculto");
@@ -88,9 +88,9 @@ function login() {
 
 /* Codi per a inserir al header el nom de l'usuari y la seva imatge */
 function codigoHTMLheaderuser(datos) {
-    let text =`<div class="flex navbar">
+    let text = `<div class="flex navbar">
                 <div>${datos.usuari}</div>
-                <div>
+                <div class="pad">
                     <img class="img_header circle responsive-img" src="${datos.imagen}">
                 </div>
                 <div>
