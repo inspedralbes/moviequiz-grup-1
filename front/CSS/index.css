@@ -5,13 +5,6 @@ body {
     color: white;
 }
 
-.row {
-    margin: 20px 0 0 0;
-}
-
-#carrousel-titol h1{
-    margin: 0;
-}
 
 
 /*-----------TEXT-----------*/
@@ -23,6 +16,9 @@ body {
 .white_font {
     color: white !important;
 }
+
+
+/*----------ALTRES----------*/
 
 .centrar {
     text-align: center;
@@ -38,6 +34,24 @@ body {
 
 .centrar h3{
     margin: 0;
+}
+
+.row {
+    margin: 20px 0 0 0;
+}
+
+.centrar h3{
+    margin: 0;
+}
+
+.margin0px{
+    margin: 0px;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -83,6 +97,17 @@ body {
 .divpelis {
     display: inline-block;
     margin-bottom: 100px;
+}
+
+#divsearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#divsearch input{
+    width: 85%;
+    margin-right: 10px;
 }
 
 .apartadoBusqueda {
@@ -147,6 +172,10 @@ body {
     height: 400px;
 }
 
+#carrousel-titol h1{
+    margin: 0;
+}
+
 
 
 /*----LES MEVES PEL·LÍCUELES----*/
@@ -157,6 +186,34 @@ body {
 
 #mispelis-titol {
     text-align: center;
+}
+
+#mispelis-titol {
+    text-align: center;
+}
+
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.collapsible-header p {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.collapsible, .collapsible-header, .collapsible-body{
+    background-color: rgb(39, 39, 39) !important;
+    color: white !important;
+}
+
+.coll{
+    border: white 1px solid !important;
+}
+
+#apartadoMisPeliculas h3{
+    margin: 20px;
 }
 
 
@@ -224,8 +281,6 @@ body {
     #juego, #ranking {
         height: auto !important;
     }
-
-    
 }
 
 /* Pantalla Petita */
@@ -280,6 +335,7 @@ body {
 }
 
 
+
 /*------RANKING JOC------*/
 
 .divranking {
@@ -293,8 +349,6 @@ body {
     justify-content: center;
     align-items: center;
     border: 5px solid rgb(39, 39, 39);
-
-    
 }
 
 #ranking {
@@ -314,66 +368,23 @@ body {
     max-height: 35vh;
 }
 
-
-
-/*-----APARTAT "LES MEVES PEL·LÍCULES"-----*/
-#mispelis-titol {
-    text-align: center;
+/* Links info usuaris*/
+.usuarisModals{
+    color: black;
 }
 
-.collapsible-header {
-    display: flex;
-    align-items: center;
-    justify-content: start;
+.imgModalUsuari{
+    max-height: 25vw;
+    height: auto;
 }
 
-.collapsible-header p {
-    margin-left: 10px;
-    font-size: 18px;
-}
 
-.collapsible, .collapsible-header, .collapsible-body{
-    background-color: rgb(39, 39, 39) !important;
-    color: white !important;
-}
 
-.coll{
-    border: white 1px solid !important;
-}
-
-.centrar h3{
-    margin: 0;
-}
-
-.margin0px{
-    margin: 0px;
-}
+/*-----HEADER DADES USUARI LOGGEJAT-----*/
 
 .foto-usu{
     margin-top: 20px;
     max-height: 200px;
-}
-
-#apartadoMisPeliculas h3{
-    margin: 20px;
-}
-
-
-#divsearch{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#divsearch input{
-    width: 85%;
-    margin-right: 10px;
-}
-
-.flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .navbar{
@@ -384,13 +395,4 @@ body {
 nav{
     height: 64px !important;
     line-height: 64px !important;
-}
-
-.usuarisModals{
-    color: black;
-}
-
-.imgModalUsuari{
-    max-height: 25vw;
-    height: auto;
 }
