@@ -49,7 +49,7 @@ function login() {
             //No mostrar el botó de desar les dades de l'usuari
             document.getElementById("btn_save").classList.add("oculto");
 
-            //Mostrar totes les dades modificables al pressionar el botó d'editar i habilitar la seva edició
+            //Mostrar totes les dades modificables de l'usuari al pressionar el botó d'editar i habilitar la seva edició
             document.getElementById("btn_edit").addEventListener("click", function (e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
@@ -59,7 +59,7 @@ function login() {
                 document.getElementById("btn_edit").classList.add("oculto");
             });
 
-            //Ocultar dades modificables al pressionar el botó de desar i deshabilitar la seva edició
+            //Ocultar dades modificables de l'usuari al pressionar el botó de dessar i deshabilitar la seva edició
             document.getElementById("btn_save").addEventListener("click", function (e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
@@ -72,6 +72,17 @@ function login() {
 
             //Mostrar les pel·lícules desades per l'usuari
             misPeliculas();
+
+            //Habilitar l'edició de les dades modificables de la valoració al pressionar el botó d'editar 
+            document.getElementById("btn_edit_colleccio").addEventListener("click", function (e) {
+                document.getElementById("btn_save_colleccio").removeAttribute("oculto");
+            });
+
+            //Deshabilitar l'edició de les dades modificables de la valoració al pressionar el botó d'editar 
+            document.getElementById("btn_save_colleccio").addEventListener("click", function (e) {
+                document.getElementById("btn_edit_colleccio").setAttribute("oculto");
+                dadesUsuariModificades();
+            });
 
         } else {
             //Mostrar notificació conform no s'ha pogut iniciar la sessió
@@ -187,11 +198,19 @@ function misPeliculasHTML(datos) {
                         <input type="number" name="valoracio-${datos[i].idPelicula}" id="valoracio-${datos[i].idPelicula}" min=1 max=5 disabled value="${datos[i].valoracio}">
                         <p>
                             <label>
-                            <input type="checkbox" checked name="favorit-${datos[i].idPelicula}" id="favorit-${datos[i].idPelicula}"/>
+                            <input type="checkbox" disabled checked name="favorit-${datos[i].idPelicula}" id="favorit-${datos[i].idPelicula}"/>
                             <span>Guardat</span>
                             </label>
                         </p>
+
+                        <div class="right-align">
+                            <a class="btn-colleccio btn btn-small waves-effect waves-light right red" id="btn_delete"><i class="material-icons">delete</i></a>
+                            <a class="btn-colleccio btn btn-small waves-effect waves-light right" id="btn_edit_colleccio"><i class="material-icons">create</i></a>
+                            <a class="btn-colleccio btn btn-small waves-effect waves-light right oculto" id="btn_save_colleccio"><i class="material-icons">save</i></a>
+                            <br>
+                        </div>
                     </div>
+                    
                 </li>`;
     }
     text += '</ul>';
@@ -224,3 +243,6 @@ function dadesUsuariModificades() {
         console.log(error)
     });;
 }
+
+
+/* GUARDAR DADES D'EDITAR LES VALORACIONS DE LES PELIS */
