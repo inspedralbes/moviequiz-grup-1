@@ -79,31 +79,38 @@ function login() {
 
 /* Codi per a  inserir al header el nom de l'usuari y la seva imatge */
 function codigoHTMLheaderuser(datos) {
-    let text = `<li class="usuario_header">${datos.usuari}</li>
-                <li><img class="img_header circle responsive-img" src="${datos.imagen}"></li>
-                <li><a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light btn">LOGOUT</a></li>`;
+    let text =`<div class="flex navbar">
+                <div>${datos.usuari}</div>
+                <div>
+                    <img class="img_header circle responsive-img" src="${datos.imagen}">
+                </div>
+                <div>
+                    <a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light btn">LOGOUT</a>
+                </div>
+              </div>`;
     return text;
 }
 
 
 /* FORMULARI DADES (EDITABLES) USUARI */
 function codigoHTMLuser(datos) {
-    let text = `<div class="row">
-                    <div class="col s3 m3 l3 centrar">
+    let text = `<div class="row margin0px">
+                    <div class="col s12 m4 centrar">
                         <h3>¡Hola ${datos.nombre}!</h3>
-                        <img src="${datos.imagen}" class="circle responsive-img">
+                        <img src="${datos.imagen}" class="circle responsive-img foto-usu">
                     </div>
 
-                    <div class="dades_usuari center-align>
-                        
-                        <div class="row">
-                            <div class="col s4 m4 l4"> 
+                    <div class="dades_usuari col s12 m8">
+
+                        <div class="row margin0px">
+                            <div class="col s10">
+                                <h3 class="margin0px center">Les teves dades</h3>
                                 <label class="white_font" for="alias">Nom</label>
                                 <input disabled id="nom_us" type="text" class="white_font" value="${datos.nombre}">
 
                                 <label class="white_font" for="email">Correu</label>
                                 <input disabled id="email_us" type="email" class="white_font" value="${datos.email}">
-                            
+
                                 <label class="white_font" for="puntuacio">Karma</label>
                                 <input disabled id="puntuacio_us" type="text" class="white_font" value="${datos.puntuacion}">
 
@@ -111,8 +118,10 @@ function codigoHTMLuser(datos) {
 
                                 <div class="file-field input-field oculto" id="canviar_img_usr">
                                     <div class="btn btn-small">
-                                        <input type="file" id="foto-input" multiple accept="image/*"><i class="material-icons">insert_photo</i></input>
+                                        <input type="file" id="foto-input" multiple accept="image/*"><i
+                                            class="material-icons">insert_photo</i></input>
                                     </div>
+
                                     <div class="file-path-wrapper">
                                         <input class="file-path white_font" type="text" id="img_link">
                                     </div>
@@ -120,16 +129,15 @@ function codigoHTMLuser(datos) {
 
                                 <input id="alias" type="hidden" value="${datos.usuari}">
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col s3 m3 l3 center-align">
-                                <a class="btn btn-small waves-effect waves-light" id="btn_edit"><i class="material-icons">create</i></a>
-                                <a class="btn btn-small waves-effect waves-light" id="btn_save"><i class="material-icons">save</i></a>
+                            <div class="col s2 center-align">
+                                <a class="btn btn-small waves-effect waves-light" id="btn_edit"><i
+                                        class="material-icons">create</i></a>
+                                <a class="btn btn-small waves-effect waves-light" id="btn_save"><i
+                                        class="material-icons">save</i></a>
                             </div>
                         </div>
-
-                    
+                    </div>
                 </div>`;
     return text;
 }
@@ -154,7 +162,7 @@ function misPeliculas() {
 
 /* Llista amb les pel·lícules favorites de l'usuari */
 function misPeliculasHTML(datos) {
-    let text = `<h3>Les meves pel·lícules</h3><ul class="collapsible popout">`;
+    let text = `<h3 class="center">Les meves pel·lícules</h3><ul class="collapsible popout">`;
     for (let i = 0; i < datos.length; i++) {
         text += `<li class="coll">
                     <div class="collapsible-header">

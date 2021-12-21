@@ -7,7 +7,6 @@ nav a {
 }
 
 .brand-logo{
-
     margin: 5px;
     margin-top: 7px;
 }
@@ -17,8 +16,8 @@ nav a {
 }
 
 .img_header{
-    width: 50px;
-    margin: 7px;
+    height: 40px !important;
+    margin: auto;
 }
 
 .logo{

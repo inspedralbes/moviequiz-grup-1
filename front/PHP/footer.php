@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="footer footer-copyright">
+        <div class="footer footer-copyright center">
             <p class="grey-text text-lighten-4">© 2021 Copyright - Made by Pau Muñoz, Sandra Ortiz & Víctor Moreno</p>
         </div>
 
