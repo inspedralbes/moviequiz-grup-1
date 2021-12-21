@@ -38,7 +38,7 @@
 
             <!-- BOTÓ LOGIN / LINK SING UP-->
             <div class="col s12">
-                <a id="btn_entrar" class="waves-effect waves-light btn btn-small">Entrar</a>
+                <a id="btn_entrar" class="waves-effect black_font waves-light btn btn-small">Entrar</a>
                 <p class="grey-text link">No ets usuari?,<a href="signup.php"> registrat</a></p>
             </div>
         </div>

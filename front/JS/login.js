@@ -59,7 +59,7 @@ function login() {
                 document.getElementById("btn_edit").classList.add("oculto");
             });
 
-            //Ocultar dades modificables al pressionar el botó de dessar i deshabilitar la seva edició
+            //Ocultar dades modificables al pressionar el botó de desar i deshabilitar la seva edició
             document.getElementById("btn_save").addEventListener("click", function (e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
@@ -94,7 +94,7 @@ function codigoHTMLheaderuser(datos) {
                     <img class="img_header circle responsive-img" src="${datos.imagen}">
                 </div>
                 <div>
-                    <a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light btn">LOGOUT</a>
+                    <a id="btn_logout" href="logout.php" class="modal-trigger black_font waves-effect waves-light btn">LOGOUT</a>
                 </div>
               </div>`;
     return text;
@@ -128,7 +128,7 @@ function codigoHTMLuser(datos) {
                                 <div class="file-field input-field oculto" id="canviar_img_usr">
                                     <div class="btn btn-small">
                                         <input type="file" id="foto-input" multiple accept="image/*"><i
-                                            class="material-icons">insert_photo</i></input>
+                                            class="material-icons black_font">insert_photo</i></input>
                                     </div>
 
                                     <div class="file-path-wrapper">
@@ -140,9 +140,9 @@ function codigoHTMLuser(datos) {
                             </div>
 
                             <div class="col s2 center-align">
-                                <a class="btn btn-small waves-effect waves-light" id="btn_edit"><i
+                                <a class="btn btn-small waves-effect waves-light black_font" id="btn_edit"><i
                                         class="material-icons">create</i></a>
-                                <a class="btn btn-small waves-effect waves-light" id="btn_save"><i
+                                <a class="btn btn-small waves-effect waves-light black_font" id="btn_save"><i
                                         class="material-icons">save</i></a>
                             </div>
                         </div>
