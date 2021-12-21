@@ -22,6 +22,7 @@ nav a {
 .img_header{
     height: 40px !important;
     margin: auto;
+    margin-left: 5px;
 }
 
 .logo{
@@ -32,6 +33,9 @@ nav a {
     background-color: #26c6da;
 }
 
+.pad{
+    padding-top: 25px;
+}
 
 
 
