@@ -7,7 +7,7 @@
         <a href="#" class="brand-logo center"><img src="../IMG/titol.png" class="titolMovies"></a>
 
         <ul id="nav-mobile" class="right">
-            <li><a id="btn_login" href="#login" class="modal-trigger waves-effect waves-light btn">LOGIN</a></li>
+            <li><a id="btn_login" href="#login" class="modal-trigger waves-effect waves-light btn black_font">LOGIN</a></li>
             <li id="resultat_header"></li>
         </ul>
     </div>

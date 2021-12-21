@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="col s12 submit">
-                    <button class="btn waves-effect waves-light pulse" type="submit" name="signup">Registrat</button>
+                    <button class="btn waves-effect waves-light pulse black_font" type="submit" name="signup">Registra't</button>
                 </div>
 
             </div>
