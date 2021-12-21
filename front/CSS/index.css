@@ -10,7 +10,7 @@ body {
 /*-----------TEXT-----------*/
 
 .black_font {
-    color: black;
+    color: black !important;
 }
 
 .white_font {
@@ -415,7 +415,3 @@ body {
     max-height: 64px;
 }
 
-nav{
-    height: 80px !important;
-    line-height: 80px !important;
-}

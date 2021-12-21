@@ -2,9 +2,11 @@
     padding-bottom: 20px;
 }
 
-nav {
-    height: 75px;
+nav{
+    height: 80px !important;
+    line-height: 80px !important;
 }
+
 
 nav a {
     color: #26c6da;
@@ -37,6 +39,9 @@ nav a {
     padding-top: 25px;
 }
 
+.black_font {
+    color: black !important;
+}
 
 
 /*----TITOL PÀGINA----*/

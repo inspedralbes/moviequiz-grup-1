@@ -378,7 +378,7 @@ function generarjuego() {
                             <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
                             <h6 id="enunciatJoc">En quin any es va estrenar aquesta pel·lícula?</h6>
                             <div class="center">
-                                <a id="btn-acabarJoc" class="btn waves-effect">Enviar</a>
+                                <a id="btn-acabarJoc" class="btn waves-effect black_font">Enviar</a>
                             </div>
                         </div>
                         
