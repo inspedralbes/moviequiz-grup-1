@@ -48,8 +48,6 @@ nav a {
 /* Pantalla Petita */
 @media only screen and (max-width: 600px) {
     .titolMovies {
-        width: 190px; 
-        margin-top: 12px; 
-        margin-right: 50px;
+        visibility: hidden;
     }
 }
