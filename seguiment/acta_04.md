@@ -18,4 +18,6 @@
   - Millorar pagina signup.php
 
   - Mostrar partides jugades
+
+  - Pujar a producció i actualitzar els links
  
