@@ -47,11 +47,13 @@ class usuari extends BD_MovieQuiz
 
                 $this->query = "INSERT INTO usuari(idUsuari, nom, cognoms, email, user, passw, imatge, punts) VALUES (NULL, '$nom', '$cognoms', '$email', '$usuari', '$contrasenya', NULL, 0)";
                 $this->execute_single_query();
-                $this->message  = "Usuari introduït";
-            } else $this->message = "L'usuari ja existeix";
-        } else $this->message = "Usuari no introduït";
-
-        return $this->message;
+                $this->message  = "ok";
+            } else {
+                $this->message = "existeix";
+            }
+        }
+        
+        $_SESSION['registrar'] = $this->message;
     }
 
     public function comprovarLogin($login_data = array())

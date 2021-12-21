@@ -1,5 +1,18 @@
+<?php
+require_once("controller_MQ.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
+<?php
+    if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'existeix') {
+        header("Refresh:2; url=signup.php");
+    }
+    if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'ok') {
+        header("Location: ./index.php");
+    }
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -26,7 +39,7 @@
     <!-- Formulari registre d'usuari -->
 
     <div class="formulariRegistre">
-        <form action="./index.php?action=signup" method="POST">
+        <form action="./signup.php?action=signupUsuari" method="POST">
             <div class="row formulari center white">
 
                 <div class="col s12">
@@ -68,10 +81,19 @@
 
     </div>
 
+    <?php
+        if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'existeix') {
+            echo "<div id='registrar'></div>";
+            unset($_SESSION['registrar']);
+            session_destroy();
+        }
 
-    <?php include("footer.php"); ?>
+        include("footer.php");
+    ?>
     <!-- SCRIPTS -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="../JS/signup.js"></script>
+
 </body>
 
 </html>
