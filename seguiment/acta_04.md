@@ -19,5 +19,7 @@
 
   - Mostrar partides jugades
 
+  - Carousel dinàmic
+
   - Pujar a producció i actualitzar els links
  

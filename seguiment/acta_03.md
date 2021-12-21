@@ -4,20 +4,18 @@
 
 - securitzar contrasenya (fet)
 
-- fer login permanent (session_start())
-
 - carusel de pel·lícules dinàmic (BD ordenar per millor valoració) (fet)
 
-- apartat per a modificar la informació de l'usuari (fet) (Falta canviar la imatge)
+- apartat per a modificar la informació de l'usuari (fet)
 
 - apartat usuari - mostrar pel·lícules favorites (fet)
 
-- començar joc
+- començar joc (fet)
     - json
     - modal
       - carusel 
     - agafar 5 pel·lícules aleatories de les favovirtes del jugador / 5 més valorades
     - 5 respostes x pel·lícula (anys)
     - generar els anys aletoriament (sumar o restar un número) RESPOSTA NO REPETIDA
-    - demanar a l'usuari nom de la partida  - proposar nom partida
+    - demanar a l'usuari nom de la partida  - (falta proposar nom partida9
 
