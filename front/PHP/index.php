@@ -6,7 +6,6 @@ session_start();
 require_once("controller_MQ.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,9 +53,13 @@ require_once("controller_MQ.php");
 
     <!-- CONTINGUT VISIBLE PER L'USUARI REGISTRAT -->
     <div id="apartadoJuego" class="row">
+
+        <div id="modaljoc" class="modal joc joc-modal"></div>
+
         <div id="juego" class="col s12 m12 l4">
             <button id="btn-joc" class="waves-effect waves-light btn btn-joc modal-trigger" href="#modaljoc"> Minijoc </button>
         </div>
+
         <div id="ranking" class="col s12 m12 l8">
             <div>
                 <div id="ranking-titol" class="center">
@@ -72,11 +75,9 @@ require_once("controller_MQ.php");
             </div>
         </div>
 
-        <div id="modaljoc" class="modal joc joc-modal">
-        </div>
-
     </div>
 
+    <!-- APARTAT "LES MEVES PEL·LÍCULES"-->
     <div id="apartadoMisPeliculas" class="row oculto">
         <div id="mispelis" class="col s12 m12 l8">
             <div>

@@ -17,7 +17,6 @@ class controller
         $partida_jugada = new partida_jugada();
         $vista = new view();
 
-        // Què em demanen?
         $event = 'inici';
 
         $uri = $_SERVER['REQUEST_URI'];
@@ -29,17 +28,20 @@ class controller
         }
 
         switch ($event) {
+            //Registrar nou usuari
             case 'signup':
                 $dadesPOST = $this->recollirDadesPost();
                 echo $usuari->introduirUsuari($dadesPOST);
                 break;
 
+            //Valorar una pel·lícula
             case 'valoracio':
                 $dadesPOST = $this->recollirDadesPost();
                 $res = $valoracio_pelicula->afegirValoracioPeli($dadesPOST);
                 echo $res;
                 break;
 
+            //Iniciar sessió amb un usuari
             case 'login':
                 $dadesPOST = $this->recollirDadesPost();
                 $resposta = $usuari->comprovarLogin($dadesPOST);
@@ -47,6 +49,7 @@ class controller
                 echo $res;
                 break;
 
+            //Apartat "Les Meves Pel·lícules" de l'usuari
             case 'pelisValoradesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
                 $datosUsuario = $usuari->dadesUsuari($dadesPOST);
@@ -54,6 +57,7 @@ class controller
                 echo json_encode($res);
                 break;
 
+            //Pel·lícules millor valorades
             case 'pelismillorvalorades':
                 $res = $valoracio_pelicula->millorvalorades();
                 echo json_encode($res);
@@ -66,11 +70,13 @@ class controller
                 echo json_encode($res);
                 break;
 
+            //Editar les dades d'un usuari loggejat
             case 'modificarDadesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
                 $usuari->modificarDadesUsuari($dadesPOST);
                 break;
 
+            //Generar joc amb inici i sense inici de sessió
             case 'joc':
                 $dadesPOST = $this->recollirDadesPost();
                 if ($dadesPOST['juego'] == 'exito') {
@@ -82,6 +88,7 @@ class controller
                 }
                 break;
 
+            //Comprovar les respostes de l'usuari al joc
             case 'comprovarJoc':
                 $dadesPOST = $this->recollirDadesPost();
                 sleep(1.5);
@@ -102,9 +109,13 @@ class controller
         }
     }
 
+
+    //Funció per a recollir totes les dades de formularis amb POST
     private function recollirDadesPost()
     {
         $dadesForm = false;
+
+        //Agafar les dades del formulari de registre
         if (isset($_POST["signup"])) {
             $dadesForm = array(
                 'usuari' => $_POST["user"],
@@ -113,11 +124,13 @@ class controller
                 'nom' => $_POST['nom'],
                 'cognoms' => $_POST['cognom']
             );
+        //Agafar les dades d'inici de sessió
         } else if (isset($_POST['usuari'])) {
             $dadesForm = array(
                 'usuari' => $_POST['usuari'],
                 'contrasenya' => $_POST['pwd']
             );
+        //Dades de la valoració d'una pel·lícula
         } else if (isset($_POST['valoracio'])) {
             $dadesForm = array(
                 'valoracio' => $_POST["valoracio"],
@@ -139,10 +152,8 @@ class controller
 
             //Editar Dades Usuari
         } else if (isset($_POST['email_us'])) {
-
-            print_r($_FILES);
+            //Format en que es desará les dades corresponents a l'imatge d'un usuari
             move_uploaded_file($_FILES['foto']['tmp_name'], "../IMG/" . $_FILES['foto']['name']);
-            print_r($_FILES);
 
             $dadesForm = array(
                 'usuari' => $_POST['alias'],

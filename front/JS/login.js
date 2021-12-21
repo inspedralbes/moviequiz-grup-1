@@ -22,6 +22,7 @@ function login() {
         method: "POST",
         body: datosLogin
     }).then(response => response.json()).then(data => {
+        //Si hi ha un usuari loggejat ...
         if (data.exito == true) {
             Swal.fire({
                 position: 'top-end',
@@ -31,15 +32,24 @@ function login() {
                 timer: 1500
             });
 
+            //Inserir al header el nom de l'usuari y la seva imatge
+            document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
+
+
+            //Ocultar botó login, carusel
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
 
+            //Mostrar l'informació de l'usuari i l'apartatar de "les Meves Pel·lícules"
             document.getElementById("info-usuari").classList.remove("oculto");
             document.getElementById("apartadoMisPeliculas").classList.remove("oculto");
+            //Inserir l'informació de l'usuari
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
+            //No mostrar el botó de desar les dades de l'usuari
             document.getElementById("btn_save").classList.add("oculto");
 
+            //Mostrar totes les dades modificables al pressionar el botó d'editar i habilitar la seva edició
             document.getElementById("btn_edit").addEventListener("click", function(e) {
                 document.getElementById("nom_us").removeAttribute("disabled");
                 document.getElementById("email_us").removeAttribute("disabled");
@@ -49,6 +59,7 @@ function login() {
                 document.getElementById("btn_edit").classList.add("oculto");
             });
 
+            //Ocultar dades modificables al pressionar el botó de dessar i deshabilitar la seva edició
             document.getElementById("btn_save").addEventListener("click", function(e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
@@ -59,13 +70,11 @@ function login() {
                 dadesUsuariModificades();
             });
 
-            /* Inserir al header el nom de l'usuari y la seva imatge */
-            document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
-
-            /* Mostrar les pel·lícules desades per l'usuari */
+            //Mostrar les pel·lícules desades per l'usuari
             misPeliculas();
 
         } else {
+            //Mostrar notificació conform no s'ha pogut iniciar la sessió
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
@@ -77,7 +86,7 @@ function login() {
     });
 }
 
-/* Codi per a  inserir al header el nom de l'usuari y la seva imatge */
+/* Codi per a inserir al header el nom de l'usuari y la seva imatge */
 function codigoHTMLheaderuser(datos) {
     let text =`<div class="flex navbar">
                 <div>${datos.usuari}</div>
@@ -142,6 +151,7 @@ function codigoHTMLuser(datos) {
     return text;
 }
 
+/* SECCIÓ "LES MEVES PEL·LÍCULES" */
 function misPeliculas() {
     let user = document.getElementById("alias").value;
     let codi;
@@ -155,6 +165,7 @@ function misPeliculas() {
     }).then(response => response.json()).then(pelisGuardades => {
         codi = misPeliculasHTML(pelisGuardades);
         document.getElementById("apartadoMisPeliculas").innerHTML = codi;
+        //Inicialitzar el colapsable que mostrará "Les Meves Pel·lícules"
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems, {});
     });
@@ -187,7 +198,7 @@ function misPeliculasHTML(datos) {
     return text;
 }
 
-/* EDITAR DADES USUARI */
+/* GUARDAR DADES D'EDITAR LES DADES DE L'USUARI */
 function dadesUsuariModificades() {
     let file = document.getElementById("foto-input").files[0];
     let nom_u = document.getElementById("nom_us").value;
