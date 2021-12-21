@@ -12,7 +12,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../CSS/header.css">
     <link rel="stylesheet" href="../CSS/footer.css">
-    <link  rel="stylesheet" href="../CSS/signup.css">
+    <link rel="stylesheet" href="../CSS/signup.css">
     <title>Registre</title>
 </head>
 
@@ -20,74 +20,58 @@
     <?php include("header.php"); ?>
 
     <!-- Botó tornar enrrere -->
-    <div>
-        <button id="back" class="btn waves-effect waves-light" type="button" name="action"><i class="material-icons">arrow_back</i></button>
-    </div>
+
 
 
     <!-- Formulari registre d'usuari -->
-    <?php
-    if (!$_POST) {
-    ?>
-        <h2 class="h2">Dades de l'usuari</h2>
 
-        <div class="row">
-            <form class="col s12" action="./index.php?action=signup" method="POST">
-                <div class="row center">
-                    <div class="input-field col s6">
-                        <input id="usuari" type="text" class="validate  white_font" name="user">
-                        <label for="usuari">Usuari/alias</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="password" type="password" class="validate white_font" name="password">
-                        <label for="password">Contrasenya</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="email" type="email" class="validate white_font" name="email">
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="nom" type="text" class="validate white_font" name="nom">
-                        <label for="nom">Nom</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="cognom" type="text" class="validate white_font" name="cognom">
-                        <label for="cognom">Cognoms</label>
-                    </div>
+    <div class="formulariRegistre">
+        <form action="./index.php?action=signup" method="POST">
+            <div class="row formulari center white">
+
+                <div class="col s12">
+                    <h3 class="h3 deep-purple-text">Dades de l'usuari</h3>
                 </div>
 
-                <div class="submit">
-                    <button class="btn waves-effect waves-light" type="submit" name="signup">Registrat</button>
+                <div class="input-field col s12">
+                    <input id="usuari" type="text" class="validate" name="user">
+                    <label for="usuari">Usuari/alias</label>
                 </div>
-            </form>
-        </div>
 
-    <?php
-    } else {
-        echo "<br>";
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate" name="password">
+                    <label for="password">Contrasenya</label>
+                </div>
 
-        function test_input($valor)
-        {
-            $valor = trim($valor);
-            $valor = stripslashes($valor);
-            return htmlspecialchars($valor);
-        }
-    }
-    ?>
+                <div class="input-field col s12">
+                    <input id="email" type="email" class="validate" name="email">
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input id="nom" type="text" class="validate" name="nom">
+                    <label for="nom">Nom</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input id="cognom" type="text" class="validate" name="cognom">
+                    <label for="cognom">Cognoms</label>
+                </div>
+
+                <div class="col s12 submit">
+                    <button class="btn waves-effect waves-light pulse" type="submit" name="signup">Registrat</button>
+                </div>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <!-- SCRIPTS -->
-    <?php include("footer.php"); ?>
-    <script type="text/javascript" src="../JS/signup.js"></script>
 
+    <?php include("footer.php"); ?>
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="../JS/signup.js"></script>
 </body>
 
 </html>

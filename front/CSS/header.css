@@ -2,6 +2,10 @@
     padding-bottom: 20px;
 }
 
+nav {
+    height: 75px;
+}
+
 nav a {
     color: #26c6da;
 }
@@ -22,7 +26,7 @@ nav a {
 }
 
 .logo{
-    margin: 7px 7px 7px 12px;
+    margin: 14px 7px 7px 12px;
 }
 
 .btn {
@@ -31,4 +35,23 @@ nav a {
 
 .pad{
     padding-top: 25px;
+}
+
+
+
+/*----TITOL PÀGINA----*/
+
+.titolMovies {
+    display:block;
+    margin:auto;
+    display: inline-block;
+    margin-top: 7px;
+    width: 220px;
+}
+
+/* Pantalla Petita */
+@media only screen and (max-width: 600px) {
+    .titolMovies {
+        visibility: hidden;
+    }
 }
