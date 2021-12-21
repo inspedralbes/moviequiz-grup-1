@@ -217,13 +217,28 @@ body {
     color: white !important;
 }
 
+.collapsible-body {
+    background-color: #673ab7 !important;
+    color: white;
+}
+
 .coll{
     border: white 1px solid !important;
 }
 
 #apartadoMisPeliculas h3{
     margin: 20px;
+    margin-top: 40px;
 }
+
+.btn-colleccio a{
+    margin: 20px;
+}
+
+#btn_delete {
+    margin-left: 5px;
+}
+
 
 
 
