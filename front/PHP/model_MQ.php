@@ -97,6 +97,13 @@ class usuari extends BD_MovieQuiz
 
         $this->execute_single_query();
     }
+
+    public function rankingUsuaris()
+    {
+        $this->query = "SELECT * FROM usuari ORDER BY usuari.punts DESC LIMIT 3";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
 }
 
 class partida extends BD_MovieQuiz

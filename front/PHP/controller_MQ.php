@@ -6,7 +6,7 @@ require_once('view_MQ.php');
 class controller
 {
     //rutes o esdeveniments possibles
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc', 'comprovarJoc');
+    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc', 'comprovarJoc', 'ranking');
 
     public function handler()
     {
@@ -92,6 +92,13 @@ class controller
                     $json = $partida->comprovarPartidaSinLogin($dadesPOST);
                     echo $json;
                 }
+                break;
+            
+            case 'ranking':
+                $users = $usuari->rankingUsuaris();
+                $users = json_encode($users);
+                echo $users;
+                break;
         }
     }
 

@@ -9,6 +9,10 @@ body {
     margin: 20px 0 0 0;
 }
 
+#carrousel-titol h1{
+    margin: 0;
+}
+
 
 
 /*-----------TEXT-----------*/
@@ -144,10 +148,6 @@ body {
 
 /*----LES MEVES PEL·LÍCUELES----*/
 
-#apartadoMisPeliculas{
-    border: 2px solid black;
-}
-
 .oculto {
     display: none !important;
 }
@@ -217,6 +217,12 @@ body {
     .img_joc {
         width: 100% !important;   
     }
+
+    #juego, #ranking {
+        height: auto !important;
+    }
+
+    
 }
 
 /* Pantalla Petita */
@@ -284,21 +290,25 @@ body {
     justify-content: center;
     align-items: center;
     border: 5px solid rgb(39, 39, 39);
-    height: 25vh;
+
     
 }
 
 #ranking {
     background-color: #311b922d;
+    padding: 20px;
+    max-height: 35vh;
+    height: 35vh;
+}
+
+#ranking h4{
+    margin: 10px;
 }
 
 #juego {
     background-color: #311b922d;
-}
-
-
-#ranking-usuaris {
-    text-align: center;
+    height: 35vh;
+    max-height: 35vh;
 }
 
 #mispelis-titol {
@@ -327,4 +337,54 @@ body {
 
 .centrar h3{
     margin: 0;
+}
+
+.margin0px{
+    margin: 0px;
+}
+
+.foto-usu{
+    margin-top: 20px;
+    max-height: 200px;
+}
+
+#apartadoMisPeliculas h3{
+    margin: 20px;
+}
+
+
+#divsearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#divsearch input{
+    width: 85%;
+    margin-right: 10px;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    height: auto;
+    max-height: 64px;
+}
+
+nav{
+    height: 64px !important;
+    line-height: 64px !important;
+}
+
+.usuarisModals{
+    color: black;
+}
+
+.imgModalUsuari{
+    max-height: 25vw;
+    height: auto;
 }

@@ -30,11 +30,8 @@ require_once("controller_MQ.php");
     <!-- CERCADOR PEL·LÍCULES-->
     <div id="apartadoBusqueda">
         <div class="row apartadoBusqueda">
-            <div id="divsearch" class="col s10">
+            <div id="divsearch" class="col s12">
                 <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
-            </div>
-
-            <div id="butons_search" class="col s2">
                 <a class="btn btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
                 <a id="ocultardivsearch" href="#!" class="btn-small oculto red"><i class="material-icons">arrow_drop_up</i></a>
             </div>
@@ -44,10 +41,10 @@ require_once("controller_MQ.php");
     </div>
 
     <!-- CARUSEL PEL·LÍCULES MÉS VALORADES-->
-    <div id="apartadoCarrousel" class="row">
+    <div id="apartadoCarrousel" class="row margin0px">
         <div id="info-usuari" class="col s12 oculto"></div>
 
-        <div id="carrousel-titol" class="col s12 m12 l5">
+        <div id="carrousel-titol" class="col s12 m12 l5 ">
             <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>
 
@@ -58,13 +55,12 @@ require_once("controller_MQ.php");
     <!-- CONTINGUT VISIBLE PER L'USUARI REGISTRAT -->
     <div id="apartadoJuego" class="row">
         <div id="juego" class="col s12 m12 l4">
-            <!--<h3>Minijoc</h3>-->
-            <button id="btn-joc" class="waves-effect waves-light btn btn-joc modal-trigger" href="#modaljoc"> Jugar </button>
+            <button id="btn-joc" class="waves-effect waves-light btn btn-joc modal-trigger" href="#modaljoc"> Minijoc </button>
         </div>
         <div id="ranking" class="col s12 m12 l8">
             <div>
-                <div id="ranking-titol ">
-                    <h5>Ranking puntuació</h5>
+                <div id="ranking-titol" class="center">
+                    <h4>Ranking puntuació</h4>
                 </div>
                 <div id="ranking-usuaris">
                     <ul>

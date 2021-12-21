@@ -1,6 +1,9 @@
 /* Carrusel amb les pel·lícules millor valorades */
 obtenermejorvaloracion();
 
+/* Obtenir el ranking del joc */
+obtenirRankingJoc();
+
 /* Mostrar resultats de la búsqueda */
 document.getElementById("btn_search").addEventListener("click", function () {
     buscador();
@@ -444,5 +447,53 @@ function generarpreguntas() {
                 fullWidth: true,
                 indicators: true
             });
+        });
+}
+
+function obtenirRankingJoc() {
+    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=ranking')
+        .then(response => response.json())
+        .then(usuarisRanking => {
+            let rankingHTML = `<table class="highlight responsive-table centered">
+                                <thead>
+                                    <tr>
+                                        <th>Usuari</th>
+                                        <th>Puntuació</th>
+                                    </tr>
+                                </thead>
+                               <tbody>`;
+
+
+            usuarisRanking.forEach(usuari => {
+                rankingHTML += `<tr>
+                                    <td><a href="#${usuari.user}" class="modal-trigger">${usuari.user}</a></td>
+                                    <td>${usuari.punts}</td>
+                                </tr>`;
+            });
+
+            rankingHTML += `</tbody></table>`;
+
+            usuarisRanking.forEach(usuari => {
+                rankingHTML += `<div id="${usuari.user}" class="modal usuarisModals bottom-sheet">
+                                    <div class="modal-content">
+                                        <div class="row center flex">
+                                            <div class="col s6">
+                                                <h4>${usuari.nom} ${usuari.cognoms}</h4>
+                                                <p>${usuari.email}</p>
+                                            </div>
+                                            <div class="col s6">
+                                                <img src="${usuari.imatge}" class="imgModalUsuari">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Tancar</a>
+                                    </div>
+                                </div>`;
+            });
+
+            document.getElementById('ranking-usuaris').innerHTML = rankingHTML;
+            var elems = document.querySelectorAll('.usuarisModals');
+            var instances = M.Modal.init(elems, {});
         });
 }
