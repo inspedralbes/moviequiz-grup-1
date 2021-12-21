@@ -1,6 +1,6 @@
 # Acta de la quarta reunió (4º Reunió)
 
-  - Títol de la web
+  - Títol de la web (fet)
 
   - Ranking puntuació usuaris (fet)
      - Link info usuari
