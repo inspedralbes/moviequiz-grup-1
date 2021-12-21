@@ -14,9 +14,44 @@ body {
 }
 
 .btn:hover {
-    background-color: #4dd0e1  ;
+    background-color: #4dd0e1;
 }
 
-#back {
-    margin-top: 20px;
+.formulariRegistre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.formulari{
+    border-radius: 5px;
+    width: 35%;
+    margin: auto;
+    padding: 25px 35px;
+    box-shadow: 10px 13px 19px -5px rgba(0,0,0,0.75);
+    color: black;
+}
+
+@media only screen and (max-width: 600px) {
+    .formulari{
+        width: 90%;
+    }
+
+}
+
+
+h3.h3{
+    margin: 5px;
+}
+
+.flex{
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+p.copyright{
+    width: 90%;
+    margin: auto;
 }
