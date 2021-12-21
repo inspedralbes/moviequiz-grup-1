@@ -73,6 +73,7 @@ function login() {
             //Mostrar les pel·lícules desades per l'usuari
             misPeliculas();
 
+            /*
             //Habilitar l'edició de les dades modificables de la valoració al pressionar el botó d'editar 
             document.getElementById("btn_edit_colleccio").addEventListener("click", function (e) {
                 document.getElementById("btn_save_colleccio").removeAttribute("oculto");
@@ -82,7 +83,7 @@ function login() {
             document.getElementById("btn_save_colleccio").addEventListener("click", function (e) {
                 document.getElementById("btn_edit_colleccio").setAttribute("oculto");
                 dadesUsuariModificades();
-            });
+            });*/
 
         } else {
             //Mostrar notificació conform no s'ha pogut iniciar la sessió
@@ -176,6 +177,24 @@ function misPeliculas() {
     }).then(response => response.json()).then(pelisGuardades => {
         codi = misPeliculasHTML(pelisGuardades);
         document.getElementById("apartadoMisPeliculas").innerHTML = codi;
+        //Eliminar pel·lícula de col·lecció
+        document.getElementById("apartadoMisPeliculas").addEventListener("click", function (e) {
+            if (e.target.classList.contains("btn_delete")) {
+                let id_peli = e.target.parentElement.parentElement.id;
+                let usr = document.getElementById('alias').value;
+
+                const idMovie = new FormData();
+                idMovie.append("id_peli", id_peli);
+                idMovie.append("nom_usr", usr);
+
+                fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=eliminarPelisColleccio', {
+                    method: "POST",
+                    body: idMovie
+                }).then(response => response.json()).then(pelisGuardades => {
+
+                });
+            }
+        });
         //Inicialitzar el colapsable que mostrará "Les Meves Pel·lícules"
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems, {});
@@ -203,8 +222,8 @@ function misPeliculasHTML(datos) {
                             </label>
                         </p>
 
-                        <div class="right-align">
-                            <a class="btn-colleccio btn btn-small waves-effect waves-light right red" id="btn_delete"><i class="material-icons">delete</i></a>
+                        <div class="right-align" id="${datos[i].idPelicula}">
+                            <a class="btn-colleccio btn btn-small waves-effect waves-light right red" id=""><i class="material-icons btn_delete">delete</i></a>
                             <a class="btn-colleccio btn btn-small waves-effect waves-light right" id="btn_edit_colleccio"><i class="material-icons">create</i></a>
                             <a class="btn-colleccio btn btn-small waves-effect waves-light right oculto" id="btn_save_colleccio"><i class="material-icons">save</i></a>
                             <br>

@@ -7,7 +7,7 @@ session_start();
 class controller
 {
     //rutes o esdeveniments possibles
-    private $peticions = array('login', 'signupUsuari', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc', 'comprovarJoc', 'ranking');
+    private $peticions = array('login', 'signupUsuari', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'eliminarPelisColleccio', 'pelismillorvalorades', 'joc', 'comprovarJoc', 'ranking');
 
     public function handler()
     {
@@ -75,6 +75,12 @@ class controller
             case 'modificarDadesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
                 $usuari->modificarDadesUsuari($dadesPOST);
+                break;
+
+            //Eliminar pel·lícules de la col·lecció
+            case 'eliminarPelisColleccio':
+                $dadesPOST = $this->recollirDadesPost();
+                $valoracio_pelicula ->eliminarPeliValorada($dadesPOST);
                 break;
 
             //Generar joc amb inici i sense inici de sessió
@@ -167,6 +173,11 @@ class controller
             if (isset($_POST['userPartida'])) {
                 $dadesForm = array_merge($dadesForm, array('user' => $_POST['userPartida']));
             }
+        }else if (isset($_POST['id_peli'])) {
+            $dadesForm = array(
+                'peli' => $_POST['id_peli'],
+                'usuari' => $_POST['nom_usr']
+            );
         }
         return $dadesForm;
     }

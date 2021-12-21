@@ -233,11 +233,13 @@ body {
 
 .btn-colleccio a{
     margin: 20px;
+   
 }
 
-#btn_delete {
-    margin-left: 5px;
+#btn_edit_colleccio {
+    margin-right: 5px !important;
 }
+
 
 
 

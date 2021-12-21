@@ -372,10 +372,6 @@ class valoracio_pelicula extends BD_MovieQuiz
             $this->comentari . ", " . $this->favorit .  ", " . $this->valoracio . ")";
     }
 
-    function __destruct()
-    {
-    }
-
     /* INSERTAR VALORACIÓ PELI B.D */
     public function afegirValoracioPeli($dadesValoracio = array())
     {
@@ -466,5 +462,16 @@ class valoracio_pelicula extends BD_MovieQuiz
                             valoracio_pelicules.usuari = $id AND valoracio_pelicules.favorit = 1;";
         $this->get_results_from_query();
         return $this->rows;
+    }
+
+    public function eliminarPeliValorada($datos=array())
+    {
+        $peli = $datos["peli"];
+        $usuari = $datos["usuari"];
+        $usr = new usuari();
+        $id= $usr->dadesUsuari($usuari)[0]['idUsuari'];
+        $this->query = "DELETE FROM valoracio_pelicules WHERE valoracio_pelicules.pelicula = '$peli' AND valoracio_pelicules.usuari = '$id'";
+        $this -> execute_single_query();
+        echo $this->query;
     }
 }

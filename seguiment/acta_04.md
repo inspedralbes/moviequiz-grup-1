@@ -8,7 +8,7 @@
   - Jugar al joc (front - back // login & no login) (fet)
 
   - Usuari Registrat 
-        - esborrar pel·lícules de la col·lecció
+        - esborrar pel·lícules de la col·lecció (fet)
         - modificar valoració pelis a la col·lecció
 
   - Si es clica enter, cercar pelicula (fet)
