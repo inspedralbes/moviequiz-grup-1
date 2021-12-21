@@ -2,11 +2,12 @@
 
 require_once('model_MQ.php');
 require_once('view_MQ.php');
+session_start();
 
 class controller
 {
     //rutes o esdeveniments possibles
-    private $peticions = array('login', 'signup', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc', 'comprovarJoc', 'ranking');
+    private $peticions = array('login', 'signupUsuari', 'valoracio', 'pelisValoradesUsuari', 'pelisGuardadesUsuari', 'modificarDadesUsuari', 'pelismillorvalorades', 'joc', 'comprovarJoc', 'ranking');
 
     public function handler()
     {
@@ -29,9 +30,9 @@ class controller
 
         switch ($event) {
             //Registrar nou usuari
-            case 'signup':
+            case 'signupUsuari':
                 $dadesPOST = $this->recollirDadesPost();
-                echo $usuari->introduirUsuari($dadesPOST);
+                $usuari->introduirUsuari($dadesPOST);
                 break;
 
             //Valorar una pel·lícula

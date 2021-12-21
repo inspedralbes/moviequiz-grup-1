@@ -4,6 +4,17 @@ obtenermejorvaloracion();
 /* Obtenir el ranking del joc */
 obtenirRankingJoc();
 
+/* Missatge de que l'usuari s'introdueixi */
+if (document.getElementById('registrar') != null) {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Usuari introduït',
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+
 /* Mostrar resultats de la búsqueda */
 document.getElementById("btn_search").addEventListener("click", function () {
     buscador();
@@ -72,7 +83,7 @@ function buscador() {
 /* Cards pel·lícules */
 function imprimirPelisCards(data_movie, id) {
     var txt = `<div class="col s6 m4 l3" id="${data_movie.imdbID}" class="divpelis">
-                <div class="card">
+                <div class="card hoverable">
                     <div class="card-image">
                         <img class="poster" id="img-peli" src="${data_movie.Poster}" alt="${data_movie.Poster}">
                         <a id="btn btn-modal" class="btn-floating halfway-fab modal-trigger waves-effect waves-light deep-purple darken-1" href="#${id}"><i class="material-icons">add</i></a>
@@ -132,7 +143,7 @@ function generarModal(nom) {
                             <label for="comentario">Comentari</label>
                         </div>
 
-                        <button id="btn-guardar" class="btn waves-effect waves-light disabled"> Guardar </button>
+                        <button id="btn-guardar" class="btn waves-effect waves-light black_font disabled"> Guardar </button>
                         <div id="diverror" class="diverror"><label class="error"><span style="font-size: 20px"> ! </span>Has d'iniciar sessió per poder fer una valoració</label></div>
                     </div>
                     <div class="modal-footer">
@@ -310,7 +321,7 @@ function enviarResposta(pelis) {
 
         jsonPartida = JSON.stringify(jsonPartida);
 
-        document.getElementById("joc-carousel").innerHTML = `<div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
+        document.getElementById("joc-carousel").innerHTML = `<br><div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
                                                                 <div class="spinner-layer spinner-blue-only">
                                                                     <div class="circle-clipper left">
                                                                         <div class="circle"></div>
@@ -485,7 +496,7 @@ function obtenirRankingJoc() {
 
             usuarisRanking.forEach(usuari => {
                 rankingHTML += `<tr>
-                                    <td><a href="#${usuari.user}" class="modal-trigger">${usuari.user}</a></td>
+                                    <td><a href="#${usuari.user}" class="modal-trigger white_font">${usuari.user}</a></td>
                                     <td>${usuari.punts}</td>
                                 </tr>`;
             });

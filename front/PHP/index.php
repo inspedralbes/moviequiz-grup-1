@@ -1,8 +1,4 @@
 <?php
-session_start();
-/*if(!isset($_SESSION['user'])){
-    header("Location: ./index.php");
-}*/
 require_once("controller_MQ.php");
 ?>
 
@@ -66,11 +62,6 @@ require_once("controller_MQ.php");
                     <h4>Ranking puntuació</h4>
                 </div>
                 <div id="ranking-usuaris">
-                    <ul>
-                        <li>Persona 1 - 90pt</li>
-                        <li>Persona 2 - 60pt</li>
-                        <li>Persona 3 - 40pt</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -88,8 +79,15 @@ require_once("controller_MQ.php");
         </div>
     </div>
 
+    <?php
+        if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'ok') {
+            echo "<div id='registrar'></div>";
+            unset($_SESSION['registrar']);
+            session_destroy();
+        }
 
-    <?php include("footer.php"); ?>
+        include("footer.php");
+    ?>
 
     <!-- SCRIPTS -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
