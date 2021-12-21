@@ -44,7 +44,7 @@ require_once("controller_MQ.php");
         <div id="info-usuari" class="col s12 oculto"></div>
 
         <div id="carrousel-titol" class="col s12 m12 l5 ">
-            <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
+            <h1><i class="material-icons medium deep-purple-text text-accent-1">whatshot</i> LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>
 
         <div id="carrousel-fotos" class="carousel col s12 m12 l7"></div>

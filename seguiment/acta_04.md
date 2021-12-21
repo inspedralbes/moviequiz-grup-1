@@ -23,3 +23,4 @@
 
   - Pujar a producció i actualitzar els links
  
+  - Canviar color con azul texto negro
