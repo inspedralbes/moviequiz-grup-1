@@ -106,7 +106,7 @@ function codigoHTMLheaderuser(datos) {
                     <img class="img_header circle responsive-img" src="${datos.imagen}">
                 </div>
                 <div>
-                    <a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light btn">LOGOUT</a>
+                    <a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light black_font btn">LOGOUT</a>
                 </div>
               </div>`;
     return text;
@@ -125,7 +125,7 @@ function codigoHTMLuser(datos) {
 
                         <div class="row margin0px">
                             <div class="col s10">
-                                <h3 class="margin0px center">Les teves dades</h3>
+                                <h3 class="margin0px center">Les meves dades</h3>
                                 <label class="white_font" for="alias">Nom</label>
                                 <input disabled id="nom_us" type="text" class="white_font" value="${datos.nombre}">
 
@@ -140,7 +140,7 @@ function codigoHTMLuser(datos) {
                                 <div class="file-field input-field oculto" id="canviar_img_usr">
                                     <div class="btn btn-small">
                                         <input type="file" id="foto-input" multiple accept="image/*"><i
-                                            class="material-icons">insert_photo</i></input>
+                                            class="material-icons black_font">insert_photo</i></input>
                                     </div>
 
                                     <div class="file-path-wrapper">
@@ -152,9 +152,9 @@ function codigoHTMLuser(datos) {
                             </div>
 
                             <div class="col s2 center-align">
-                                <a class="btn btn-small waves-effect waves-light" id="btn_edit"><i
+                                <a class="btn btn-small waves-effect waves-light black_font" id="btn_edit"><i
                                         class="material-icons">create</i></a>
-                                <a class="btn btn-small waves-effect waves-light" id="btn_save"><i
+                                <a class="btn btn-small waves-effect waves-light black_font" id="btn_save"><i
                                         class="material-icons">save</i></a>
                             </div>
                         </div>

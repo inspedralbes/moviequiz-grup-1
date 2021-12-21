@@ -5,7 +5,7 @@ obtenermejorvaloracion();
 obtenirRankingJoc();
 
 /* Missatge de que l'usuari s'introdueixi */
-if(document.getElementById('registrar') != null){
+if (document.getElementById('registrar') != null) {
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -143,7 +143,7 @@ function generarModal(nom) {
                             <label for="comentario">Comentari</label>
                         </div>
 
-                        <button id="btn-guardar" class="btn waves-effect waves-light disabled"> Guardar </button>
+                        <button id="btn-guardar" class="btn waves-effect waves-light black_font disabled"> Guardar </button>
                         <div id="diverror" class="diverror"><label class="error"><span style="font-size: 20px"> ! </span>Has d'iniciar sessió per poder fer una valoració</label></div>
                     </div>
                     <div class="modal-footer">
@@ -321,7 +321,7 @@ function enviarResposta(pelis) {
 
         jsonPartida = JSON.stringify(jsonPartida);
 
-        document.getElementById("joc-carousel").innerHTML = `<div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
+        document.getElementById("joc-carousel").innerHTML = `<br><div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
                                                                 <div class="spinner-layer spinner-blue-only">
                                                                     <div class="circle-clipper left">
                                                                         <div class="circle"></div>
@@ -389,7 +389,7 @@ function generarjuego() {
                             <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
                             <h6 id="enunciatJoc">En quin any es va estrenar aquesta pel·lícula?</h6>
                             <div class="center">
-                                <a id="btn-acabarJoc" class="btn waves-effect">Enviar</a>
+                                <a id="btn-acabarJoc" class="btn waves-effect black_font">Enviar</a>
                             </div>
                         </div>
                         
@@ -496,7 +496,7 @@ function obtenirRankingJoc() {
 
             usuarisRanking.forEach(usuari => {
                 rankingHTML += `<tr>
-                                    <td><a href="#${usuari.user}" class="modal-trigger">${usuari.user}</a></td>
+                                    <td><a href="#${usuari.user}" class="modal-trigger white_font">${usuari.user}</a></td>
                                     <td>${usuari.punts}</td>
                                 </tr>`;
             });
