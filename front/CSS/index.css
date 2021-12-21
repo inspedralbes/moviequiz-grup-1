@@ -176,6 +176,10 @@ body {
     margin: 0;
 }
 
+.carousel .indicators {
+    display: none !important;
+}
+
 
 
 /*----LES MEVES PEL·LÍCUELES----*/
