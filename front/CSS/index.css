@@ -380,12 +380,16 @@ body {
 
 
 
-/*-----HEADER DADES USUARI LOGGEJAT-----*/
+/*------DADES USUARI LOGGEJAT------*/
 
 .foto-usu{
     margin-top: 20px;
     max-height: 200px;
 }
+
+
+
+/*-----HEADER DADES USUARI LOGGEJAT-----*/
 
 .navbar{
     height: auto;
