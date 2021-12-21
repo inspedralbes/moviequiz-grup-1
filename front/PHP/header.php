@@ -3,6 +3,9 @@
         <a href="index.php">
             <img src="../IMG/logo2.png" class="logo" width="50px">
         </a>
+
+        <a href="#" class="brand-logo center"><img src="../IMG/titol.png" class="titolMovies"></a>
+
         <ul id="nav-mobile" class="right">
             <li><a id="btn_login" href="#login" class="modal-trigger waves-effect waves-light btn">LOGIN</a></li>
             <li id="resultat_header"></li>

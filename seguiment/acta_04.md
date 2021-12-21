@@ -1,6 +1,6 @@
 # Acta de la quarta reunió (4º Reunió)
 
-  - Títol de la web
+  - Títol de la web (fet)
 
   - Ranking puntuació usuaris (fet)
      - Link info usuari
@@ -18,4 +18,8 @@
   - Millorar pagina signup.php
 
   - Mostrar partides jugades
+
+  - Carousel dinàmic
+
+  - Pujar a producció i actualitzar els links
  
