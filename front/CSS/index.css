@@ -103,6 +103,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 13px;
 }
 
 #divsearch input{
@@ -150,6 +151,10 @@ body {
     font-weight: bold;
 }
 
+#ocultardivsearch {
+    margin-left: 4px;
+}
+
 
 
 /*-------CAROUSEL PELIS-------*/ 
@@ -174,6 +179,10 @@ body {
 
 #carrousel-titol h1{
     margin: 0;
+}
+
+.carousel .indicators {
+    display: none !important;
 }
 
 
@@ -272,6 +281,11 @@ body {
     margin-top: 40px !important;
 }
 
+#juego {
+    background-image: url("../IMG/jocFons.png");
+    background-size: 260px;
+}
+
 /* Pantalla Gran */
 @media only screen and (max-width: 1000px) {
     .img_joc {
@@ -308,6 +322,11 @@ body {
         width: 450px;
         margin-bottom: 6%;
         margin-top: 4%;
+    }
+
+    #juego {
+        background-image: url("../IMG/jocFons.png");
+        background-size: 300px;
     }
 }
 

@@ -27,7 +27,7 @@ require_once("controller_MQ.php");
         <div class="row apartadoBusqueda">
             <div id="divsearch" class="col s12">
                 <input type="text" id="search" class="white_font" placeholder="Cercar pel·lícula">
-                <a class="btn btn-small waves-effect waves-light" id="btn_search"><i class="material-icons">search</i></a>
+                <a class="btn btn-small waves-effect waves-light black_font" id="btn_search"><i class="material-icons">search</i></a>
                 <a id="ocultardivsearch" href="#!" class="btn-small oculto red"><i class="material-icons">arrow_drop_up</i></a>
             </div>
         </div>
@@ -40,7 +40,7 @@ require_once("controller_MQ.php");
         <div id="info-usuari" class="col s12 oculto"></div>
 
         <div id="carrousel-titol" class="col s12 m12 l5 ">
-            <h1>LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
+            <h1><i class="material-icons medium deep-purple-text text-accent-1">whatshot</i> LES ÚLTIMES TENDÈNCIES EN PEL·LÍCULES</h1>
         </div>
 
         <div id="carrousel-fotos" class="carousel col s12 m12 l7"></div>
@@ -53,7 +53,7 @@ require_once("controller_MQ.php");
         <div id="modaljoc" class="modal joc joc-modal"></div>
 
         <div id="juego" class="col s12 m12 l4">
-            <button id="btn-joc" class="waves-effect waves-light btn btn-joc modal-trigger" href="#modaljoc"> Minijoc </button>
+            <button id="btn-joc" class="waves-effect waves-light btn btn-joc modal-trigger black_font" href="#modaljoc"> Minijoc </button>
         </div>
 
         <div id="ranking" class="col s12 m12 l8">

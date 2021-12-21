@@ -73,9 +73,9 @@ function buscador() {
 
         })
 
-        document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
-            document.getElementById("resultat").classList.add("oculto");
-            document.getElementById("ocultardivsearch").classList.add("oculto");
+    document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
+        document.getElementById("resultat").classList.add("oculto");
+        document.getElementById("ocultardivsearch").classList.add("oculto");
     })
 }
 
@@ -226,16 +226,33 @@ function obtenermejorvaloracion() {
         var instances = M.Carousel.init(imgs, {
             numVisible: 6,
             padding: 2,
+            indicators: true,
         });
+        let indicatorItems = document.querySelectorAll('.carousel .indicator-item'),
+            slideTime = 3500,
+            activeClass = "active";
 
+        setInterval(() => {
+            indicatorItems.forEach(el => {
+                if (el.classList.contains(activeClass)) {
+                    sib = el.nextElementSibling;
+                    if (sib == null) {
+                        indicatorItems[0].click();
+                    } else {
+                        sib.click()
+                    }
+                }
+            });
+        }, slideTime);
     });
-}
+};
+
 
 //Funció que genera el carosuel amb les imatges de les pel·lícules
 function generarcarrrousel(data) {
     var carrousel = "";
     for (let i = 0; i < data.length; i++) {
-        carrousel += `<a class="carousel-item" href="#"><img src="${data[i].img}" height="320px"></a>`;
+        carrousel += `<a class="carousel-item" href="#"><img src="${data[i].img}" height="300px"></a>`;
     }
     return carrousel;
 }
@@ -381,7 +398,7 @@ function generarjuego() {
                         </div>
 
                     </div>`;
-                    
+
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
 

@@ -16,10 +16,13 @@
   - Millorar disseny css
 
   - Millorar pagina signup.php
+      - css
+      - validació
 
   - Mostrar partides jugades
 
-  - Carousel dinàmic
+  - Carousel dinàmic (fet)
 
   - Pujar a producció i actualitzar els links
  
+  - Canviar color con azul texto negro
