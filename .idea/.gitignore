@@ -1,8 +1,6 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+# Credencials de la Base de Dades
+
+**Database:** a20paumunoli_Projecte_pelicules
+**User:** a20paumunoli_vicsanpau
+**Password:** Vicsanpau123456789
+
