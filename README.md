@@ -9,7 +9,7 @@
     * JS
     * PHP
 
-# Aquest fitxer ha de contenir com a mínim:
+# Dades del projecte
    Integrants: Pau Muñoz, Víctor Moreno, Sandra Ortiz
    Projecte Movies
    
