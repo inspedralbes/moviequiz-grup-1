@@ -35,7 +35,7 @@ function busquedaPeliculas() {
 }
 
 /*  Funcio que cerca una pelicula i mostra els resultats de la cerca  */
-function buscador(a = "") {
+function buscador(val = "") {
 
     //Ocultar el div on es trobarà el resultat de la cerca i boto que oculta el div anterior
     document.getElementById("resultat").classList.remove("oculto");
@@ -50,7 +50,7 @@ function buscador(a = "") {
         then(data => {
 
             //Si no es troba res, missatge d'error
-            if (data.Response == "False" && a == "") {
+            if (data.Response == "False" && val == "") {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -61,7 +61,7 @@ function buscador(a = "") {
             }
 
             //Si es troba informacio, mostrar una graella amb les pelis
-            else {
+            else{
                 var text_movie = "";
                 for (var i = 0; i < data.Search.length; i++) {
                     var idMovie = "movie" + i;
@@ -620,9 +620,10 @@ function obtenirRankingJoc() {
         });
 }
 
-function refrescar(a = ""){
+function refrescar(val = ""){
     login();
     obtenirRankingJoc();
     obtenerPelisMejorValoracion();
-    buscador(a);
+    buscador(val);
 }
+

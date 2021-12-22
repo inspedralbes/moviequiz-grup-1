@@ -164,11 +164,12 @@ class controller
                 $dadesForm = array_merge($dadesForm, array('user' => $_POST['jocUser']));
             }
 
-            //Editar Dades Usuari
+        //Editar Dades Usuari
         } else if (isset($_POST['email_us'])) {
 
             //Format en que es desará les dades corresponents a l'imatge d'un usuari
-            move_uploaded_file($_FILES['foto']['tmp_name'], "/home/a20paumunoli/web/moviequiz1.alumnes.inspedralbes.cat/public_html/front/IMG/" . $_FILES['foto']['name']);
+            move_uploaded_file($_FILES['foto']['tmp_name'], 
+            "/home/a20paumunoli/web/moviequiz1.alumnes.inspedralbes.cat/public_html/front/IMG/" . $_FILES['foto']['name']);
 
             $dadesForm = array(
                 'usuari' => $_POST['alias'],
