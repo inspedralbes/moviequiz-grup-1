@@ -1,10 +1,10 @@
 <nav>
     <div id="nav" class="nav-wrapper deep-purple">
-        <a href="index.php">
-            <img src="../IMG/logo2.png" class="logo" width="50px">
+        <a href="http://moviequiz1.alumnes.inspedralbes.cat">
+            <img src="http://moviequiz1.alumnes.inspedralbes.cat/front/IMG/logo2.png" class="logo" width="50px">
         </a>
 
-        <a href="#" class="brand-logo center"><img src="../IMG/titol.png" class="titolMovies"></a>
+        <a href="#" class="brand-logo center"><img src="http://moviequiz1.alumnes.inspedralbes.cat/front/IMG/titol.png" class="titolMovies"></a>
 
         <ul id="nav-mobile" class="right">
             <li><a id="btn_login" href="#login" class="modal-trigger waves-effect waves-light btn black_font">LOGIN</a></li>
@@ -15,7 +15,7 @@
 
 
 <!-- LOGIN MODAL -->
-<div id="login" class=" login modal">
+<div id="login" class="login modal lg">
     <div class="modal-content">
         <div class="row center">
             <div class="col s12">
@@ -39,7 +39,7 @@
             <!-- BOTÓ LOGIN / LINK SING UP-->
             <div class="col s12">
                 <a id="btn_entrar" class="waves-effect waves-light btn btn-small black_font">Entrar</a>
-                <p class="grey-text link">No ets usuari?,<a href="signup.php"> registra't</a></p>
+                <p class="grey-text link">No ets usuari?,<a href="./front/PHP/signup.php"> registra't</a></p>
             </div>
         </div>
     </div>

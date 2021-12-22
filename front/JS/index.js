@@ -1,10 +1,10 @@
-/* Carrusel amb les pel·lícules millor valorades */
-obtenermejorvaloracion();
+/* Generar el carrusel amb les pel·lícules millor valorades */
+obtenerPelisMejorValoracion();
 
-/* Obtenir el ranking del joc */
+/* Generar el ranking del joc */
 obtenirRankingJoc();
 
-/* Missatge de que l'usuari s'introdueixi */
+/* Mostrar un missatge si l'usuari s'ha registrat correctament a la BD */
 if (document.getElementById('registrar') != null) {
     Swal.fire({
         position: 'center',
@@ -15,63 +15,93 @@ if (document.getElementById('registrar') != null) {
     });
 }
 
-/* Mostrar resultats de la búsqueda */
-document.getElementById("btn_search").addEventListener("click", function () {
-    buscador();
-});
-document.getElementById("search").addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+/* Funcio que engloba tota la funcionalitat de cercar de pelis */
+busquedaPeliculas();
+
+/* Funcio que engloba tota la funcionalitat de cercar de pelis */
+function busquedaPeliculas() {
+
+    //Cercar quan es fa click al boto de cercar
+    document.getElementById("btn_search").addEventListener("click", function () {
         buscador();
-    }
-})
+    });
 
+    //Cercar quan es pressiona el boto d'enter
+    document.getElementById("search").addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            buscador();
+        }
+    });
+}
 
-/*  CERCADOR PEL·LÍCULES  */
-function buscador() {
+/*  Funcio que cerca una pelicula i mostra els resultats de la cerca  */
+function buscador(a = "") {
+
+    //Ocultar el div on es trobarà el resultat de la cerca i boto que oculta el div anterior
     document.getElementById("resultat").classList.remove("oculto");
     document.getElementById("ocultardivsearch").classList.remove("oculto");
-    var input = document.getElementById("search").value;
-    let valoracio;
 
-    //Agafa les dades de pel·lícules de l'api de Omdb 
+    //Obtenir el que s'ha introduit al input de la cerca
+    var input = document.getElementById("search").value;
+
+    //Peticio a l'api d'Omdb amb el parametre s = "peli que volem cercar"
     fetch(`https://www.omdbapi.com/?apikey=5149518a&s=${input}&type=movie`).
         then(res => res.json()).
         then(data => {
-            var text_movie = "";
-            for (var i = 0; i < data.Search.length; i++) {
-                var idMovie = "movie" + i;
-                let data_movie = data.Search[i];
-                //insereix al div "resultat" de l'index.php les pel·lícules a les seves cards
-                text_movie += imprimirPelisCards(data_movie, idMovie);
-                document.getElementById("resultat").innerHTML = text_movie;
+
+            //Si no es troba res, missatge d'error
+            if (data.Response == "False" && a == "") {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error en la cerca de la pel·lícula introduïda',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
 
-            if (document.getElementById("info-usuari").innerHTML != "") {
-                obtenerPelisValoradesUsuario();
-            }
+            //Si es troba informacio, mostrar una graella amb les pelis
+            else {
+                var text_movie = "";
+                for (var i = 0; i < data.Search.length; i++) {
+                    var idMovie = "movie" + i;
+                    let data_movie = data.Search[i];
 
-            document.getElementById("resultat").addEventListener("click", function (e) {
-                if (e.target.classList == "material-icons") {
-                    id = e.target.parentElement.href.split("#")[1];
-                    numPeli = id.split("e")[1];
-                    eliminarModals(data.Search);
-                    document.getElementById(id).innerHTML = generarModal(data.Search[numPeli]);
-
-                    //Inicialitzar modals de les pelicules
-                    var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
-
-                    //Habilitar o no el boto de guarda comentari/valoracio/favorit si l'usuari no ha fet login
-                    if (document.getElementById("info-usuari").innerHTML != "") {
-                        document.getElementById("btn-guardar").classList.remove("disabled");
-                        document.getElementById("diverror").classList.add("oculto");
-                        document.getElementById("resultat").classList.remove("oculto");
-                    }
-
-                    guardarValoracio(data);
+                    //Inserir al div "resultat" la graella amb les pel·lícules resultants de la cerca
+                    text_movie += generarPelisCards(data_movie, idMovie);
+                    document.getElementById("resultat").innerHTML = text_movie;
                 }
-            });
 
-        })
+                //Si s'ha fet login, comprovar quines pelis ja s'han guardat / valorat per tal de deshabilitar el boto que obre el modal que serveix per valorar cada peli
+                if (document.getElementById("info-usuari").innerHTML != "") {
+                    obtenerPelisValoradesUsuario();
+                }
+
+                //Generar el modal (de la peli on es fa click) que ens permetrà valorar/guardar-la
+                document.getElementById("resultat").addEventListener("click", function (e) {
+                    if (e.target.classList == "material-icons") {
+                        id = e.target.parentElement.href.split("#")[1];
+                        numPeli = id.split("e")[1];
+
+                        eliminarModals(data.Search);
+                        document.getElementById(id).innerHTML = generarModal(data.Search[numPeli]);
+
+                        //Inicialitzar modals de les pelicules
+                        var instances = M.Modal.init(document.querySelectorAll(".modal"), {});
+
+                        //Habilitar o no el boto de guardar comentari/valoracio/favorit en funcio de si l'usuari ha fet o no login
+                        if (document.getElementById("info-usuari").innerHTML != "") {
+                            document.getElementById("btn-guardar").classList.remove("disabled");
+                            document.getElementById("diverror").classList.add("oculto");
+                            document.getElementById("resultat").classList.remove("oculto");
+                        }
+
+                        //Guardar la valoracio a la BD
+                        guardarValoracio(data);
+                    }
+                });
+            }
+        });
 
     document.getElementById("ocultardivsearch").addEventListener("click", function (e) {
         document.getElementById("resultat").classList.add("oculto");
@@ -79,9 +109,8 @@ function buscador() {
     })
 }
 
-
-/* Cards pel·lícules */
-function imprimirPelisCards(data_movie, id) {
+/* Generar les cards de les pel·lícules */
+function generarPelisCards(data_movie, id) {
     var txt = `<div class="col s6 m4 l3" id="${data_movie.imdbID}" class="divpelis">
                 <div class="card hoverable">
                     <div class="card-image">
@@ -90,8 +119,7 @@ function imprimirPelisCards(data_movie, id) {
                     </div>
 
                     <div class="card-content card-title">
-                        <span class="black_font">${data_movie.Title}</span><br>
-                        <span class="black_font">${data_movie.Year}</span>
+                        <span class="black_font">${data_movie.Title}</span>
                     </div>
                 </div>
                 <div id="${id}" class="modal"></div>
@@ -99,7 +127,7 @@ function imprimirPelisCards(data_movie, id) {
     return txt;
 }
 
-/* MODALS PER A VALORAR LES PEL·LÍCULES */
+/* GENERAR EL MODAL QUE SERVEIX PER A VALORAR LA PEL·LÍCULA SELECCIONADA */
 function generarModal(nom) {
     var modalHtml = `<div class="modal-content center-align">
                         <h4 class="center-align purple-text text-darken-3 ">${nom.Title}</h4>
@@ -152,15 +180,15 @@ function generarModal(nom) {
     return modalHtml;
 }
 
+//Funcio que serveix per eliminar els modals (que serveixen per valorar una peli) ja existents
 function eliminarModals(data) {
     for (let i = 0; i < data.length; i++) {
         document.getElementById("movie" + i).innerHTML = "";
     }
 }
 
+//Funcio que serveix per guardar la valoracio i el comentari d'una peli i si es favorita o no a la BD 
 function guardarValoracio(data) {
-    //Guardar la valoracio i el comentari d'una peli i si es favorita o no a la BD 
-
 
     //Listener per obtenir el valor (del input radio seleccionat) de la valoracio de la peli 
     document.getElementById("formRadio").addEventListener("click", function (e) {
@@ -176,6 +204,7 @@ function guardarValoracio(data) {
         let comentario = e.target.parentElement.querySelector("#comentario").value;
         let nomUsuari = document.getElementById('alias').value;
 
+        //Creacio del FormData que enviarem pel fetch
         const datosLogin = new FormData();
         datosLogin.append("valoracio", valoracio);
         datosLogin.append("favorit", favorito);
@@ -186,25 +215,59 @@ function guardarValoracio(data) {
         datosLogin.append('id-peli', data.Search[numPeli].imdbID);
         datosLogin.append('nom-usuari', nomUsuari);
 
-        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=valoracio', {
+        //Peticio fetch que guardarà la valoracio/comentari/favorit a la BD
+        fetch('http://moviequiz1.alumnes.inspedralbes.cat//front/PHP/controller_MQ.php?action=valoracio', {
             method: "POST",
             body: datosLogin
-        }).then(response => response.json()).then(data => { console.log(data); });
+        }).then(response => response.json())
+            .then(data => {
+
+                //Si el resultat del fetch es "existeix", mostrar missatge d'error
+                if (data.resultat == "existeix") {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Ja s\' fet una valoració / un comentari a aquesta pel·lícula',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+                //Si el resultat del fetch es "be", mostrar missatge d'ok
+                else if (data.resultat == "be") {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Valoració introduïda',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    document.body.style.overflow = "initial";
+
+                    //Refrescar la pagina sense fer F5
+                    refrescar();
+                }
+            });
     });
 }
 
 function obtenerPelisValoradesUsuario() {
+
+    //Obtenir el nom d'usuari de la persona que ha fet login
     let user = document.getElementById("alias").value;
 
     const datos = new FormData();
     datos.append("user", user);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelisValoradesUsuari', {
+    //Fer un peticio fetch per tal d'obtenir les pelis que ha valorat la persona que ha fet login
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat//front/PHP/controller_MQ.php?action=pelisValoradesUsuari', {
         method: "POST",
         body: datos
     }).then(response => response.json()).then(pelisValorades => {
         for (var i = 0; i < pelisValorades.length; i++) {
-            //deshabilita el botó per a obrir el modal (de valorar) d'una peli ja valorada per l'usuari
+
+            //Deshabilita el botó (de cada peli ja valorada) que serveix per a obrir el modal que ens permet valorar una peli.
             if (document.getElementById(pelisValorades[i].idPelicula) != null) {
                 document.querySelector(`#${pelisValorades[i].idPelicula} a`).setAttribute("disabled", '');
             }
@@ -212,43 +275,47 @@ function obtenerPelisValoradesUsuario() {
     });
 }
 
+/* Generar el carrusel amb les pel·lícules millors valorades */
+function obtenerPelisMejorValoracion() {
 
+    //Peticio fetch de les pelis millors valorades
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat//front/PHP/controller_MQ.php?action=pelismillorvalorades')
+        .then(response => response.json())
+        .then(data => {
 
-function obtenermejorvaloracion() {
+            //Inserir al div -> carrousel-fotos, el codi HTML del carrousel 
+            document.getElementById("carrousel-fotos").innerHTML = generarcarrrousel(data);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelismillorvalorades', {}).then(response => response.json()).then(data => {
+            //Inicialitzar carrousel
+            var imgs = document.querySelectorAll('.carousel');
 
-        document.getElementById("carrousel-fotos").innerHTML = generarcarrrousel(data);
-
-        var imgs = document.querySelectorAll('.carousel');
-
-        //Característiques del carousel
-        var instances = M.Carousel.init(imgs, {
-            numVisible: 6,
-            padding: 2,
-            indicators: true,
-        });
-        let indicatorItems = document.querySelectorAll('.carousel .indicator-item'),
-            slideTime = 3500,
-            activeClass = "active";
-
-        setInterval(() => {
-            indicatorItems.forEach(el => {
-                if (el.classList.contains(activeClass)) {
-                    sib = el.nextElementSibling;
-                    if (sib == null) {
-                        indicatorItems[0].click();
-                    } else {
-                        sib.click()
-                    }
-                }
+            /* Característiques del carousel */
+            var instances = M.Carousel.init(imgs, {
+                numVisible: 6,
+                padding: 2,
+                indicators: true,
             });
-        }, slideTime);
-    });
+
+            let indicatorItems = document.querySelectorAll('.carousel .indicator-item'),
+                slideTime = 3500,
+                activeClass = "active";
+
+            setInterval(() => {
+                indicatorItems.forEach(el => {
+                    if (el.classList.contains(activeClass)) {
+                        sib = el.nextElementSibling;
+                        if (sib == null) {
+                            indicatorItems[0].click();
+                        } else {
+                            sib.click()
+                        }
+                    }
+                });
+            }, slideTime);
+        });
 };
 
-
-//Funció que genera el carosuel amb les imatges de les pel·lícules
+//Funció que genera el codi HTML carosuel amb les imatges de les pel·lícules millors valorades
 function generarcarrrousel(data) {
     var carrousel = "";
     for (let i = 0; i < data.length; i++) {
@@ -257,18 +324,19 @@ function generarcarrrousel(data) {
     return carrousel;
 }
 
-
-/*-------------JOC------------- */
+/* Listener que activa el joc */
 document.getElementById("btn-joc").addEventListener("click", function (e) {
     let pelis = [];
 
-    //Inicialitzar modal del joc 
+    //Inicialitzar el modal del joc 
     var joc = document.querySelectorAll('.joc');
     var instances = M.Modal.init(joc, {});
 
+    //Funcions per genrar el codi HTML del joc
     generarjuego();
     generarpreguntas();
 
+    //Si es fa click a un dels inputs[type="radio"] que apareixen com a resposta de cada pregunta del joc, es guarda la resposta seleccionada a un array d'objectes
     document.getElementById('generarpreguntas').addEventListener('click', function (e) {
         if (e.target.name == "resposta") {
             let idPregunta = e.target.parentElement.parentElement.parentElement.id
@@ -278,16 +346,17 @@ document.getElementById("btn-joc").addEventListener("click", function (e) {
         }
     });
 
+    //Enviar les respostes per compravar si son correctes
     enviarResposta(pelis);
-
 });
 
 function enviarResposta(pelis) {
-    document.getElementById('btn-acabarJoc').addEventListener('click', e => {
 
+    //Listener que s'activa quan es fa click al boto de enviar dades del joc
+    document.getElementById('btn-acabarJoc').addEventListener('click', e => {
         let idPelis = [], respuestas = [];
 
-        //Guarda l'id de cada una de les 5 pel·lícules que apareixen al joc
+        //Guardar l'id de cada una de les 5 pel·lícules que apareixen al joc
         for (let i = 0; i < pelis.length; i++) {
             var n = 0;
             for (let j = 0; j < idPelis.length; j++) {
@@ -296,32 +365,38 @@ function enviarResposta(pelis) {
             if (n == 0) idPelis.push(pelis[i].ImdbID);
         }
 
-        //Array donde se han extraido el valor de los campos ImdbID del array de objetos 'peli' 
-        let pelisImdBID = pelis.map(peli => {
+        //Crear un array format per només el valor dels camps ImdbID del array d'objectes 'pelis' 
+        let pelisImdbID = pelis.map(peli => {
             return peli.ImdbID;
         })
 
         for (let i = 0; i < idPelis.length; i++) {
 
-            //Obtener el ultimo indice en el que el id de una pelicula puede encontrase en el array aux 
-            let val = pelisImdBID.lastIndexOf(idPelis[i]);
+            //Obtenir l'ultima posicio del array pelisImdbID en el que es pot trobar l'id d'una de les peli que hi apareixen a l'array idPelis  
+            let val = pelisImdbID.lastIndexOf(idPelis[i]);
 
-            //Guardar la ultima respuesta que se ha hecho de cada pelicula
+            //Guardar l'ultima resposta que s'ha fet de cada peli a l'array 'respuestas'
             respuestas.push(pelis[val]);
         }
 
+        //Obtenir el id de la partida
         let idParitda = document.getElementById('generarpreguntas').className;
+
+        //Preguntar pel nom de la partida
         let nombrePartida = prompt('Nom de la partida: ');
 
+        //Crear un objecte que volem enviar al servidor per comprovar les respostes
         jsonPartida = {
             'id_partida': idParitda,
             'nom_partida': nombrePartida,
             'respostes': respuestas
         }
 
+        //Convertir l'objecte creat en una cadena de text JSON
         jsonPartida = JSON.stringify(jsonPartida);
 
-        document.getElementById("joc-carousel").innerHTML = `<br><div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
+        //Inserir al div -> joc-carousel el codi HTML que mostra un spinner
+        document.getElementById("joc-carousel").innerHTML = `<br><div class="center"><div id="gif-loading" class="preloader-wrapper big active margen-top margen-bottom">
                                                                 <div class="spinner-layer spinner-blue-only">
                                                                     <div class="circle-clipper left">
                                                                         <div class="circle"></div>
@@ -333,8 +408,9 @@ function enviarResposta(pelis) {
                                                                         <div class="circle"></div>
                                                                     </div>
                                                                 </div>
-                                                            </div>`;
+                                                            </div></div>`;
 
+        //Crear el FormData per enviar les respostes al servidor i obtenir algunes dades o unes altres en funcio de si s'ha fet login o no
         const datos = new FormData();
         datos.append("respostes", jsonPartida);
 
@@ -343,7 +419,8 @@ function enviarResposta(pelis) {
             datos.append('userPartida', user);
         }
 
-        fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=comprovarJoc', {
+        //Fer un fetch al servidor per comprovar les respostes seleccionades
+        fetch('http://moviequiz1.alumnes.inspedralbes.cat//front/PHP/controller_MQ.php?action=comprovarJoc', {
             method: "POST",
             body: datos
         }).then(response => response.json())
@@ -353,47 +430,54 @@ function enviarResposta(pelis) {
                 document.getElementById("btn-acabarJoc").classList.add("oculto");
                 document.getElementById("enunciatJoc").classList.add("oculto");
 
-                console.log(data);
+                //Processar les dades obtingudes despres que el servidor fes la comprovacio de les respostes seleccionades
                 let puntuacion;
                 var tpunts = data.encerts * 3 + data.fallos * -1;
-                //Imprimeix el resultat del joc
-                puntuacion = `<div class="modal-content resultat-joc deep-purple center">
-                                <h4>${data.nom_partida}</h4>
-                                </br>
-                                <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
-                                <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
-                                <h5 class="karma">Puntuació: ${tpunts}/15</h5>`;
+                if (tpunts < 0) tpunts = 0;
 
-                // Depenent de si s'ha arribat a la mitja o no mostra un gif que enfatitza 
+                //Crear el codi HTML del resultat del joc
+                puntuacion = `<div class="modal-content resultat-joc deep-purple center">
+                                <div>                
+                                    <h4>Partida: ${data.nom_partida}</h4>
+                                </div>
+                                <div> 
+                                    <h5><i class="icon-resultat material-icons green-text text-accent-3">check</i>Encerts: ${data.encerts}</h5>
+                                    <h5><i class="icon-resultat material-icons red-text">close</i>Errors: ${data.fallos}</h5>
+                                </div>
+                                <div>
+                                    <h5 class="karma">Puntuació: ${tpunts}/15</h5>
+                                </div><div>`;
+
+
+                // Depenent de si s'ha aprovat o no, es mostra un gif que enfatitza el resultat
                 if (tpunts < 7) {
-                    puntuacion += `<img class="gifJoc" src="../IMG/bad.gif">`;
+                    puntuacion += `<img class="img_joc" src="./front/IMG/bad.gif">`;
                 } else {
-                    puntuacion += `<img class="gifJoc" src="../IMG/welldone.gif">`;
+                    puntuacion += `<img class="img_joc" src="./front/IMG/welldone.gif">`;
                 }
 
-                //Botó per a tancar el modaldel resultat del joc
-                puntuacion += `<a id="cerrarModal-joc" href="#!" class="btn modal-close red oculto"><i class="material-icons red">close</i></a>
-                            </div>`;
+                //Botó per a tancar el modal del joc
+                puntuacion += `</div><div><a id="cerrarModal-joc" href="#!" class="btn modal-close red"><i class="material-icons red">close</i></a>
+                            </div></div>`;
 
-                //Sobrescriu el modal que ja hi existia amb els resultats
+                //Inserir al div -> joc-carousel els resultats del joc
                 document.getElementById("joc-carousel").innerHTML = puntuacion;
-                document.getElementById("cerrarModal-joc").classList.remove("oculto");
             });
     });
 }
 
-
+//Funcio per generar i inserir l'estructura HTML del modal del joc al div -> modaljoc
 function generarjuego() {
     let juegoHTML = `<div class="modal-content joc-modal">
                         <div class="header-joc center" id="pr">
                             <h4><i class="material-icons">games</i> MINIJOC <i class="material-icons">games</i> </h4>
                             <h6 id="enunciatJoc">En quin any es va estrenar aquesta pel·lícula?</h6>
-                            <div class="center">
+                            <div>
                                 <a id="btn-acabarJoc" class="btn waves-effect black_font">Enviar</a>
                             </div>
                         </div>
                         
-                        <div id="joc-carousel" class="carousel joc-carousel carousel-slider center black-text">
+                        <div id="joc-carousel" class="carousel joc-carousel carousel-slider black-text">
                             <div id="generarpreguntas"></div>
                         </div>
 
@@ -402,9 +486,10 @@ function generarjuego() {
     document.getElementById("modaljoc").innerHTML = juegoHTML;
 };
 
-
+// Funcio per generar les 5 preguntes de les pelis
 function generarpreguntas() {
 
+    //Enviar unes dades o unes altres en funcio de si s'ha fet login o no
     let val = 'fallo';
     const datos = new FormData();
 
@@ -416,62 +501,60 @@ function generarpreguntas() {
 
     datos.append('joc', val);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=joc', {
+    //Fer fetch per obtenir i inserir les 5 preguntes de les pelis
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat//front/PHP/controller_MQ.php?action=joc', {
         method: "POST",
         body: datos
     }).then(response => response.json())
         .then(data => {
-            console.log(data);
             let preguntas = "";
-            //Genera les 5 preguntes / pel·lícules com a diapositives del carousel
+
+            //Generar el codi HTML de les 5 preguntes que es mostraran com a diapositives del carousel
             for (let i = 0; i < data.peliculas.length; i++) {
                 preguntas += `<div class="row carousel-item deep-purple black-text" href="#">
 
-                                <div class="col s12 m5">
+                                <div class="col s6 center">
                                     <img class="img_joc center" src="${data.peliculas[i].Poster}">
-                                </div>
-
-                                <div class="col s12 m5 center">
-                                    <h4 class="white-text center titol_peli_joc">${data.peliculas[i].Nombre}</h4>
                                 </div>
                                 
                                 <div id="${data.peliculas[i].ImdbID}" class="form-joc col s6 center">
+                                    <h4 class="white-text center titol_peli_joc">${data.peliculas[i].Nombre}</h4>
                                     <form>
                                         <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice1}"/>
-                                            <span class="resposta-joc">${data.peliculas[i].choice1}</span>
+                                            <span class="resposta-joc white_font">${data.peliculas[i].choice1}</span>
                                         </label>
                                         </br>
                                         <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice2}"/>
-                                            <span class="resposta-joc">${data.peliculas[i].choice2}</span>
+                                            <span class="resposta-joc  white_font">${data.peliculas[i].choice2}</span>
                                         </label>
                                         </br>
                                         <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice3}"/>
-                                            <span class="resposta-joc">${data.peliculas[i].choice3}</span>
+                                            <span class="resposta-joc white_font">${data.peliculas[i].choice3}</span>
                                         </label>
                                         </br>
                                         <label class="opcions-joc">
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice4}"/>
-                                            <span class="resposta-joc">${data.peliculas[i].choice4}</span>
+                                            <span class="resposta-joc white_font">${data.peliculas[i].choice4}</span>
                                         </label>
                                         </br>
                                         <label>
                                             <input name="resposta" type="radio" value="${data.peliculas[i].choice5}"/>
-                                            <span class="resposta-joc">${data.peliculas[i].choice5}</span>
+                                            <span class="resposta-joc white_font">${data.peliculas[i].choice5}</span>
                                         </label>
                                     </form>
                                 </div>  
                             </div>`;
             }
 
-            //Insereix les 5 preguntes/pel·lícules
+            //Inserir les 5 preguntes de les pel·lícules i la classe formada per l'id de la partida al div -> generarpreguntas
             document.getElementById("generarpreguntas").innerHTML = preguntas;
             document.getElementById("generarpreguntas").classList.add(`${data.id_partida}`);
 
 
-            //Inicialitzar carousel joc 
+            //Inicialitzar el carrusel del joc 
             var carr = document.querySelectorAll('.joc-carousel');
             var instance = M.Carousel.init(carr, {
                 fullWidth: true,
@@ -480,10 +563,15 @@ function generarpreguntas() {
         });
 }
 
+// Funcio per generar el codi HTML del ranking total del joc 
 function obtenirRankingJoc() {
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=ranking')
+
+    //Peticio fetch per obtenir els 3 users amb la millor puntuació 
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat//front/PHP/controller_MQ.php?action=ranking')
         .then(response => response.json())
         .then(usuarisRanking => {
+
+            //Crear una taula amb els resultats del fetch
             let rankingHTML = `<table class="highlight responsive-table centered">
                                 <thead>
                                     <tr>
@@ -503,6 +591,7 @@ function obtenirRankingJoc() {
 
             rankingHTML += `</tbody></table>`;
 
+            //Generar el codi HTML del modal de cadascun dels usuaris que surten al ranking
             usuarisRanking.forEach(usuari => {
                 rankingHTML += `<div id="${usuari.user}" class="modal usuarisModals bottom-sheet">
                                     <div class="modal-content">
@@ -522,8 +611,18 @@ function obtenirRankingJoc() {
                                 </div>`;
             });
 
+            //Inserir al div -> ranking-usuaris el codi HTML del ranking
             document.getElementById('ranking-usuaris').innerHTML = rankingHTML;
+
+            //Inicialitzar els modals dels 3 usuaris amb millor puntuacio
             var elems = document.querySelectorAll('.usuarisModals');
             var instances = M.Modal.init(elems, {});
         });
+}
+
+function refrescar(a = ""){
+    login();
+    obtenirRankingJoc();
+    obtenerPelisMejorValoracion();
+    buscador(a);
 }

@@ -1,17 +1,17 @@
 <?php
-require_once("controller_MQ.php");
+require_once("./controller_MQ.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
-    if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'existeix') {
-        header("Refresh:2; url=signup.php");
-    }
-    if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'ok') {
-        header("Location: ./index.php");
-    }
+if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'existeix') {
+    header("Refresh:2; url=./signup.php");
+}
+if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'ok') {
+    header("Location: ../../index.php");
+}
 ?>
 
 <head>
@@ -30,7 +30,7 @@ require_once("controller_MQ.php");
 </head>
 
 <body>
-    <?php include("header.php"); ?>
+    <?php include("./header.php"); ?>
 
     <!-- Botó tornar enrrere -->
 
@@ -40,38 +40,42 @@ require_once("controller_MQ.php");
 
     <div class="formulariRegistre">
         <form action="./signup.php?action=signupUsuari" method="POST">
-            <div class="row formulari center white">
+            <div class="row formulari white">
 
                 <div class="col s12">
+                    <button id="back" class="btn waves-effect waves-light" type="button" name="action"><i class="black_font material-icons">arrow_back</i></button>
+                </div>
+
+                <div class="col s12 center">
                     <h3 class="h3 deep-purple-text">Dades de l'usuari</h3>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s12 center">
                     <input id="usuari" type="text" class="validate" name="user">
                     <label for="usuari">Usuari/alias</label>
                 </div>
-
-                <div class="input-field col s12">
+ 
+                <div class="input-field col s12 center">
                     <input id="password" type="password" class="validate" name="password">
                     <label for="password">Contrasenya</label>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s12 center">
                     <input id="email" type="email" class="validate" name="email">
                     <label for="email">Email</label>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s12 center">
                     <input id="nom" type="text" class="validate" name="nom">
                     <label for="nom">Nom</label>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s12 center">
                     <input id="cognom" type="text" class="validate" name="cognom">
                     <label for="cognom">Cognoms</label>
                 </div>
 
-                <div class="col s12 submit">
+                <div class="col s12 submit center">
                     <button class="btn waves-effect waves-light pulse black_font" type="submit" name="signup">Registra't</button>
                 </div>
 
@@ -82,13 +86,13 @@ require_once("controller_MQ.php");
     </div>
 
     <?php
-        if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'existeix') {
-            echo "<div id='registrar'></div>";
-            unset($_SESSION['registrar']);
-            session_destroy();
-        }
+    if (isset($_SESSION['registrar']) && $_SESSION['registrar'] == 'existeix') {
+        echo "<div id='registrar'></div>";
+        unset($_SESSION['registrar']);
+        session_destroy();
+    }
 
-        include("footer.php");
+    include("./footer.php");
     ?>
     <!-- SCRIPTS -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

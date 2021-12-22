@@ -1,51 +1,65 @@
-/* Inicialitzar modals */
+/* Listener al boto de login per tal d'inicialitzar el modal del login */
 document.getElementById("btn_login").addEventListener("click", function (e) {
     var instances = M.Modal.init(document.querySelector(".login"), {});
 })
 
-/* USUARI REGISTRAT */
-document.getElementById("btn_entrar").addEventListener("click", function () { login(); });
+//Funcio que engloba tota la funcionalitat de fer login
+ferLogin();
 
-document.getElementById("pwd").addEventListener('keydown', e => {
-    if (e.key === 'Enter') { login(); }
-});
+//Funcio que engloba tota la funcionalitat de fer login
+function ferLogin() {
+    document.getElementById("btn_entrar").addEventListener("click", function () { login(); });
 
+    document.getElementById("pwd").addEventListener('keydown', e => {
+        if (e.key === 'Enter') { login(); }
+    });
+}
+
+//Funcio que comprova si l'usuari introduït, concorda amb algun de la BD
 function login() {
+
+    //Obtenir l'usuari i la contrasenya introduïts per l'usuari
     let usu = document.getElementById("usuari").value;
     let pwd = document.getElementById("pwd").value;
 
+    //Crear el FormData per enviar-lo pel fetch
     const datosLogin = new FormData();
     datosLogin.append("usuari", usu);
     datosLogin.append("pwd", pwd);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=login', {
+    //Fer el fetch per comprovar si l'suari introduït concorda amb algun de la BD
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat/front/PHP/controller_MQ.php?action=login', {
         method: "POST",
         body: datosLogin
     }).then(response => response.json()).then(data => {
         //Si hi ha un usuari loggejat ...
         if (data.exito == true) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'S\'ha iniciat la sessió!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            if(document.getElementById("login").classList.contains('lg')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'S\'ha iniciat la sessió!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                document.getElementById("login").classList.remove('lg');
+            }
 
-            //Inserir al header el nom de l'usuari y la seva imatge
+            //Inserir al header el nom de l'usuari i la seva imatge
             document.getElementById("resultat_header").innerHTML = codigoHTMLheaderuser(data);
 
-
-            //Ocultar botó login, carusel
+            //Ocultar el botó login i el carrusel
             document.getElementById("btn_login").classList.add("oculto");
             document.getElementById("carrousel-fotos").classList.add("oculto");
             document.getElementById("carrousel-titol").classList.add("oculto");
 
-            //Mostrar l'informació de l'usuari i l'apartatar de "les Meves Pel·lícules"
+            //Mostrar l'informació de l'usuari i l'apartat de "les Meves Pel·lícules"
             document.getElementById("info-usuari").classList.remove("oculto");
             document.getElementById("apartadoMisPeliculas").classList.remove("oculto");
+
             //Inserir l'informació de l'usuari
             document.getElementById("info-usuari").innerHTML = codigoHTMLuser(data);
+
             //No mostrar el botó de desar les dades de l'usuari
             document.getElementById("btn_save").classList.add("oculto");
 
@@ -59,7 +73,7 @@ function login() {
                 document.getElementById("btn_edit").classList.add("oculto");
             });
 
-            //Ocultar dades modificables de l'usuari al pressionar el botó de dessar i deshabilitar la seva edició
+            //Ocultar dades modificables de l'usuari al pressionar el botó de desar, deshabilitar la seva edició i guardar les dades modificades
             document.getElementById("btn_save").addEventListener("click", function (e) {
                 document.getElementById("nom_us").setAttribute("disabled", "");
                 document.getElementById("email_us").setAttribute("disabled", "");
@@ -67,26 +81,17 @@ function login() {
                 document.getElementById("img_usr_label").classList.add("oculto");
                 document.getElementById("btn_edit").classList.remove("oculto");
                 document.getElementById("btn_save").classList.add("oculto");
+
+                //Guardar les dades modificades
                 dadesUsuariModificades();
             });
 
             //Mostrar les pel·lícules desades per l'usuari
             misPeliculas();
 
-            /*
-            //Habilitar l'edició de les dades modificables de la valoració al pressionar el botó d'editar 
-            document.getElementById("btn_edit_colleccio").addEventListener("click", function (e) {
-                document.getElementById("btn_save_colleccio").removeAttribute("oculto");
-            });
-
-            //Deshabilitar l'edició de les dades modificables de la valoració al pressionar el botó d'editar 
-            document.getElementById("btn_save_colleccio").addEventListener("click", function (e) {
-                document.getElementById("btn_edit_colleccio").setAttribute("oculto");
-                dadesUsuariModificades();
-            });*/
 
         } else {
-            //Mostrar notificació conform no s'ha pogut iniciar la sessió
+            //Mostrar notificació d'error en cas que no s'hagi pogut iniciar la sessió
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
@@ -98,7 +103,7 @@ function login() {
     });
 }
 
-/* Codi per a inserir al header el nom de l'usuari y la seva imatge */
+/* Codi per a inserir al header el nom de l'usuari, la seva imatge i boto de logout */
 function codigoHTMLheaderuser(datos) {
     let text = `<div class="flex navbar">
                 <div>${datos.usuari}</div>
@@ -106,14 +111,13 @@ function codigoHTMLheaderuser(datos) {
                     <img class="img_header circle responsive-img" src="${datos.imagen}">
                 </div>
                 <div>
-                    <a id="btn_logout" href="logout.php" class="modal-trigger waves-effect waves-light black_font btn">LOGOUT</a>
+                    <a id="btn_logout" href="../../index.php" class="modal-trigger waves-effect waves-light black_font btn">LOGOUT</a>
                 </div>
               </div>`;
     return text;
 }
 
-
-/* FORMULARI DADES (EDITABLES) USUARI */
+/* FORMULARI AMB LES DADES (EDITABLES) DE L'USUARI QUE HA FET LOGIN */
 function codigoHTMLuser(datos) {
     let text = `<div class="row margin0px">
                     <div class="col s12 m4 centrar">
@@ -163,45 +167,69 @@ function codigoHTMLuser(datos) {
     return text;
 }
 
-/* SECCIÓ "LES MEVES PEL·LÍCULES" */
+/* Funcio per generar el codi HTML de "LES MEVES PEL·LÍCULES" */
 function misPeliculas() {
+
+    //Obtenir el nom d'usuari de la persona que ha fet login
     let user = document.getElementById("alias").value;
     let codi;
 
+    //Crear el FormData per enviar-lo pel fetch
     const datos = new FormData();
     datos.append("user", user);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=pelisGuardadesUsuari', {
+    //Fer la peticio fetch
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat/front/PHP/controller_MQ.php?action=pelisGuardadesUsuari', {
         method: "POST",
         body: datos
     }).then(response => response.json()).then(pelisGuardades => {
+
+        //Generar el codi HTML de les pelis guardades i inserir-ho al div -> apartadoMisPeliculas
         codi = misPeliculasHTML(pelisGuardades);
         document.getElementById("apartadoMisPeliculas").innerHTML = codi;
-        //Eliminar pel·lícula de col·lecció
+
+        //Listener per eliminar una pel·lícula de la col·lecció de pelis d'un usuari
         document.getElementById("apartadoMisPeliculas").addEventListener("click", function (e) {
             if (e.target.classList.contains("btn_delete")) {
+
+                //Obtenir el id de la peli i nom d'usuari
                 let id_peli = e.target.parentElement.parentElement.id;
                 let usr = document.getElementById('alias').value;
 
+                //Crear el FormData per enviar-lo pel fetch
                 const idMovie = new FormData();
                 idMovie.append("id_peli", id_peli);
                 idMovie.append("nom_usr", usr);
 
-                fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=eliminarPelisColleccio', {
+                //Fer la peticio fetch
+                fetch('http://moviequiz1.alumnes.inspedralbes.cat/front/PHP/controller_MQ.php?action=eliminarPelisColleccio', {
                     method: "POST",
                     body: idMovie
-                }).then(response => response.json()).then(pelisGuardades => {
+                }).then(response => response.json()).then(data => {
+                    //Si la query s'ha executat be, es mostrarà un missatge
+                    if (data.resultat == "ok") {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Valoració eliminada de les meves pel·lícules',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
 
+                        //Refrescar la pagina sense fer F5
+                        refrescar("a");
+                    }
                 });
             }
         });
-        //Inicialitzar el colapsable que mostrará "Les Meves Pel·lícules"
+
+        //Inicialitzar el colapsable que mostrará la llista de "Les Meves Pel·lícules"
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems, {});
     });
 }
 
-/* Llista amb les pel·lícules favorites de l'usuari */
+/* Generar el codi HTML de la llista que contindrà les pel·lícules favorites de l'usuari */
 function misPeliculasHTML(datos) {
     let text = `<h3 class="center">Les meves pel·lícules</h3><ul class="collapsible popout">`;
     for (let i = 0; i < datos.length; i++) {
@@ -229,21 +257,23 @@ function misPeliculasHTML(datos) {
                             <br>
                         </div>
                     </div>
-                    
                 </li>`;
     }
     text += '</ul>';
     return text;
 }
 
-/* GUARDAR DADES D'EDITAR LES DADES DE L'USUARI */
+/* GUARDAR LES DADES DE L'USUARI MODIFICADES */
 function dadesUsuariModificades() {
+
+    //Obtenir les noves dades del usuari
     let file = document.getElementById("foto-input").files[0];
     let nom_u = document.getElementById("nom_us").value;
     let email_u = document.getElementById("email_us").value;
     let img_u = document.getElementById("img_link").value;
     let user = document.getElementById("alias").value;
 
+    //Crear el FormData per enviar-lo pel fetch
     const dades_u = new FormData();
     dades_u.append("alias", user);
     dades_u.append("nom_us", nom_u);
@@ -251,17 +281,27 @@ function dadesUsuariModificades() {
     dades_u.append("img_link", img_u);
     dades_u.append("foto", file);
 
-    fetch('http://localhost/moviequiz-grup-1/front/PHP/controller_MQ.php?action=modificarDadesUsuari', {
+    //Fer un fetch per actualitzar les dades de l'usuari
+    fetch('http://moviequiz1.alumnes.inspedralbes.cat/front/PHP/controller_MQ.php?action=modificarDadesUsuari', {
         method: "POST",
         body: dades_u,
         contentType: false,
         processData: false
     }).then(response => response.json()).then(data => {
-        console.log(data);
-    }).catch((error) => {
-        console.log(error)
-    });;
+
+        //Si la query s'ha executat be, es mostrarà un missatge
+        if (data.resultat == "ok") {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Informació modificada',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            //Refrescar la pagina sense fer F5
+            refrescar("a");
+        }
+    })
 }
 
-
-/* GUARDAR DADES D'EDITAR LES VALORACIONS DE LES PELIS */

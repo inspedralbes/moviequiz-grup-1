@@ -16,7 +16,6 @@ class controller
         $valoracio_pelicula = new valoracio_pelicula();
         $partida = new partida();
         $partida_jugada = new partida_jugada();
-        $vista = new view();
 
         $event = 'inici';
 
@@ -74,13 +73,17 @@ class controller
             //Editar les dades d'un usuari loggejat
             case 'modificarDadesUsuari':
                 $dadesPOST = $this->recollirDadesPost();
-                $usuari->modificarDadesUsuari($dadesPOST);
+                $res = $usuari->modificarDadesUsuari($dadesPOST);
+                $res = json_encode($res);
+                echo $res;
                 break;
 
             //Eliminar pel·lícules de la col·lecció
             case 'eliminarPelisColleccio':
                 $dadesPOST = $this->recollirDadesPost();
-                $valoracio_pelicula ->eliminarPeliValorada($dadesPOST);
+                $res = $valoracio_pelicula ->eliminarPeliValorada($dadesPOST);
+                $res = json_encode($res);
+                echo $res;
                 break;
 
             //Generar joc amb inici i sense inici de sessió
@@ -131,12 +134,14 @@ class controller
                 'nom' => $_POST['nom'],
                 'cognoms' => $_POST['cognom']
             );
+
         //Agafar les dades d'inici de sessió
         } else if (isset($_POST['usuari'])) {
             $dadesForm = array(
                 'usuari' => $_POST['usuari'],
                 'contrasenya' => $_POST['pwd']
             );
+
         //Dades de la valoració d'una pel·lícula
         } else if (isset($_POST['valoracio'])) {
             $dadesForm = array(
@@ -149,8 +154,10 @@ class controller
                 'imgPeli' => $_POST["img-peli"],
                 'nomUsuari' => $_POST['nom-usuari']
             );
+
         } else if (isset($_POST['user'])) {
             $dadesForm = $_POST['user'];
+
         } else if (isset($_POST['joc'])) {
             $dadesForm = array("juego" => $_POST['joc']);
             if ($_POST['joc'] == 'exito') {
@@ -159,20 +166,23 @@ class controller
 
             //Editar Dades Usuari
         } else if (isset($_POST['email_us'])) {
+
             //Format en que es desará les dades corresponents a l'imatge d'un usuari
-            move_uploaded_file($_FILES['foto']['tmp_name'], "../IMG/" . $_FILES['foto']['name']);
+            move_uploaded_file($_FILES['foto']['tmp_name'], "/home/a20paumunoli/web/moviequiz1.alumnes.inspedralbes.cat/public_html/front/IMG/" . $_FILES['foto']['name']);
 
             $dadesForm = array(
                 'usuari' => $_POST['alias'],
                 'nomU' => $_POST['nom_us'],
                 'emailU' => $_POST['email_us'],
-                'imgU' => "../IMG/" . $_FILES['foto']['name']
+                'imgU' => "./front/IMG/" . $_FILES['foto']['name']
             );
+
         } else if (isset($_POST['respostes'])) {
             $dadesForm = array("respostes" => json_decode($_POST['respostes'], true));
             if (isset($_POST['userPartida'])) {
                 $dadesForm = array_merge($dadesForm, array('user' => $_POST['userPartida']));
             }
+
         }else if (isset($_POST['id_peli'])) {
             $dadesForm = array(
                 'peli' => $_POST['id_peli'],

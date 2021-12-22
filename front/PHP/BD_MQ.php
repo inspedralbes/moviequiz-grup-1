@@ -2,9 +2,9 @@
 
 abstract class BD_MovieQuiz {
   private static $db_host = "localhost";
-  private static $db_user = "root";
-  private static $db_pass = "";
-  private $db_name = "projecte_pelis";
+  private static $db_user = "a20paumunoli_vicsanpau";
+  private static $db_pass = "Vicsanpau123456789";
+  private $db_name = "a20paumunoli_movie_quiz";
 
   protected $query;
   protected $rows=array();
@@ -35,5 +35,6 @@ abstract class BD_MovieQuiz {
   }
 
 }
+
 
 ?>

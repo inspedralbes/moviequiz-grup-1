@@ -4,27 +4,11 @@ require_once("BD_MQ.php");
 
 class usuari extends BD_MovieQuiz
 {
-    private $nom;
-    private $cognoms;
-    private $email;
-    private $user;
-    private $password;
-    private $img;
-    private $punts;
-
-    function __toString()
-    {
-        echo "Dades usuari<br>";
-        return "(" . $this->id . ", " . $this->name . ", " . $this->edat . ", " .
-            $this->alcada . ")";
-    }
-
     public function actualizarPuntosUsuario($puntos, $id)
     {
         $this->query = "UPDATE usuari SET punts = '$puntos' WHERE idUsuari = '$id'";
         $this->execute_single_query();
     }
-
 
     public function dadesUsuari($user = "")
     {
@@ -52,7 +36,7 @@ class usuari extends BD_MovieQuiz
                 $this->message = "existeix";
             }
         }
-        
+
         $_SESSION['registrar'] = $this->message;
     }
 
@@ -98,6 +82,8 @@ class usuari extends BD_MovieQuiz
                             usuari.user = '$usuari'";
 
         $this->execute_single_query();
+
+        return array("resultat" => "ok");
     }
 
     public function rankingUsuaris()
@@ -110,17 +96,6 @@ class usuari extends BD_MovieQuiz
 
 class partida extends BD_MovieQuiz
 {
-    private $nomPartida;
-    private $pelicules;
-    private $fecha;
-
-    function __toString()
-    {
-        echo "Dades pelicula<br>";
-        return "(" . $this->nomPartida . ", " . $this->pelicules . ", " .
-            $this->fecha . ")";
-    }
-
     //GENERAR EL JOC PER ALS USUARIS LOGGEJATS
     public function generarjocLogin($nomuser = "")
     {
@@ -218,14 +193,12 @@ class partida extends BD_MovieQuiz
         $this->execute_single_query();
     }
 
-
     public function obtenerIDPartida()
     {
         $this->query = "SELECT MAX(partida.idPartida) AS 'id' FROM partida";
         $this->get_results_from_query();
         return $this->rows[0]['id'];
     }
-
 
     public function comprovarPartidaConLogin($dadesPartida = array())
     {
@@ -240,7 +213,6 @@ class partida extends BD_MovieQuiz
         return json_encode($datos);
     }
 
-
     public function comprovarPartidaSinLogin($dadesPartida = array())
     {
         $datos = $this->comprovarPartida($dadesPartida);
@@ -248,7 +220,6 @@ class partida extends BD_MovieQuiz
         unset($datos['puntos']);
         return json_encode($datos);
     }
-
 
     public function comprovarPartida($dadesPartida = array())
     {
@@ -268,6 +239,8 @@ class partida extends BD_MovieQuiz
                 $fallos++;
             }
         }
+
+        if (count($respuestas) == 0) $fallos = 5;
 
         if ($punts < 0) $punts = 0;
 
@@ -291,19 +264,6 @@ class partida extends BD_MovieQuiz
 
 class partida_jugada extends BD_MovieQuiz
 {
-    private $partida;
-    private $usuari;
-    private $encerts;
-    private $errades;
-
-
-    function __toString()
-    {
-        echo "Dades pelicula<br>";
-        return "(" . $this->partida . ", " . $this->usuari . ", " .
-            $this->encerts . ", " . $this->errades . ")";
-    }
-
     public function guardarPartida($idPartida, $idUsuari, $encerts, $errades)
     {
         $this->query = "INSERT INTO partida_jugada VALUES ('$idPartida','$idUsuari','$encerts','$errades')";
@@ -313,27 +273,6 @@ class partida_jugada extends BD_MovieQuiz
 
 class pelicula extends BD_MovieQuiz
 {
-    private $nomPelicula;
-    private $any;
-    private $img;
-
-
-    function __toString()
-    {
-        echo "Dades pelicula<br>";
-        return "(" . $this->nomPelicula . ", " . $this->any . ", " .
-            $this->img . ")";
-    }
-
-    function __destruct()
-    {
-    }
-
-
-    public function selectAll($fields = array())
-    {
-    }
-
     public function dadesPelicula($nom = "")
     {
         $this->query = "SELECT * FROM pelicula WHERE nomPelicula = '$nom'";
@@ -358,20 +297,6 @@ class pelicula extends BD_MovieQuiz
 
 class valoracio_pelicula extends BD_MovieQuiz
 {
-    private $pelicula;
-    private $usuari;
-    private $comentari;
-    private $favorit;
-    private $valoracio;
-
-    /* STRING VALORACIÓ PEL·LÍCULA */
-    function __toString()
-    {
-        echo "Dades valoracio pel·lícula<br>";
-        return "(" . $this->pelicula . ", " . $this->usuari . ", " .
-            $this->comentari . ", " . $this->favorit .  ", " . $this->valoracio . ")";
-    }
-
     /* INSERTAR VALORACIÓ PELI B.D */
     public function afegirValoracioPeli($dadesValoracio = array())
     {
@@ -464,14 +389,14 @@ class valoracio_pelicula extends BD_MovieQuiz
         return $this->rows;
     }
 
-    public function eliminarPeliValorada($datos=array())
+    public function eliminarPeliValorada($datos = array())
     {
         $peli = $datos["peli"];
         $usuari = $datos["usuari"];
         $usr = new usuari();
-        $id= $usr->dadesUsuari($usuari)[0]['idUsuari'];
+        $id = $usr->dadesUsuari($usuari)[0]['idUsuari'];
         $this->query = "DELETE FROM valoracio_pelicules WHERE valoracio_pelicules.pelicula = '$peli' AND valoracio_pelicules.usuari = '$id'";
-        $this -> execute_single_query();
-        echo $this->query;
+        $this->execute_single_query();
+        return array("resultat" => "ok");
     }
 }

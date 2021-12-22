@@ -118,24 +118,27 @@ body {
 }
 
 .card-image img {
-    min-height: 20vh;
     height: auto;
     max-height: 60vh;
 }
 
 .card-content {
-    font-size: 25px !important;
+    font-size: 22px !important;
+}
+
+.card.hoverable{
+    margin-bottom: 50px !important;
 }
 
 @media only screen and (max-width: 1000px) {
     .card-content {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 }
 
 @media only screen and (max-width: 600px) {
     .card-content {
-        font-size: 18px !important;
+        font-size: 16px !important;
     }
 }
 
@@ -154,8 +157,6 @@ body {
 #ocultardivsearch {
     margin-left: 4px;
 }
-
-
 
 /*-------CAROUSEL PELIS-------*/ 
 
@@ -233,13 +234,11 @@ body {
 
 .btn-colleccio a{
     margin: 20px;
-   
 }
 
-#btn_edit_colleccio {
-    margin-right: 5px !important;
+#btn_delete {
+    margin-left: 5px;
 }
-
 
 
 
@@ -265,7 +264,7 @@ body {
 .joc-modal {
     height: auto !important;
     overflow: hidden;
-    padding: 7px 0px 0px 0px !important;
+    padding: 0px 0px 0px 0px !important;
     background-color: rgb(39, 39, 39);
     border-radius: 2%;
 }
@@ -275,27 +274,20 @@ body {
 }
 
 .img_joc {
-    margin-top: 20px !important;
+    max-width: 75%;
+    height: auto;
 }
 
-.titol_peli_joc{
-    margin: 4% !important; 
-    margin-top: 10% !important;
+#cerrarModal-joc {
+    margin-top: 10px;
 }
 
-.form-joc {
-    margin-top: 10%; 
-    margin-left: 20px;
+.titol_peli_joc {
+    margin-bottom: 25px;
 }
 
 .resposta-joc {
     font-size: 23px !important;
-}
-
-.gifJoc {
-    width: 450px;
-    margin-bottom: 20px !important;
-    margin-top: 40px !important;
 }
 
 #juego {
@@ -305,10 +297,6 @@ body {
 
 /* Pantalla Gran */
 @media only screen and (max-width: 1000px) {
-    .img_joc {
-        width: 100% !important;   
-    }
-
     #juego, #ranking {
         height: auto !important;
     }
@@ -316,19 +304,8 @@ body {
 
 /* Pantalla Petita */
 @media only screen and (max-width: 600px) {
-    .img_joc {
-        width: 50%  !important;
-        margin: 5% 5% 5% 5% !important;
-    }
-
     .titol_peli_joc{
-        margin: 4%; 
-        margin-top: 0 !important;
-    }
-
-    .form-joc {
-        margin-top: 3%; 
-        margin-left: 20px;
+        font-size: 20px;
     }
 
     .resposta-joc {
@@ -345,6 +322,24 @@ body {
         background-image: url("../IMG/jocFons.png");
         background-size: 300px;
     }
+
+    .joc-carousel {
+
+    }
+    
+}
+
+#generarpreguntas .row{
+    margin: 0px !important;
+    padding-top: 20px;
+}
+
+#btn-acabarJoc{
+    margin-top: 10px;
+}
+
+.header-joc{
+    padding: 20px;
 }
 
 .resultat-joc {
